@@ -35,15 +35,11 @@ const ThemeSwitcher = () => {
   }
 
   return (
-    <div
-      className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]"
-    >
-      <DarkModeSwitch
-        checked={isDarkMode} // Set based on resolved theme
-        onChange={toggleTheme} // Toggle between dark and light modes
-        size={18}
-      />
-    </div>
+    <DarkModeSwitch
+      checked={isDarkMode} // Set based on resolved theme
+      onChange={toggleTheme} // Toggle between dark and light modes
+      size={18}
+    />
   );
 };
 

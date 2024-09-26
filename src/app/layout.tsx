@@ -5,6 +5,7 @@ import "./globals.css";
 import { GlobalStyle } from './GlobalStyles';
 import type { Viewport } from 'next';
 import {Container} from '@/components/Container';
+import Header from '@/components/Header';
 
 // Define viewport settings
 export const viewport: Viewport = {
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
       <GlobalStyle/>
             <Container>
+      <Header/>
           {children}
           </Container>
         </Providers>
