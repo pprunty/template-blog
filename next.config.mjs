@@ -1,23 +1,41 @@
-/** @type {import('next').NextConfig} */
 import withPWA from 'next-pwa';
-import runtimeCaching from 'next-pwa/cache.js';  // Added .js extension
-import remarkGfm from 'remark-gfm';              // GitHub flavored markdown
-import rehypeHighlight from 'rehype-highlight';  // Syntax highlighting
+import runtimeCaching from 'next-pwa/cache.js';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
 import createMDX from '@next/mdx';
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkGfm],  // GitHub-flavored Markdown
-    rehypePlugins: [rehypeHighlight], // Syntax highlighting
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [rehypeHighlight],
   },
 });
 
+// Customize runtime caching for image optimization
+const customRuntimeCaching = [
+  {
+    urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/i,
+    handler: 'CacheFirst',
+    options: {
+      cacheName: 'images',
+      expiration: {
+        maxEntries: 50, // Limit the number of images to cache
+        maxAgeSeconds: 30 * 24 * 60 * 60, // Cache images for 30 days
+      },
+      cacheableResponse: {
+        statuses: [0, 200], // Cache only if the response is successful
+      },
+    },
+  },
+  // You can add more runtimeCaching entries if needed for other assets
+];
+
 const nextConfig = {
-  reactStrictMode: true,  // Enable React strict mode for improved error handling
+  reactStrictMode: true,
   compiler: {
-    styledComponents: true,  // Enable styled-components compiler options
-    removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
+    styledComponents: true,
+    removeConsole: process.env.NODE_ENV !== 'development',
   },
   experimental: {
     swcMinify: true,
@@ -26,12 +44,13 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
 
-const withBoth = (config) => withPWA({
-  dest: "public",           // Destination directory for the PWA files
-  register: true,           // Register the PWA service worker
-  skipWaiting: true,        // Skip waiting for service worker activation
-  runtimeCaching,           // Add the runtime caching configuration here
-  disable: process.env.NODE_ENV === "development",  // Disable PWA in development environment
-})(withMDX(config));
+const withBoth = (config) =>
+  withPWA({
+    dest: 'public',
+    register: true,
+    skipWaiting: true,
+    runtimeCaching: customRuntimeCaching, // Use the customized caching
+    disable: process.env.NODE_ENV === 'development',
+  })(withMDX(config));
 
 export default withBoth(nextConfig);
