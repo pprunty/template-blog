@@ -2,7 +2,6 @@ import { Inter } from 'next/font/google';
 import type { Metadata } from "next";
 import { Providers } from './ThemeProvider';
 import "./globals.css";
-import { GlobalStyle } from './GlobalStyles';
 import type { Viewport } from 'next';
 import {Container} from '@/components/Container';
 import Header from '@/components/Header';
