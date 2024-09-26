@@ -1,7 +1,15 @@
 import Link from "next/link";
+import { AnchorHTMLAttributes, ReactNode } from "react";
 
-export function A({ children, className = "", href, ...props }) {
-  if (href[0] === "#") {
+interface AProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  href: string;
+  children: ReactNode;
+  className?: string;
+}
+
+export function A({ children, className = "", href, ...props }: AProps) {
+  // If the href starts with "#", render an <a> tag (for internal anchor links)
+  if (href.startsWith("#")) {
     return (
       <a
         href={href}
@@ -12,6 +20,7 @@ export function A({ children, className = "", href, ...props }) {
       </a>
     );
   } else {
+    // For other links, render the Next.js <Link> component
     return (
       <Link
         href={href}

@@ -13,7 +13,6 @@ import Image from "next/image";
 import { Figure } from "./src/app/(post)/components/figure";
 // import { Snippet } from "./src/app/(post)/components/snippet";
 import { Caption } from "./src/app/(post)/components/caption";
-import { Callout } from "./src/app/(post)/components/callout";
 import { YouTube } from "./src/app/(post)/components/youtube";
 import { Ref, FootNotes, FootNote } from "./src/app/(post)/components/footnotes";
 import { Blockquote as blockquote } from "./src/app/(post)/components/blockquote";
@@ -62,9 +61,7 @@ export function useMDXComponents(components: {
           );
         },
     Figure,
-//     Snippet,
     Caption,
-    Callout,
     YouTube,
     Ref,
     FootNotes,

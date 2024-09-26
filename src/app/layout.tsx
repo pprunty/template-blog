@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Providers } from './ThemeProvider';
 import "./globals.css";
 import { GlobalStyle } from './GlobalStyles';
-import Script from 'next/script'; // Import Script from next/script
 import type { Viewport } from 'next';
 import {Container} from '@/components/Container';
 
