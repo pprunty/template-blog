@@ -5,9 +5,9 @@
   "display": "standalone",
   "orientation": "any",
   "lang": "en-GB",
-  "id": "/",
-  "scope": "https://patrickprunty.com/",
-  "start_url": "https://patrickprunty.com",
+  "id": "https://template-blog-xi.vercel.app/",
+  "scope": "https://template-blog-xi.vercel.app/",
+  "start_url": "https://template-blog-xi.vercel.app",
   "icons": [
     {
       "src": "icons/16x16.png",
