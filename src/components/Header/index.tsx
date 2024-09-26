@@ -7,7 +7,7 @@ export default function Header() {
     <div className="w-full">
       {/* Navbar */}
       <header className="w-full">
-        <nav className="flex justify-between items-center py-4 w-full">
+        <nav className="flex justify-between items-center w-full">
           {/* Left: Logo */}
           <div className="flex items-center">
             <Logo />

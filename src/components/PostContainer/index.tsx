@@ -9,6 +9,7 @@ export const PostContainer = styled.div`
   width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin-top: 20px;
 
   pre {
     overflow-x: auto;
@@ -21,7 +22,6 @@ export const PostContainer = styled.div`
     }
   }
 
-  padding: 18px;
 
   @media (max-width: 768px) {
     padding: 23px; /* Smaller padding for devices below iPhone 11 size */
