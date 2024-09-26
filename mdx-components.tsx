@@ -57,7 +57,6 @@ export function useMDXComponents(components: {
               layout="responsive"
               quality={90}
               priority={true}
-            loading="eager"   // Load the image eagerly to prevent lazy loading delays
             />
           );
         },
