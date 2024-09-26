@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "test": "echo \"No test specified\" && exit 1",
+    "clean": "rm -rf .next node_modules",
+    "docker-build": "docker build -t my-blog:latest .",
+    "docker-run": "docker run -p 3000:3000 my-blog:latest"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
