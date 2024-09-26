@@ -1,4 +1,6 @@
 import Image from "next/image";
+import ThemeSwitcher from './ThemeSwitcher';
+import { StyledButton } from './styled';
 
 export default function Home() {
   return (
@@ -12,6 +14,8 @@ export default function Home() {
           height={38}
           priority
         />
+              <StyledButton>Click Me</StyledButton>
+        <ThemeSwitcher/>
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
             Get started by editing{" "}
@@ -36,6 +40,7 @@ export default function Home() {
               alt="Vercel logomark"
               width={20}
               height={20}
+              priority
             />
             Deploy now
           </a>
@@ -62,6 +67,7 @@ export default function Home() {
             alt="File icon"
             width={16}
             height={16}
+            priority
           />
           Learn
         </a>
@@ -77,6 +83,7 @@ export default function Home() {
             alt="Window icon"
             width={16}
             height={16}
+            priority
           />
           Examples
         </a>
@@ -92,6 +99,7 @@ export default function Home() {
             alt="Globe icon"
             width={16}
             height={16}
+            priority
           />
           Go to nextjs.org →
         </a>
