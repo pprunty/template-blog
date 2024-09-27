@@ -17,7 +17,7 @@ const ThemeSwitcher = () => {
     if (metaThemeColor) {
       metaThemeColor.setAttribute(
         'content',
-        resolvedTheme === 'dark' ? '#000000' : '#ffffff'
+        resolvedTheme === 'dark' ? '#1c1c1c' : '#ffffff'
       );
     }
   }, [resolvedTheme]);

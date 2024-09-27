@@ -16,11 +16,11 @@ export const Container = styled.div`
     margin-right: auto;
   }
 
-  @media (min-width: 768px) {
-    padding: 18px; /* Smaller padding for devices below iPhone 11 size */
+  @media (max-width: 768px) {
+    padding: 23px; /* Smaller padding for devices below iPhone 11 size */
   }
 
-  @media (min-width: 375px) {
-    padding: 14px; /* Smaller padding for devices below iPhone 11 size */
+  @media (max-width: 375px) {
+    padding: 8px; /* Smaller padding for very small devices */
   }
 `;

@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
 
   [data-theme="dark"] {
     --fg: #fff;
-    --bg: #000;
+    --bg: #1c1c1c;
     --border-color: #313131;
     --hover-bg: #4b5563;
     --focus-border-color: #00BFFF;
