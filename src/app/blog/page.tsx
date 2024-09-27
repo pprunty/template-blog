@@ -85,7 +85,7 @@ export default async function PostsPage() {
         {Object.entries(postsByYear).map(([year, posts]) => (
           <div key={year} className="mb-8">
             {/* Display the year as a header */}
-            <h2 className="text-lg font-semibold mb-4">{year}</h2>
+            <h2 className="text-m mb-4 text-gray-500 dark:text-gray-500">{year}</h2>
             <ul className="list-none p-0">
               {posts.map((post) => (
                 <li key={post.slug} className="mb-4">
@@ -95,7 +95,7 @@ export default async function PostsPage() {
                     >
                       {/* Image Container with responsive sizes */}
                       {post.image && (
-                        <div className="w-[60px] h-[60px] sm:w-[60px] sm:h-[60px] md:w-[60px] md:h-60px] lg:w-[60px] lg:h-[60px] flex-shrink-0 overflow-hidden mr-4">
+                        <div className="w-[60px] h-[60px] sm:w-[60px] sm:h-[60px] md:w-[60px] md:h-[60px] lg:w-[70px] lg:h-[70px] flex-shrink-0 overflow-hidden mr-4">
                           <Image
                             src={post.image}
                             alt={post.title || "Blog post image"}
@@ -108,17 +108,10 @@ export default async function PostsPage() {
 
                       {/* Post Details */}
                       <div className="flex flex-col justify-between grow">
-                        {/* Views Count */}
-{/*                        <span className="text-gray-500 dark:text-gray-500 text-xs mb-1">
-                          {post.views || 5} views
-                        </span>*/}
-
                         {/* Title */}
                         <span className="dark:text-gray-100">
                           {post.title}
                         </span>
-
-                        {/* Description */}
 
                         {/* Render tags below title and description */}
                         {post.keywords && post.keywords.length > 0 && (
@@ -126,9 +119,9 @@ export default async function PostsPage() {
                             {post.keywords.slice(0, 4).map((tag, index) => (
                               <span
                                 key={index}
-                                className="text-xs bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1"
+                                className="text-xs border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-800 px-2 py-1"
                               >
-                                {tag} {/* No rounded class for square corners */}
+                                {tag} {/* No background color, just border */}
                               </span>
                             ))}
                           </div>

@@ -1,0 +1,238 @@
+export const metadata = {
+  title: "The Best Software Runs on Sh!t Code: Here's Why",
+  description: "Exploring the paradox of software development: how imperfect, quick solutions often power the most successful applications, and why perfectionism can be an obstacle to innovation.",
+  image: "/images/spaghetti.jpeg",
+  date: "2024-09-05",
+  openGraph: {
+    title: "The Best Software Runs on Sh!t Code: Here's Why",
+    description: "Exploring the paradox of software development: how imperfect, quick solutions often power the most successful applications, and why perfectionism can be an obstacle to innovation.",
+    images: [
+      {
+        url: "/images/spaghetti.jpeg",
+        alt: "Spaghetti Representing Bad or 'Spaghetti' Code",
+      },
+    ],
+    type: 'article',
+    tags: [ "software development", "programming", "tech industry", "creativity" ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Best Software Runs on Sh!t Code: Here's Why",
+    description: "Exploring the paradox of software development: how imperfect, quick solutions often power the most successful applications, and why perfectionism can be an obstacle to innovation.",
+    image: "/images/spaghetti.jpeg",
+  },
+  keywords: ["software development", "programming", "tech industry", "creativity"], // Additional SEO keywords
+};
+
+
+![Optional Description](/images/spaghetti.jpeg)
+
+
+At the tips of their fingers, software developers have the power to change the world, but they are not perfect.
+
+From the outside looking in,
+'software bros' with their shorts, socks, and sandals appear to be the epitome of the modern working professional.
+Smart,
+reclusive, and not to mention, wealthy.
+
+The majority of software developers enjoy the luxury of remote work, free from long commutes, physical labor, or the
+distractions of office small talk.
+
+So what excuse do they have for putting shit code into the best software?
+
+## The Good, The Bad, and The Quick-and-Dirty
+
+Consider two approaches to a common programming task:
+calculating the average of a list of numbers (provided as an example which you don't necessarily need to read).
+
+In a real-world
+scenario, this code could be used to calculate your average daily calorie intake based on your biometrics,
+predict future stock prices using historical data, or even estimate the age you're going to die based on some deadly
+statistics.
+
+```python
+"""Module for calculating averages with extensive error handling and logging."""
+
+from typing import List, Union
+from functools import reduce  # We'll keep this import and use it
+import logging
+
+
+class NumberValidator:
+    """A class for validating lists of numbers."""
+
+    @staticmethod
+    def validate(numbers: List[Union[int, float]]) -> None:
+        """
+        Validates a list of numbers.
+
+        Args:
+            numbers: A list of integers or floats to be validated.
+
+        Raises:
+            TypeError: If the input is not a list.
+            ValueError: If any element in the list is not a number or if the list is empty.
+        """
+        if not isinstance(numbers, list):
+            raise TypeError("Input must be a list")
+        if not all(isinstance(n, (int, float)) for n in numbers):
+            raise ValueError("All elements must be numbers")
+        if len(numbers) == 0:
+            raise ValueError("List cannot be empty")
+
+
+class AverageCalculator:
+    """A class for calculating averages with logging."""
+
+    def __init__(self):
+        """Initializes the AverageCalculator with a logger."""
+        self.logger = logging.getLogger(__name__)
+
+    def calculate_average(self, numbers: List[Union[int, float]]) -> float:
+        """
+        Calculates the average of a list of numbers.
+
+        Args:
+            numbers: A list of integers or floats to calculate the average from.
+
+        Returns:
+            float: The calculated average.
+
+        Raises:
+            TypeError: If the input is not a list.
+            ValueError: If any element in the list is not a number or if the list is empty.
+        """
+        self.logger.info(f"Calculating average for {numbers}")
+        NumberValidator.validate(numbers)
+        try:
+            # Using reduce to calculate sum, then dividing by length
+            total = reduce(lambda x, y: x + y, numbers)
+            result = total / len(numbers)
+            self.logger.info(f"Average calculated: {result}")
+            return result
+        except Exception as e:
+            self.logger.error(f"Error calculating average: {str(e)}")
+            raise
+
+
+def main():
+    """
+    Main function to demonstrate the usage of AverageCalculator.
+
+    This function creates an instance of AverageCalculator, uses it to calculate
+    the average of a list of numbers, and prints the result. It also demonstrates
+    basic error handling.
+    """
+    calculator = AverageCalculator()
+    try:
+        average = calculator.calculate_average([1, 2, 3, 4, 5])
+        print(f"The average is: {average}")
+    except (TypeError, ValueError) as e:
+        print(f"Error: {str(e)}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+This code uses nearly every best practice software developers strive to use in production systems:
+
+1. Google Standard Comments
+2. Type hints
+3. Multipe class methods
+4. Design patterns (e.g., Single Responsibility Principle, Static Factory Methods)
+4. Built-in optimized Python modules, such as `functools`
+5. Error checking and validation
+6. Logging
+
+However, the second piece of code accomplishes the same task in just a few lines:
+
+```python
+# Quick and dirty version
+
+# Compute average of a list
+def average(numbers):
+    return sum(numbers) / len(numbers)
+
+
+# Usage
+print(f"The average is: {average([1, 2, 3, 4, 5])}")
+```
+
+This, in software jargon, is known as the "quick-and-dirty" solution.
+
+Ask any software developer to choose a version of the code to ship to a production system right now, and they'll readily point
+to the first,
+lengthy and error-conscious version. However, with equal haste, they'll confess that real-world pressures often compel
+them to produce the second, quick-and-dirty version instead.
+
+And in the software industry, where resources are costly,
+time
+is money.
+
+So how do systems continue to function on such shit code?
+
+Once the work is complete, it undergoes a formal review process involving peers and mentors. This crucial step emphasizes coding standards and reliability, serving as a filter where
+constructive criticism helps patch the imperfections.
+
+In truth, both versions of the code are shit. The first is over-engineered and potentially difficult to maintain, while
+the second considers no edge cases and lacks robustness.
+
+The ideal solution would be made of 20-30% part the first version and 70-80% part the second: quick-and-dirty but with
+guardrails.
+
+But still, some shit slips through the cracks.
+
+## Progress Over Perfection
+
+In a scene in the sci-fi thriller [Ex Machina](https://en.wikipedia.org/wiki/Ex_Machina_(film)), two main
+characters [debate the ethics of programming a robot to flirt with a human](https://www.youtube.com/watch?v=Z2tm1emL8YA).
+Standing before
+a [Jackson Pollock](https://en.wikipedia.org/wiki/Jackson_Pollock) [drip painting](https://en.wikipedia.org/wiki/Drip_painting),
+the character who coded this flirtatious behavior into the robot — and
+in doing so, seeks to create general artificial intelligence — argues:
+
+> \[Jackson Pollock\] let his mind go blank and his hand go where it wanted. Not deliberate, not random, someplace
+> inbetween.
+> They called it automatic art. What if Pollock had reversed the challenge. What if instead of making art without
+> thinking,
+> he said, "you know what, I can't paint anything unless I know exactly why I'm doing it." What would have happened..?
+> He
+> never would have made a single mark!
+
+[!Jackson_Pollock](https://www.singulart.com/blog/wp-content/uploads/2019/08/number-5-1024x602.jpg)
+
+The antagonist's argument is clear: if he were to wait until he could create the perfect AI, he would never make any
+progress at all.
+
+This justifies, in his mind, the controversial steps he's taking in programming the robot. It's a
+sentiment that resonates beyond the realm of science fiction.
+
+Drip paintings often fall victim to criticism from the artistically untunued, who exclaim, "My five-year-old could have
+painted that!"
+upon learning the painting sold for hundreds of millions of dollars at auction.
+
+There's some truth in this.
+
+Children, often blessed with vibrant imaginations, care little for perfection and
+express themselves freely with a paintbrush and canvas.
+
+Adults, on the other hand, having climbed out of their imagination through their experience of adolescence, become more conscious of what they produce. They want
+everything they create to be the by-product of all their teachings; perfected and mastered. If it's not, they iterate,
+improve, or cast it away.
+
+Software developers are, by nature, often trapped in this self-inflicted cycle of perfectionism. Like the antagonist
+in Ex Machina, they face a choice: wait for perfection and risk never shipping, or embrace imperfection and make
+progress.
+
+In the world
+of software development, as in art and AI, sometimes the key to innovation lies in knowing when good enough is, well,
+good enough.
+
+## Unboxing Microsoft's Suite of Buggy Tools
+
+Microsoft's suite of tools: Outlook, Teams, ...
+
+sometimes staying relevant is more important than being better.
+
+People make entire careers out of working with Excel. I repeat, people make an entire career out of working with Excel!
