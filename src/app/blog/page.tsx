@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs/promises';
 import { BlogPostType } from '@/types/BlogPost'; // Make sure BlogPostType matches the structure of your posts
 import Link from 'next/link'; // Import Link from next/link
+import Image from 'next/image'; // Import Image from next/image
 import { Suspense } from "react";
 
 // Define metadata type
@@ -13,8 +14,9 @@ interface BlogMetadata {
   description?: string;
   excerpt?: string;
   type?: string;
-  tags?: string[];
+  keywords?: string[];
   readingTime?: number;
+  views?: number;
 }
 
 // Memoize the function to avoid repeated file reads
@@ -44,8 +46,9 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
           description: metadata.description || '',
           excerpt: metadata.excerpt || '',
           type: metadata.type || 'article',
-          tags: metadata.tags || [],
+          keywords: metadata.keywords || [],
           readingTime: metadata.readingTime || 5,
+          views: metadata.views || 5,
         });
       } catch (error) {
         console.error(`Error reading file ${filePath}:`, error);
@@ -66,50 +69,78 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
 export default async function PostsPage() {
   const posts = await getAllPosts();
 
+  // Group posts by year
+  const postsByYear = posts.reduce((acc, post) => {
+    const year = post.date ? new Date(post.date).getFullYear() : 'Unknown Year';
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(post);
+    return acc;
+  }, {} as Record<string, BlogPostType[]>);
+
   return (
     <Suspense fallback={null}>
       <div className="font-mono m-auto mb-10 text-sm">
-        <ul className="list-none p-0">
-          {posts.map((post, index) => {
-            const year = post.date ? new Date(post.date).getFullYear() : 'Unknown Year';
-            const firstOfYear = index === 0 || year !== new Date(posts[index - 1]?.date || '').getFullYear();
-            const lastOfYear = index === posts.length - 1 || year !== new Date(posts[index + 1]?.date || '').getFullYear();
-
-            return (
-              <li key={post.slug}>
-                <Link href={`/blog/${post.slug}`}>
-                  <span
-                    className={`flex transition-[background-color] hover:bg-gray-100 dark:hover:bg-[#242424] active:bg-gray-200 dark:active:bg-[#222] border-y border-gray-200 dark:border-[#313131]
-                    ${!firstOfYear ? "border-t-0" : ""}
-                    ${lastOfYear ? "border-b-0" : ""}
-                    `}
-                  >
+        {Object.entries(postsByYear).map(([year, posts]) => (
+          <div key={year} className="mb-8">
+            {/* Display the year as a header */}
+            <h2 className="text-lg font-semibold mb-4">{year}</h2>
+            <ul className="list-none p-0">
+              {posts.map((post) => (
+                <li key={post.slug} className="mb-4">
+                  <Link href={`/blog/${post.slug}`}>
                     <span
-                      className={`py-3 flex grow items-center ${
-                        !firstOfYear ? "ml-14" : ""
-                      }`}
+                      className="flex flex-row transition-[background-color] hover:bg-gray-100 dark:hover:bg-[#242424] active:bg-gray-200 dark:active:bg-[#222] border-y border-gray-200 dark:border-[#313131] p-4"
                     >
-                      {firstOfYear && (
-                        <span className="w-14 inline-block self-start shrink-0 text-gray-500 px-2 dark:text-gray-500">
-                          {year}
-                        </span>
+                      {/* Image Container with responsive sizes */}
+                      {post.image && (
+                        <div className="w-[60px] h-[60px] sm:w-[60px] sm:h-[60px] md:w-[60px] md:h-60px] lg:w-[60px] lg:h-[60px] flex-shrink-0 overflow-hidden mr-4">
+                          <Image
+                            src={post.image}
+                            alt={post.title || "Blog post image"}
+                            width={200}
+                            height={200}
+                            className="object-cover w-full h-full" // Ensure images fit correctly
+                          />
+                        </div>
                       )}
-                      {/* Ensuring title and date are aligned */}
-                      <span className="flex grow items-center justify-between">
-                        <span className="grow dark:text-gray-100">
+
+                      {/* Post Details */}
+                      <div className="flex flex-col justify-between grow">
+                        {/* Views Count */}
+{/*                        <span className="text-gray-500 dark:text-gray-500 text-xs mb-1">
+                          {post.views || 5} views
+                        </span>*/}
+
+                        {/* Title */}
+                        <span className="dark:text-gray-100">
                           {post.title}
                         </span>
-                        <span className="ml-4 text-gray-500 dark:text-gray-500 px-2 text-xs flex-shrink-0">
-                          {post.date ? new Date(post.date).toLocaleDateString() : 'No Date Available'}
-                        </span>
-                      </span>
+
+                        {/* Description */}
+
+                        {/* Render tags below title and description */}
+                        {post.keywords && post.keywords.length > 0 && (
+                          <div className="mt-2 flex gap-2 flex-wrap">
+                            {post.keywords.slice(0, 4).map((tag, index) => (
+                              <span
+                                key={index}
+                                className="text-xs bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1"
+                              >
+                                {tag} {/* No rounded class for square corners */}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </span>
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </Suspense>
   );

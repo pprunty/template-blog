@@ -7,6 +7,6 @@ export interface BlogPostType {
   description: string;
   excerpt: string;
   type: string;
-  tags: string[];
+  keywords: string[];
   readingTime: number;
 }

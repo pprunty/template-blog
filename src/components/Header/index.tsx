@@ -4,9 +4,7 @@ import {Logo} from "@/components/Logo";
 
 export default function Header() {
   return (
-    <div className="w-full">
-      {/* Navbar */}
-      <header className="w-full">
+    <header className="flex mb-5 md:mb-10 items-center">
         <nav className="flex justify-between items-center w-full">
           {/* Left: Logo */}
           <div className="flex items-center">
@@ -33,6 +31,5 @@ export default function Header() {
           </div>
         </nav>
       </header>
-    </div>
   );
 }
