@@ -4,9 +4,7 @@ import { PostContainer } from '@/components/PostContainer'; // Assuming it's exp
 export default function AboutLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <PostContainer>
         {children}
-      </PostContainer>
     </>
   );
 }

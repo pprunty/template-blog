@@ -40,16 +40,20 @@ export { metadata };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+    lang="en"
+    suppressHydrationWarning
+      className={`${inter.className} antialiased`}
+    >
       <head>
         <meta name="theme-color" content="var(--bg)" />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`dark:text-gray-100 max-w-2xl m-auto`}>
         <Providers>
-            <Container>
+                    <main className="p-6 pt-3 md:pt-6 min-h-screen">
             <Header/>
           {children}
-          </Container>
+          </main>
         </Providers>
       </body>
     </html>

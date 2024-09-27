@@ -24,6 +24,16 @@
   font-variation-settings: normal;
   -webkit-tap-highlight-color: transparent;
   scroll-behavior: smooth; /* Smooth scrolling */
+
+    pre {
+      overflow-x: auto;
+      position: relative;
+      code {
+        font-family: monospace;
+        font-size: 15px;
+      }
+    }
+
 }
 
 [data-theme="dark"] {
