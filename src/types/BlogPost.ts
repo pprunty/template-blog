@@ -9,4 +9,5 @@ export interface BlogPostType {
   type: string;
   keywords: string[];
   readingTime: number;
+    views?: number;
 }
