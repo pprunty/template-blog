@@ -2,45 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --fg: #000;
-  --bg: #fff;
-  --border-color: #e3e2e0;
-  --hover-bg: #e5e7eb;
-  --focus-border-color: #3b82f6;
-  --placeholder-color: #999999;
+@layer base {
+  :root {
+    font-family: "Inter", sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    color-scheme: light;
+    /* note: must keep in sync with `theme-color` in `theme-effect.ts` */
+    @apply bg-[#fcfcfc];
+    @apply text-[#333];
+  }
 
-  /* Additional styles */
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
-  -webkit-text-size-adjust: 100%;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-  font-family: Quicksand, system-ui, sans-serif;
-  font-feature-settings: normal;
-  font-variation-settings: normal;
-  -webkit-tap-highlight-color: transparent;
-  scroll-behavior: smooth; /* Smooth scrolling */
+  :root.dark {
+    color-scheme: dark;
+    /* note: must keep in sync with `theme-color` in `theme-effect.ts` */
+    @apply bg-[#1C1C1C];
+    @apply text-[#fcfcfc];
+  }
 
-    pre {
-      overflow-x: auto;
-      position: relative;
-      code {
-        font-family: monospace;
-        font-size: 15px;
-      }
+  :root.pause-transitions * {
+    transition-duration: 0ms !important;
+  }
+
+  @supports (font-variation-settings: normal) {
+    :root {
+      font-family: "Inter var", sans-serif;
     }
-
-}
-
-[data-theme="dark"] {
-  --fg: #fff;
-  --bg: #1c1c1c;
-  --border-color: #313131;
-  --hover-bg: #4b5563;
-  --focus-border-color: #00BFFF;
-  --placeholder-color: #666666;
+  }
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth; /* Smooth scrolling */
+        pre {
+          overflow-x: auto;
+          position: relative;
+          code {
+            font-family: monospace;
+            font-size: 14px;
+          }
+        }
 }

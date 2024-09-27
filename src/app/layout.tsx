@@ -1,9 +1,11 @@
 import { Inter } from 'next/font/google';
 import type { Metadata } from "next";
-import { Providers } from './ThemeProvider';
 import "./globals.css";
 import type { Viewport } from 'next';
 import Header from '@/components/Header';
+import { doge } from "./doge";
+import { themeEffect } from "@/components/ThemeSwitcher/theme-effect";
+import 'highlight.js/styles/atom-one-dark.css';
 
 // Define viewport settings
 export const viewport: Viewport = {
@@ -44,16 +46,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     suppressHydrationWarning
       className={`${inter.className} antialiased`}
     >
-      <head>
-        <meta name="theme-color" content="var(--bg)" />
-      </head>
+           <head>
+             <script
+               dangerouslySetInnerHTML={{
+                 __html: `(${themeEffect.toString()})();(${doge.toString()})();`,
+               }}
+             />
+           </head>
       <body className={`dark:text-gray-100 max-w-2xl m-auto`}>
-        <Providers>
-                    <main className="p-6 pt-3 md:pt-6 min-h-screen">
+            <main className="p-6 pt-3 md:pt-6 min-h-screen">
             <Header/>
           {children}
           </main>
-        </Providers>
       </body>
     </html>
   );

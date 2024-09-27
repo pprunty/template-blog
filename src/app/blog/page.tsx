@@ -1,12 +1,11 @@
 import { cache } from 'react';
 import path from 'path';
 import fs from 'fs/promises';
-import { BlogPostType } from '@/types/BlogPost'; // Make sure BlogPostType matches the structure of your posts
-import Link from 'next/link'; // Import Link from next/link
-import Image from 'next/image'; // Import Image from next/image
+import { BlogPostType } from '@/types/BlogPost';
+import Link from 'next/link';
+import Image from 'next/image';
 import { Suspense } from "react";
 
-// Define metadata type
 interface BlogMetadata {
   title?: string;
   date?: string;
@@ -19,7 +18,6 @@ interface BlogMetadata {
   views?: number;
 }
 
-// Memoize the function to avoid repeated file reads
 const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
   const postsDirectory = path.join(process.cwd(), 'src', 'app', 'blog', '(post)');
   const dirEntries = await fs.readdir(postsDirectory, { withFileTypes: true });
@@ -34,10 +32,8 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
       const filePath = path.join(postsDirectory, slug, 'page.mdx');
 
       try {
-        // Type metadata explicitly
         const { metadata } = (await import(`./(post)/${slug}/page.mdx`)) as { metadata: BlogMetadata };
 
-        // Push post data into posts array
         posts.push({
           slug,
           title: metadata.title || 'Untitled Post',
@@ -56,7 +52,6 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
     }
   }
 
-  // Sort posts by date, ensuring date is properly handled
   posts.sort((a, b) => {
     const dateA = a.date ? new Date(a.date).getTime() : 0;
     const dateB = b.date ? new Date(b.date).getTime() : 0;
@@ -69,7 +64,6 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
 export default async function PostsPage() {
   const posts = await getAllPosts();
 
-  // Group posts by year
   const postsByYear = posts.reduce((acc, post) => {
     const year = post.date ? new Date(post.date).getFullYear() : 'Unknown Year';
     if (!acc[year]) {
@@ -85,13 +79,13 @@ export default async function PostsPage() {
         {Object.entries(postsByYear).map(([year, posts]) => (
           <div key={year} className="mb-8">
             {/* Display the year as a header */}
-            <h2 className="text-m mb-4 text-gray-500 dark:text-gray-500">{year}</h2>
+            <h2 className="text-m mb-4 text-gray-600 dark:text-gray-400">{year}</h2>
             <ul className="list-none p-0">
               {posts.map((post) => (
                 <li key={post.slug} className="mb-4">
                   <Link href={`/blog/${post.slug}`}>
                     <span
-                      className="flex flex-row transition-[background-color] hover:bg-gray-100 dark:hover:bg-[#242424] active:bg-gray-200 dark:active:bg-[#222] border-y border-gray-200 dark:border-[#313131] p-4"
+                      className="flex flex-row transition-[background-color] hover:bg-gray-100 dark:hover:bg-[#242424] active:bg-gray-200 dark:active:bg-[#222] border-y border-gray-300 dark:border-gray-600 p-4"
                     >
                       {/* Image Container with responsive sizes */}
                       {post.image && (
@@ -101,7 +95,7 @@ export default async function PostsPage() {
                             alt={post.title || "Blog post image"}
                             width={200}
                             height={200}
-                            className="object-cover w-full h-full" // Ensure images fit correctly
+                            className="object-cover w-full h-full"
                           />
                         </div>
                       )}
@@ -109,7 +103,7 @@ export default async function PostsPage() {
                       {/* Post Details */}
                       <div className="flex flex-col justify-between grow">
                         {/* Title */}
-                        <span className="dark:text-gray-100">
+                        <span className="text-gray-900 dark:text-gray-100 font-semibold">
                           {post.title}
                         </span>
 
@@ -119,9 +113,9 @@ export default async function PostsPage() {
                             {post.keywords.slice(0, 4).map((tag, index) => (
                               <span
                                 key={index}
-                                className="text-xs border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-800 px-2 py-1"
+                                className="text-xs border border-gray-400 dark:border-gray-600 text-gray-600 dark:text-gray-400 px-2 py-1"
                               >
-                                {tag} {/* No background color, just border */}
+                                {tag}
                               </span>
                             ))}
                           </div>
