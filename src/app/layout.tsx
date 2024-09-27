@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Providers } from './ThemeProvider';
 import "./globals.css";
 import type { Viewport } from 'next';
-import {Container} from '@/components/Container';
 import Header from '@/components/Header';
 
 // Define viewport settings
