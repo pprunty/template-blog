@@ -18,7 +18,7 @@ export default function Header() {
             <ThemeSwitcher />
 
             <Link
-              href="/post"
+              href="/blog"
               className="inline-flex font-mono hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]"
             >
               Blog

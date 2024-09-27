@@ -17,7 +17,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 23px; /* Smaller padding for devices below iPhone 11 size */
+    padding: 25px; /* Smaller padding for devices below iPhone 11 size */
   }
 
   @media (max-width: 375px) {
