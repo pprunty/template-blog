@@ -75,26 +75,26 @@ export default async function PostsPage() {
 
   return (
     <Suspense fallback={null}>
-      <div className="font-mono m-auto mb-10 text-sm">
+      <div className="m-auto mb-10 text-sm font-mono">
         {Object.entries(postsByYear).map(([year, posts]) => (
           <div key={year} className="mb-8">
             {/* Display the year as a header */}
-            <h2 className="text-m mb-4 text-gray-600 dark:text-gray-400">{year}</h2>
+            <h2 className="text-m mb-4 text-gray-600 dark:text-gray-400 font-mono font-semibold">{year}</h2>
             <ul className="list-none p-0">
               {posts.map((post) => (
                 <li key={post.slug} className="mb-4">
                   <Link href={`/blog/${post.slug}`}>
                     <span
-                      className="flex flex-row transition-[background-color] hover:bg-gray-100 dark:hover:bg-[#242424] active:bg-gray-200 dark:active:bg-[#222] border-y border-gray-300 dark:border-gray-600 p-4"
+                      className="flex flex-row transition-[background-color] hover:bg-gray-100 dark:hover:bg-[#242424] active:bg-gray-200 dark:active:bg-[#222] border-y border-gray-300 dark:border-gray-600 py-4 px-2"
                     >
                       {/* Image Container with responsive sizes */}
                       {post.image && (
-                        <div className="w-[60px] h-[60px] sm:w-[60px] sm:h-[60px] md:w-[60px] md:h-[60px] lg:w-[70px] lg:h-[70px] flex-shrink-0 overflow-hidden mr-4">
+                        <div className="flex-shrink-0 w-[100px] h-[100px] overflow-hidden mr-4">
                           <Image
                             src={post.image}
                             alt={post.title || "Blog post image"}
-                            width={200}
-                            height={200}
+                            width={100}
+                            height={100}
                             className="object-cover w-full h-full"
                           />
                         </div>
@@ -102,23 +102,35 @@ export default async function PostsPage() {
 
                       {/* Post Details */}
                       <div className="flex flex-col justify-between grow">
+                        {/* Views */}
+                        <span className="text-[11px] font-mono text-gray-500 dark:text-gray-400 mb-1">
+                          {post.date} &#8226; {post.views} views
+                        </span>
+
                         {/* Title */}
-                        <span className="text-gray-900 dark:text-gray-100 font-semibold">
+                        <span className="text-gray-900 text-m dark:text-gray-100 font-semibold">
                           {post.title}
                         </span>
 
-                        {/* Render tags below title and description */}
+                        {/* Render tags below description */}
                         {post.keywords && post.keywords.length > 0 && (
                           <div className="mt-2 flex gap-2 flex-wrap">
                             {post.keywords.slice(0, 4).map((tag, index) => (
                               <span
                                 key={index}
-                                className="text-xs border border-gray-400 dark:border-gray-600 text-gray-600 dark:text-gray-400 px-2 py-1"
+                                className="text-[11px] border font-mono border-gray-400 dark:border-gray-600 text-gray-600 dark:text-gray-400 px-1 "
                               >
                                 {tag}
                               </span>
                             ))}
                           </div>
+                        )}
+
+                        {/* Description */}
+                        {post.description && (
+                          <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                            {post.description}
+                          </p>
                         )}
                       </div>
                     </span>

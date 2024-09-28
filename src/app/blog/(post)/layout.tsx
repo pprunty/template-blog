@@ -6,6 +6,9 @@ export default function PostLayout({ children }: { children: React.ReactNode }) 
     <>
         {children}
         <BottomBar />
+        <h1 className="text-2xl font-bold mb-1 dark:text-gray-100">
+                Recommended For You:
+              </h1>
     </>
   );
 }

@@ -1,8 +1,9 @@
-import { Children } from "react";
+import { ReactNode, Children } from "react";
 
-export function withHeadingId(children) {
-  return Children.map(children, el => {
-    if ("string" === typeof el) {
+export function withHeadingId(children: ReactNode): ReactNode {
+  return Children.map(children, (el) => {
+    // Check if `el` is a string
+    if (typeof el === "string") {
       const re = /\[#([^\]]+)\]\s*$/m;
       const match = el.match(re);
 
@@ -35,12 +36,13 @@ export function withHeadingId(children) {
               -top-[20px]
             `}
             />
-            {el.substring(0, match.index)}
+            {el.substring(0, match.index)} {/* Remove matched part */}
           </span>
         );
       }
     }
 
+    // Return the element as-is if it's not a string or doesn't match the pattern
     return el;
   });
 }

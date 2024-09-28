@@ -68,7 +68,7 @@
 
   pre code {
     font-family: monospace;
-    font-size: 12px; /* Ensure code within pre has smaller font */
+    font-size: 13px; /* Ensure code within pre has smaller font */
   }
 
   code {
@@ -76,7 +76,6 @@
     padding: 0.25rem;
     border-radius: 0.25rem;
     font-family: monospace;
-    font-size: 14px;
   }
 
   :root.dark pre {
