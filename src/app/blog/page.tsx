@@ -126,12 +126,12 @@ export default async function PostsPage() {
                           </div>
                         )}
 
-                        {/* Description */}
+{/*                        }
                         {post.description && (
                           <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
                             {post.description}
                           </p>
-                        )}
+                        )*/}
                       </div>
                     </span>
                   </Link>
