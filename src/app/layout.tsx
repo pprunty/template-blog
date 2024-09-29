@@ -13,6 +13,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
+themeColor: "transparent",
 };
 
 // Font settings (example with Inter)
@@ -37,10 +38,6 @@ const metadata: Metadata = {
   ],
     metadataBase: new URL("https://template-blog-xi.vercel.app/"),
 
-};
-
-export const viewport = {
-  themeColor: "transparent",
 };
 
 export { metadata };
