@@ -16,13 +16,13 @@
     color-scheme: light;
 
     @apply bg-[#fcfcfc];
-    @apply text-[#333];
+    @apply text-[#111];
   }
 
   /* Dark mode settings */
   :root.dark {
     color-scheme: dark;
-    @apply bg-[#1C1C1C];
+    @apply bg-[#111];
     @apply text-[#fcfcfc];
   }
 
@@ -41,7 +41,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   -o-tab-size: 4;
@@ -83,6 +82,6 @@
   }
 
   :root.dark code {
-    background-color: #333; /* Dark mode background for inline code */
+    background-color: #111; /* Dark mode background for inline code */
   }
 }

@@ -7,6 +7,7 @@ import { themeEffect } from "@/components/ThemeSwitcher/theme-effect";
 import 'highlight.js/styles/atom-one-dark.css';
 import Header from '@/components/Header';
 import type { Viewport } from 'next';
+import { Analytics } from "@vercel/analytics/react"
 
 // Define viewport settings
 export const viewport: Viewport = {

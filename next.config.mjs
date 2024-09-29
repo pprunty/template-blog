@@ -28,7 +28,6 @@ const customRuntimeCaching = [
       },
     },
   },
-  // You can add more runtimeCaching entries if needed for other assets
 ];
 
 const nextConfig = {
@@ -39,7 +38,7 @@ const nextConfig = {
   },
   experimental: {
     swcMinify: true,
-    scrollRestoration: true,
+//     scrollRestoration: true, // Doesn't work well with scroll-behavior: smooth, remove this in globals.css to enable reliable scrollRestoration
   },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
