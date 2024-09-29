@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import path from 'path';
 import fs from 'fs/promises';
 
-const SITE_URL = 'https://template-blog-xi.vercel.app/';
+const SITE_URL = 'https://template-blog-xi.vercel.app';
 
 interface BlogMetadata {
   title?: string;
@@ -58,7 +58,7 @@ function generateSitemapXml(posts: { slug: string; lastModified: string; priorit
   // Add static pages with priority and changefreq
   const staticPages = [
     { url: SITE_URL, lastModified: new Date().toISOString(), priority: 1.0, changefreq: 'daily' },
-    { url: `${SITE_URL}about`, lastModified: new Date().toISOString(), priority: 0.8, changefreq: 'monthly' },
+    { url: `${SITE_URL}/about`, lastModified: new Date().toISOString(), priority: 0.8, changefreq: 'monthly' },
   ];
 
   staticPages.forEach((page) => {
@@ -67,7 +67,7 @@ function generateSitemapXml(posts: { slug: string; lastModified: string; priorit
 
   // Add dynamic blog posts with priority, changefreq, and image support
   posts.forEach((post) => {
-    sitemapContent += `<url>\n  <loc>${SITE_URL}blog/${post.slug}</loc>\n  <lastmod>${post.lastModified}</lastmod>\n  <priority>${post.priority}</priority>\n  <changefreq>${post.changefreq}</changefreq>\n`;
+    sitemapContent += `<url>\n  <loc>${SITE_URL}/blog/${post.slug}</loc>\n  <lastmod>${post.lastModified}</lastmod>\n  <priority>${post.priority}</priority>\n  <changefreq>${post.changefreq}</changefreq>\n`;
 
     if (post.image) {
       sitemapContent += `  <image:image>\n    <image:loc>${SITE_URL}${post.image}</image:loc>\n    <image:title>${post.title}</image:title>\n  </image:image>\n`;
