@@ -1,3 +1,5 @@
+import JsonLd from '@/app/blog/(post)/components/JsonLd';
+
 export const metadata = {
   title: "Vietnam: Land of Strong Coffee and Risky Crosswalks",
   description: "Reflecting on my experience horsepacking with ___ in Mongolia.",
@@ -23,6 +25,23 @@ export const metadata = {
   },
   keywords: ["travel", "vietnam", "guide"], // Additional SEO keywords
 };
+
+<JsonLd
+  type="BlogPosting"
+  url={`https://yourwebsite.com/blog/vietnam-strong-coffee`}
+  title={metadata.title}
+  description={metadata.description}
+  image={`https://yourwebsite.com${metadata.image}`}
+  datePublished={metadata.date}
+  author={{
+    name: "Patrick Prunty",
+    url: "https://yourwebsite.com/about",
+    publisherName: "Patrick's Blog",
+    publisherLogo: "https://yourwebsite.com/logo.png"
+  }}
+  keywords={metadata.keywords.join(", ")}
+  articleBody="In Vietnam, crossing the street is an extreme sport, and your morning brew could wake the dead..."
+/>
 
 # Good Morning Vietnam
 

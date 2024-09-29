@@ -1,8 +1,8 @@
+// sitemap.ts
 import { MetadataRoute } from 'next';
 import path from 'path';
 import fs from 'fs/promises';
-
-const SITE_URL = 'https://template-blog-xi.vercel.app';
+import { SITE_URL } from '@/config'; // Adjust the path based on your project structure
 
 interface BlogMetadata {
   title?: string;
@@ -32,11 +32,15 @@ async function getPosts() {
 
       try {
         // Import the MDX file to get its metadata
-        const { metadata } = (await import(`./blog/(post)/${slug}/page.mdx`)) as { metadata: BlogMetadata };
+        const { metadata } = (await import(`./blog/(post)/${slug}/page.mdx`)) as {
+          metadata: BlogMetadata;
+        };
 
         posts.push({
           slug,
-          lastModified: metadata.date ? new Date(metadata.date).toISOString() : new Date().toISOString(),
+          lastModified: metadata.date
+            ? new Date(metadata.date).toISOString()
+            : new Date().toISOString(),
           priority: 0.7,
           changefreq: 'weekly',
           image: metadata.image || null, // Get image if available
@@ -52,13 +56,32 @@ async function getPosts() {
 }
 
 // Function to generate advanced sitemap XML content
-function generateSitemapXml(posts: { slug: string; lastModified: string; priority: number; changefreq: string; image: string | null; title: string }[]) {
+function generateSitemapXml(
+  posts: {
+    slug: string;
+    lastModified: string;
+    priority: number;
+    changefreq: string;
+    image: string | null;
+    title: string;
+  }[]
+) {
   let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
 
   // Add static pages with priority and changefreq
   const staticPages = [
-    { url: SITE_URL, lastModified: new Date().toISOString(), priority: 1.0, changefreq: 'daily' },
-    { url: `${SITE_URL}/about`, lastModified: new Date().toISOString(), priority: 0.8, changefreq: 'monthly' },
+    {
+      url: SITE_URL,
+      lastModified: new Date().toISOString(),
+      priority: 1.0,
+      changefreq: 'daily',
+    },
+    {
+      url: `${SITE_URL}/about`,
+      lastModified: new Date().toISOString(),
+      priority: 0.8,
+      changefreq: 'monthly',
+    },
   ];
 
   staticPages.forEach((page) => {
@@ -87,7 +110,7 @@ function generateRobotsTxt() {
 Allow: /
 
 Host: ${SITE_URL}
-Sitemap: ${SITE_URL}sitemap.xml
+Sitemap: ${SITE_URL}/sitemap.xml
 `;
 }
 
@@ -130,10 +153,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Write the robots.txt file to the public directory
   await writeRobotsToPublic(robotsTxt);
 
-  return posts.map((post) => ({
-    url: `${SITE_URL}/blog/${post.slug}`,
-    lastModified: post.lastModified,
-    priority: post.priority,
-    changefreq: post.changefreq,
-  }));
+  return [
+    ...posts.map((post) => ({
+      url: `${SITE_URL}/blog/${post.slug}`,
+      lastModified: post.lastModified,
+      priority: post.priority,
+      changefreq: post.changefreq,
+    })),
+    {
+      url: SITE_URL,
+      lastModified: new Date().toISOString(),
+      priority: 1.0,
+      changefreq: 'daily',
+    },
+    {
+      url: `${SITE_URL}/about`,
+      lastModified: new Date().toISOString(),
+      priority: 0.8,
+      changefreq: 'monthly',
+    },
+  ];
 }
