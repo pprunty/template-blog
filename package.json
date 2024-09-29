@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/generate-sitemap.js && next build",
+    "postbuild": "node scripts/generate-sitemap.js",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -15,7 +16,6 @@
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
-    "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^14.2.13",
     "autoprefixer": "^10.4.20",
     "next": "14.2.13",
