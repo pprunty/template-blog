@@ -1,8 +1,7 @@
 import { Inter } from 'next/font/google';
 import type { Metadata } from "next";
 import "./globals.css";
-import type { Viewport } from 'next';
-import Header from '@/components/Header';
+import { AUTHOR, SITE_URL, DEFAULT_KEYWORDS } from '@/config';
 import { doge } from "./doge";
 import { themeEffect } from "@/components/ThemeSwitcher/theme-effect";
 import 'highlight.js/styles/atom-one-dark.css';
@@ -13,55 +12,57 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-themeColor: "transparent",
+  themeColor: "transparent",
 };
 
-// Font settings (example with Inter)
+// Font settings
 const inter = Inter({ subsets: ['latin'] });
 
-// Define metadata with ternary operator
-const metadata: Metadata = {
-  title: "PWA NextJS",
-  description: "It's a simple progressive web application made with NextJS",
+// Define metadata
+export const metadata: Metadata = {
+  title: `${AUTHOR.name}'s blog`,
+  description: `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
   generator: "Next.js",
   manifest: process.env.NODE_ENV === 'production' ? "/manifest.prod.json" : "/manifest.json",
-  keywords: ["nextjs", "next14", "pwa", "next-pwa"],
-  authors: [
-    {
-      name: "imvinojanv",
-      url: "https://www.linkedin.com/in/imvinojanv/",
-    },
-  ],
+  openGraph: {
+    title: `${AUTHOR.name}'s blog`,
+    description: `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
+    url: SITE_URL,
+    siteName: `${AUTHOR.name}'s blog`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@patrickprunty",
+    creator: "@patrickprunty",
+  },
+  keywords: DEFAULT_KEYWORDS,
   icons: [
     { rel: "apple-touch-icon", url: "/icons/180x180.png", sizes: "180x180" },
     { rel: "icon", url: "/icons/192x192.png", sizes: "192x192", type: "image/png" },
   ],
-    metadataBase: new URL("https://template-blog-xi.vercel.app/"),
-
+  metadataBase: new URL(SITE_URL),
 };
-
-export { metadata };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-    lang="en"
-    suppressHydrationWarning
+      lang="en"
+      suppressHydrationWarning
       className={`${inter.className} antialiased`}
     >
-           <head>
-             <script
-               dangerouslySetInnerHTML={{
-                 __html: `(${themeEffect.toString()})();(${doge.toString()})();`,
-               }}
-             />
-             <meta name="google-site-verification" content="5GuQpmfOzq72Xmm56vDEj1o3L0LEngpUlkmqYPgn7iw" />
-           </head>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(${themeEffect.toString()})();(${doge.toString()})();`,
+          }}
+        />
+        <meta name="google-site-verification" content="5GuQpmfOzq72Xmm56vDEj1o3L0LEngpUlkmqYPgn7iw" />
+      </head>
       <body className={`dark:text-gray-100 max-w-2xl m-auto`}>
-            <main className="p-6 pt-3 md:pt-6 min-h-screen">
-            <Header/>
+        <main className="p-6 pt-3 md:pt-6 min-h-screen">
+          <Header />
           {children}
-          </main>
+        </main>
       </body>
     </html>
   );
