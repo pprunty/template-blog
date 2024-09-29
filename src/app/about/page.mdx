@@ -1,10 +1,49 @@
+import { AUTHOR, SITE_URL, DEFAULT_KEYWORDS } from '@/config';
+
+export const metadata = {
+  title: `About - ${AUTHOR.name}`,
+  description: `${AUTHOR.name} is a senior software engineer from Portmarnock, Dublin, Ireland. He shares his journey through software development, achievements, and adventures in triathlon, marathons, and travel.`,
+  openGraph: {
+    title: `About - ${AUTHOR.name}`,
+    description: `${AUTHOR.name} is a senior software engineer from Portmarnock, Dublin, Ireland. He shares his journey through software development, achievements, and adventures.`,
+    url: `${SITE_URL}/about`,
+    siteName: `${AUTHOR.name}'s website`,
+    images: [
+      {
+        url: `${SITE_URL}/images/me.JPG`,
+        width: 400,
+        height: 400,
+        alt: `${AUTHOR.name}'s profile picture`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@patrickprunty",
+    creator: "@patrickprunty",
+    images: [
+      {
+        url: `${SITE_URL}/images/me.JPG`,
+        alt: `${AUTHOR.name}'s profile picture`,
+      },
+    ],
+  },
+  keywords: DEFAULT_KEYWORDS.concat([
+    AUTHOR.name,
+    "Software Engineer",
+    "Dublin",
+    "Ireland",
+    "technology"
+  ]),
+  metadataBase: new URL(SITE_URL),
+};
 
 # About [#about]
 
 <img
 src="/images/me.JPG"
 alt="Patrick Prunty"
-className="bg-gray-100 block mt-2 mb-5 mx-auto w-full sm:w-80 md:float-right sm:ml-5 sm:mb-5"
+className="bg-gray-100 rounded-md block mt-2 mb-5 mx-auto w-full sm:w-80 md:float-right sm:ml-5 sm:mb-5"
 width={400}
 height={400}
 layout={"responsive"}

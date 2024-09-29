@@ -4,7 +4,7 @@
 
 @layer base {
   /* Apply smooth scrolling globally */
-  html {
+  html, body {
     scroll-behavior: smooth;
   }
 
@@ -48,12 +48,6 @@
   font-feature-settings: normal;
   font-variation-settings: normal;
   -webkit-tap-highlight-color: transparent;
-
-  /* Smooth scrolling for scrollable elements */
-  .scroll-container {
-    scroll-behavior: smooth;
-    overflow-y: auto;
-  }
 
   /* Apply global styles to pre and code tags */
   pre {
