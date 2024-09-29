@@ -1,16 +1,18 @@
+import { SITE_URL, AUTHOR } from '@/config'; // Import SITE_URL and AUTHOR from config
 import JsonLd from '@/app/blog/(post)/components/JsonLd';
+import Head from 'next/head'; // Import Head from next/head
 
 export const metadata = {
   title: "Vietnam: Land of Strong Coffee and Risky Crosswalks",
   description: "Reflecting on my experience horsepacking with ___ in Mongolia.",
   image: "/images/62b1ca5f-d849-41a7-a83e-42ca04b3b47c.jpg",
-  date: "2023-08-05", // Custom property if needed for internal use
+  date: "2023-08-05",
   openGraph: {
     title: "Vietnam: Land of Strong Coffee and Risky Crosswalks",
     description: "Reflecting on my experience horsepacking with ___ in Mongolia.",
     images: [
       {
-        url: "/images/62b1ca5f-d849-41a7-a83e-42ca04b3b47c.jpg",
+        url: `${SITE_URL}/images/62b1ca5f-d849-41a7-a83e-42ca04b3b47c.jpg`,
         alt: "Wang Haiyang's artwork for Vietnam guide",
       },
     ],
@@ -21,27 +23,24 @@ export const metadata = {
     card: "summary_large_image",
     title: "Vietnam: Land of Strong Coffee and Risky Crosswalks",
     description: "Reflecting on my experience horsepacking with ___ in Mongolia.",
-    image: "/images/photography/62b1ca5f-d849-41a7-a83e-42ca04b3b47c.jpg",
+    image: `${SITE_URL}/images/62b1ca5f-d849-41a7-a83e-42ca04b3b47c.jpg`,
   },
-  keywords: ["travel", "vietnam", "guide"], // Additional SEO keywords
+  keywords: ["travel", "vietnam", "guide"],
 };
 
-<JsonLd
-  type="BlogPosting"
-  url={`https://yourwebsite.com/blog/vietnam-strong-coffee`}
-  title={metadata.title}
-  description={metadata.description}
-  image={`https://yourwebsite.com${metadata.image}`}
-  datePublished={metadata.date}
-  author={{
-    name: "Patrick Prunty",
-    url: "https://yourwebsite.com/about",
-    publisherName: "Patrick's Blog",
-    publisherLogo: "https://yourwebsite.com/logo.png"
-  }}
-  keywords={metadata.keywords.join(", ")}
-  articleBody="In Vietnam, crossing the street is an extreme sport, and your morning brew could wake the dead..."
-/>
+<head>
+  <JsonLd
+    type="BlogPosting"
+    url={`${SITE_URL}/blog/vietnam-strong-coffee`}
+    title={metadata.title}
+    description={metadata.description}
+    image={`${SITE_URL}${metadata.image}`}
+    datePublished={metadata.date}
+    author={AUTHOR}
+    keywords={metadata.keywords.join(", ")}
+    articleBody="In Vietnam, crossing the street is an extreme sport, and your morning brew could wake the dead..."
+  />
+</head>
 
 # Good Morning Vietnam
 

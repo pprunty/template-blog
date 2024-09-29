@@ -54,7 +54,6 @@ export function useMDXComponents(components: {
               alt={alt || "Image"}
               width={width}
               height={height}
-              layout="responsive"
               quality={90}
               priority={true}
             />
