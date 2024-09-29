@@ -7,7 +7,7 @@ import { themeEffect } from "@/components/ThemeSwitcher/theme-effect";
 import 'highlight.js/styles/atom-one-dark.css';
 import Header from '@/components/Header';
 import type { Viewport } from 'next';
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "./analytics";
 
 // Define viewport settings
 export const viewport: Viewport = {
@@ -80,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           {children}
         </main>
+        <Analytics />
       </body>
     </html>
   );
