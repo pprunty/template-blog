@@ -52,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                  __html: `(${themeEffect.toString()})();(${doge.toString()})();`,
                }}
              />
+             <meta name="google-site-verification" content="5GuQpmfOzq72Xmm56vDEj1o3L0LEngpUlkmqYPgn7iw" />
            </head>
       <body className={`dark:text-gray-100 max-w-2xl m-auto`}>
             <main className="p-6 pt-3 md:pt-6 min-h-screen">
