@@ -5,6 +5,8 @@ import { AUTHOR, SITE_URL, DEFAULT_KEYWORDS } from '@/config';
 import { doge } from "./doge";
 import { themeEffect } from "@/components/ThemeSwitcher/theme-effect";
 import 'highlight.js/styles/atom-one-dark.css';
+import Header from '@/components/Header';
+import type { Viewport } from 'next';
 
 // Define viewport settings
 export const viewport: Viewport = {
