@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useLayoutEffect, useState, useCallback } from "react";
 import { themeEffect } from "./theme-effect";
 
 export function ThemeSwitcher() {
   const [preference, setPreference] = useState<undefined | null | string>(undefined);
-  const [currentTheme, setCurrentTheme] = useState<string | null>(null);
+  const [currentTheme, setCurrentTheme] = useState<null | string>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isHoveringOverride, setIsHoveringOverride] = useState(false);
 
@@ -14,7 +14,7 @@ export function ThemeSwitcher() {
     setCurrentTheme(current);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setPreference(localStorage.getItem("theme"));
     const current = themeEffect();
     setCurrentTheme(current);
@@ -43,7 +43,7 @@ export function ThemeSwitcher() {
   return (
     <>
       {isHovering && (
-        <span className="text-[9px] text-gray-400 hidden md:inline">
+        <span className="text-[9px] text-gray-400 mr-[-5px] hidden md:inline">
           {preference === null ? "System" : preference === "dark" ? "Dark" : "Light"}
         </span>
       )}
@@ -51,23 +51,18 @@ export function ThemeSwitcher() {
       <button
         aria-label="Toggle theme"
         className={`inline-flex ${
-          isHovering && !isHoveringOverride
-            ? "bg-gray-200 dark:bg-[#313131]"
-            : ""
+          isHovering && !isHoveringOverride ? "bg-gray-200 dark:bg-[#313131]" : ""
         } active:bg-gray-300 transition-[background-color] dark:active:bg-[#242424] rounded-sm p-2
-          bg-gray-200
-          dark:bg-[#313131]
-          theme-system:!bg-inherit
-          [&_.sun-icon]:hidden
-          dark:[&_.moon-icon]:hidden
-          dark:[&_.sun-icon]:inline
+          bg-gray-200 dark:bg-[#313131] theme-system:!bg-inherit [&_.sun-icon]:hidden dark:[&_.moon-icon]:hidden dark:[&_.sun-icon]:inline
         }`}
         onClick={(ev) => {
           ev.preventDefault();
           setIsHoveringOverride(true);
 
           let newPreference: string | null = currentTheme === "dark" ? "light" : "dark";
-          const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
 
           if (preference !== null && systemTheme === currentTheme) {
             newPreference = null;
