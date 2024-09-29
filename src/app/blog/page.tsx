@@ -85,7 +85,14 @@ export default async function PostsPage() {
                 <li key={post.slug} className="mb-4">
                   <Link href={`/blog/${post.slug}`}>
                     <span
-                      className="flex flex-row transition-[background-color] hover:bg-gray-100 dark:hover:bg-[#242424] active:bg-gray-200 dark:active:bg-[#222] border-y border-gray-300 dark:border-gray-600 py-4 px-2"
+                      className="
+                        flex items-center  /* Centers image and content vertically */
+                        transition-[border-color] ease-in-out
+                        border-b border-gray-300 dark:border-gray-600
+                        sm:border sm:border-gray-300 dark:sm:border-gray-600
+                        sm:hover:border-gray-500 dark:sm:hover:border-gray-400
+                        py-4 sm:px-4 /* Padding on x-axis only for sm and above */
+                      "
                     >
                       {/* Image Container with responsive sizes */}
                       {post.image && (
@@ -126,12 +133,12 @@ export default async function PostsPage() {
                           </div>
                         )}
 
-{/*                        }
+                        {/* Display description below tags */}
                         {post.description && (
                           <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
                             {post.description}
                           </p>
-                        )*/}
+                        )}
                       </div>
                     </span>
                   </Link>

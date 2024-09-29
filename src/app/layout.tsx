@@ -6,6 +6,7 @@ import { doge } from "./doge";
 import { themeEffect } from "@/components/ThemeSwitcher/theme-effect";
 import 'highlight.js/styles/atom-one-dark.css';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import type { Viewport } from 'next';
 import { Analytics } from "./analytics";
 
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="p-6 pt-3 md:pt-6 min-h-screen">
           <Header />
           {children}
+          <Footer/>
         </main>
         <Analytics />
       </body>
