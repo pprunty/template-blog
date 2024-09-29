@@ -1,9 +1,9 @@
-// import Image from 'next/legacy/image';
+import Image from 'next/legacy/image';
 
 export default function Footer() {
   return (
     <footer className="flex text-md flex-col items-center pb-4">
-      {/* <Image src="/images/line.svg" fill="currentColor" width="125" height="54" /> */}
+      <Image src="/images/line.svg" fill="currentColor" width="125" height="54" />
       <div className="flex justify-center mt-10">
         <a
           className="transition hover:underline"

@@ -1,110 +1,153 @@
-import Image from "next/image";
+import { cache } from 'react';
+import path from 'path';
+import fs from 'fs/promises';
+import { BlogPostType } from '@/types/BlogPost';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Suspense } from "react";
 
-export default function Home() {
+interface BlogMetadata {
+  title?: string;
+  date?: string;
+  image?: string;
+  description?: string;
+  excerpt?: string;
+  type?: string;
+  keywords?: string[];
+  readingTime?: number;
+  views?: number;
+}
+
+const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
+  const postsDirectory = path.join(process.cwd(), 'src', 'app', 'blog', '(post)');
+  const dirEntries = await fs.readdir(postsDirectory, { withFileTypes: true });
+  const posts: BlogPostType[] = [];
+
+  for (const entry of dirEntries) {
+    if (
+      entry.isDirectory() &&
+      !['[slug]', 'layout.js', 'page.tsx', 'components'].includes(entry.name)
+    ) {
+      const slug = entry.name;
+      const filePath = path.join(postsDirectory, slug, 'page.mdx');
+
+      try {
+        const { metadata } = (await import(`./blog/(post)/${slug}/page.mdx`)) as { metadata: BlogMetadata };
+
+        posts.push({
+          slug,
+          title: metadata.title || 'Untitled Post',
+          date: metadata.date || null,
+          image: metadata.image || '',
+          description: metadata.description || '',
+          excerpt: metadata.excerpt || '',
+          type: metadata.type || 'article',
+          keywords: metadata.keywords || [],
+          readingTime: metadata.readingTime || 5,
+          views: metadata.views || 5,
+        });
+      } catch (error) {
+        console.error(`Error reading file ${filePath}:`, error);
+      }
+    }
+  }
+
+  posts.sort((a, b) => {
+    const dateA = a.date ? new Date(a.date).getTime() : 0;
+    const dateB = b.date ? new Date(b.date).getTime() : 0;
+    return dateB - dateA;
+  });
+
+  return posts;
+});
+
+export default async function PostsPage() {
+  const posts = await getAllPosts();
+
+  const postsByYear = posts.reduce((acc, post) => {
+    const year = post.date ? new Date(post.date).getFullYear() : 'Unknown Year';
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(post);
+    return acc;
+  }, {} as Record<string, BlogPostType[]>);
+
   return (
-    <div className="w-full">
-      {/* Main Content */}
-      <main className="flex-grow grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] mt-[80px]">
-        <div className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-          <Image
-            className="dark:invert"
-            src="https://nextjs.org/icons/next.svg"
-            alt="Next.js logo"
-            width={180}
-            height={38}
-            priority
-          />
-          <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-            <li className="mb-2">
-              Get started by editing{" "}
-              <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-                src/app/page.tsx
-              </code>
-              .
-            </li>
-            <li>Save and see your changes instantly.</li>
-          </ol>
+    <Suspense fallback={null}>
+      <div className="m-auto mb-10 text-sm ">
+        {Object.entries(postsByYear).map(([year, posts]) => (
+          <div key={year} className="mb-8">
+            {/* Display the year as a header */}
+            <h2 className="text-m mb-4 text-gray-600 dark:text-gray-400 font-mono font-semibold">{year}</h2>
+            <ul className="list-none p-0">
+              {posts.map((post) => (
+                <li key={post.slug} className="mb-4">
+                  <Link href={`/blog/${post.slug}`}>
+                    <span
+                      className="
+                        flex items-center  /* Centers image and content vertically */
+                        transition-[border-color] ease-in-out
+                        border-b border-gray-300 dark:border-gray-600
+                        sm:border sm:border-gray-300 dark:sm:border-gray-600
+                        sm:hover:border-gray-500 dark:sm:hover:border-gray-400
+                        py-4 sm:px-4 /* Padding on x-axis only for sm and above */
+                      "
+                    >
+                      {/* Image Container with responsive sizes */}
+                      {post.image && (
+                        <div className="flex-shrink-0 w-[100px] h-[100px] overflow-hidden mr-4">
+                          <Image
+                            src={post.image}
+                            alt={post.title || "Blog post image"}
+                            width={100}
+                            height={100}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                      )}
 
-          <div className="flex gap-4 items-center flex-col sm:flex-row">
-            <a
-              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                className="dark:invert"
-                src="https://nextjs.org/icons/vercel.svg"
-                alt="Vercel logomark"
-                width={20}
-                height={20}
-                priority
-              />
-              Deploy now
-            </a>
-            <a
-              className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-              href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read our docs
-            </a>
+                      {/* Post Details */}
+                      <div className="flex flex-col justify-between grow">
+                        {/* Views */}
+                        <span className="text-[11px] font-mono text-gray-500 dark:text-gray-400 mb-1">
+                          {post.date} &#8226; {post.views} views
+                        </span>
+
+                        {/* Title */}
+                        <span className="text-gray-900 text-lg dark:text-gray-100 font-semibold">
+                          {post.title}
+                        </span>
+
+                        {/* Render tags below description */}
+                        {post.keywords && post.keywords.length > 0 && (
+                          <div className="mt-2 flex gap-2 flex-wrap">
+                            {post.keywords.slice(0, 4).map((tag, index) => (
+                              <span
+                                key={index}
+                                className="text-[11px] border font-mono border-gray-400 dark:border-gray-600 text-gray-600 dark:text-gray-400 px-1 "
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Display description below tags */}
+                        {post.description && (
+                          <p className="text-m text-gray-600 dark:text-gray-400 mt-2">
+                            {post.description}
+                          </p>
+                        )}
+                      </div>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-            priority
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-            priority
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-            priority
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        ))}
+      </div>
+    </Suspense>
   );
 }
