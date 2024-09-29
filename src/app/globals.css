@@ -62,7 +62,6 @@
     padding: 1rem;
     background-color: #f5f5f5; /* Light background */
     @apply text-sm; /* Apply Tailwind's text size */
-    border-radius: 0.375rem; /* Optional: rounded corners */
   }
 
   pre code {
