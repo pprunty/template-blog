@@ -31,11 +31,25 @@ export const metadata: Metadata = {
     description: `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
     url: SITE_URL,
     siteName: `${AUTHOR.name}'s blog`,
+    images: [
+      {
+        url: `${SITE_URL}/icons/512x512.png`, // Path to your Open Graph image
+        width: 1200,
+        height: 630,
+        alt: `${AUTHOR.name}'s blog cover image`,
+      }
+    ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@patrickprunty",
     creator: "@patrickprunty",
+    images: [
+      {
+        url: `${SITE_URL}/twitter-image.png`, // Path to your Twitter image (can be same as OG image)
+        alt: `${AUTHOR.name}'s blog cover image`,
+      }
+    ],
   },
   keywords: DEFAULT_KEYWORDS,
   icons: [
