@@ -76,24 +76,24 @@ export default async function PostsPage() {
   }, {} as Record<string, BlogPostType[]>);
 
   return (
-      <div className="m-auto mb-10 text-sm">
+      <div className="mb-2 text-sm">
         {Object.entries(postsByYear).map(([year, posts]) => (
-          <div key={year} className="mb-8">
+          <div key={year} className="mb-2">
             {/* Display the year as a header */}
-            <h2 className="text-lg mb-4 text-primary dark:text-primary-dark font-semibold">
+            <h2 className="text-lg mb-2 text-primary dark:text-primary-dark font-semibold">
               {year}
             </h2>
             <ul className="list-none p-0">
               {posts.map((post) => (
-                <li key={post.slug} className="mb-4">
+                <li key={post.slug} className="mb-0 sm:mb-4">
                   <Link href={`/blog/${post.slug}`}>
                     <span
                       className="
                         flex items-center transition-all ease-in-out
-                        border-b border-[#333] dark:border-[#f0f0f0] sm:border sm:border-gray-300 dark:sm:border-gray-600
+                        border-b border-[#333] dark:border-[#fcfcfc] sm:border sm:border-gray-300 dark:sm:border-gray-600
                         sm:hover:border-gray-500 dark:sm:hover:border-gray-400
                         active:opacity-80 active:scale-98
-                        py-4 sm:px-4 sm:pb-4 sm:px-4
+                        py-4 sm:py-4 sm:px-4 sm:pb-4 sm:px-4
                       "
                     >
                       {/* Image Container with responsive sizes */}
@@ -112,7 +112,7 @@ export default async function PostsPage() {
                       {/* Post Details */}
                       <div className="flex flex-col justify-between grow">
                         {/* Views */}
-                        <span className="text-[11px] font-mono text-gray-500 dark:text-gray-400 sm:mb-1">
+                        <span className="text-[11px] font-mono text-gray-500 dark:text-gray-400">
                           {post.date} &#8226; {post.views} views
                         </span>
 

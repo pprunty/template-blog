@@ -17,13 +17,13 @@
     color-scheme: light;
 
     @apply bg-[#fcfcfc];
-    @apply text-[#111];
+    @apply text-[#000];
   }
 
   /* Dark mode settings */
   :root.dark {
     color-scheme: dark;
-    @apply bg-[#111];
+    @apply bg-[#000];
     @apply text-[#fcfcfc];
   }
 

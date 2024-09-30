@@ -8,7 +8,7 @@ export const AUTHOR = {
   twitterUrl: "https://x.com/pprunty_",
   stravaUrl: "https://www.strava.com/athletes/72636452",
   githubUrl: "https://github.com/pprunty",
-  redditUrl: "",
+  redditUrl: "https://www.reddit.com/user/patrickprunty1997/",
 };
 
 // Default section and keywords

@@ -2,6 +2,7 @@ import Link from "next/link";
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import {Logo} from "@/components/Logo";
 import React from 'react';
+import { AUTHOR } from '@/config'; // Adjust the path to your config file
 
 export default function Header() {
   return (
@@ -23,7 +24,7 @@ export default function Header() {
               About
             </Link>
                <a
-                      href="https://twitter.com/rauchg"
+                      href={AUTHOR.twitterUrl}
                       target="_blank"
                       className="inline-flex hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] items-center p-2 rounded-sm transition-[background-color] whitespace-nowrap -mr-2"
                     >

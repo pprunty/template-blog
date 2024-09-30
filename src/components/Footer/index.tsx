@@ -2,7 +2,7 @@ import { AUTHOR } from '@/config'; // Adjust the path to your config file
 
 export default function Footer() {
   return (
-    <footer className="flex text-md flex-col items-center pb-4 pt-4 font-mono">
+    <footer className="flex text-md flex-col items-center pb-4 pt-4 mt-20 font-mono">
       {/* Parent container that sets the color */}
       <div className="w-[125px] h-[54px] text-black dark:text-white">
         {/* SVG using currentColor to inherit text color */}
