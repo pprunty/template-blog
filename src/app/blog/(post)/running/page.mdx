@@ -1,6 +1,5 @@
 import { SITE_URL, AUTHOR } from '@/config'; // Import SITE_URL and AUTHOR from config
 import JsonLd from '@/app/blog/(post)/components/JsonLd';
-import Head from 'next/head'; // Import Head from next/head
 
 export const metadata = {
   title: "What I Talk About When I Talk About Running",
@@ -28,19 +27,17 @@ export const metadata = {
   keywords: ["programming", "tech industry", "creativity"],
 };
 
-<head>
-  <JsonLd
-    type="BlogPosting"
-    url={`${SITE_URL}/blog/what-i-talk-about-when-i-talk-about-running`}
-    title={metadata.title}
-    description={metadata.description}
-    image={`${SITE_URL}${metadata.image}`}
-    datePublished={metadata.date}
-    author={AUTHOR}
-    keywords={metadata.keywords.join(", ")}
-    articleBody={`I can't stop running, even if I wanted to. I can't stop running. As long as destiny allows, I will continue running. I don't hop out of bed in the morning and say, "I can't wait to get out and run 16km today." In fact, I don't enjoy a large percentage of the runs that I do. But I know and understand that it's part of the process. And through repetition, I've seen the direct result of enduring a process over time. I know it's part of what I have to do. There's no other option. If I want to grow, if I want to get better, if I want to accomplish a certain thing, I have to do it. I have to do that thing. I have to get out and run.`}
-  />
-</head>
+<JsonLd
+type="BlogPosting"
+url={`${SITE_URL}/blog/what-i-talk-about-when-i-talk-about-running`}
+title={metadata.title}
+description={metadata.description}
+image={`${SITE_URL}${metadata.image}`}
+datePublished={metadata.date}
+author={AUTHOR}
+keywords={metadata.keywords.join(", ")}
+articleBody={`I can't stop running, even if I wanted to. I can't stop running. As long as destiny allows, I will continue running. I don't hop out of bed in the morning and say, "I can't wait to get out and run 16km today." In fact, I don't enjoy a large percentage of the runs that I do. But I know and understand that it's part of the process. And through repetition, I've seen the direct result of enduring a process over time. I know it's part of what I have to do. There's no other option. If I want to grow, if I want to get better, if I want to accomplish a certain thing, I have to do it. I have to do that thing. I have to get out and run.`}
+/>
 
 I can't stop running, even if I wanted to. I can't stop running.
 

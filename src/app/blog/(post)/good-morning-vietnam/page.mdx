@@ -1,6 +1,5 @@
 import { SITE_URL, AUTHOR } from '@/config'; // Import SITE_URL and AUTHOR from config
 import JsonLd from '@/app/blog/(post)/components/JsonLd';
-import Head from 'next/head'; // Import Head from next/head
 
 export const metadata = {
   title: "Vietnam: Land of Strong Coffee and Risky Crosswalks",
@@ -28,19 +27,17 @@ export const metadata = {
   keywords: ["travel", "vietnam", "guide"],
 };
 
-<head>
-  <JsonLd
-    type="BlogPosting"
-    url={`${SITE_URL}/blog/vietnam-strong-coffee`}
-    title={metadata.title}
-    description={metadata.description}
-    image={`${SITE_URL}${metadata.image}`}
-    datePublished={metadata.date}
-    author={AUTHOR}
-    keywords={metadata.keywords.join(", ")}
-    articleBody="In Vietnam, crossing the street is an extreme sport, and your morning brew could wake the dead..."
-  />
-</head>
+<JsonLd
+type="BlogPosting"
+url={`${SITE_URL}/blog/vietnam-strong-coffee`}
+title={metadata.title}
+description={metadata.description}
+image={`${SITE_URL}${metadata.image}`}
+datePublished={metadata.date}
+author={AUTHOR}
+keywords={metadata.keywords.join(", ")}
+articleBody="In Vietnam, crossing the street is an extreme sport, and your morning brew could wake the dead..."
+/>
 
 # Good Morning Vietnam
 
