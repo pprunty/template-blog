@@ -17,6 +17,8 @@ interface BlogMetadata {
   views?: number;
 }
 
+const MAX_DESCRIPTION_LENGTH = 200; // Set the max length for clamping
+
 const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
   const postsDirectory = path.join(process.cwd(), 'src', 'app', 'blog', '(post)');
   const dirEntries = await fs.readdir(postsDirectory, { withFileTypes: true });
@@ -85,15 +87,15 @@ export default async function PostsPage() {
               {posts.map((post) => (
                 <li key={post.slug} className="mb-4">
                   <Link href={`/blog/${post.slug}`}>
-                   <span
-                     className="
-                       flex items-center transition-all ease-in-out
-                       border-b-2 border-gray-400 dark:border-gray-600 sm:border sm:border-gray-300 dark:sm:border-gray-600
-                       sm:hover:border-gray-500 dark:sm:hover:border-gray-400
-                       active:opacity-80 active:scale-98
-                       py-4 sm:px-4 sm:pb-4 sm:px-6 /* Padding on x-axis only for sm and above */
-                     "
-                   >
+                    <span
+                      className="
+                        flex items-center transition-all ease-in-out
+                        border-b border-[#333] dark:border-[#f0f0f0] sm:border sm:border-gray-300 dark:sm:border-gray-600
+                        sm:hover:border-gray-500 dark:sm:hover:border-gray-400
+                        active:opacity-80 active:scale-98
+                        py-4 sm:px-4 sm:pb-4 sm:px-6
+                      "
+                    >
                       {/* Image Container with responsive sizes */}
                       {post.image && (
                         <div className="flex-shrink-0 w-[100px] h-[100px] overflow-hidden mr-4">
@@ -135,9 +137,7 @@ export default async function PostsPage() {
 
                         {/* Display description below tags */}
                         {post.description && (
-                          <p className="text-m text-gray-600 dark:text-gray-400 mt-2">
-                            {post.description}
-                          </p>
+                          <Description description={post.description} />
                         )}
                       </div>
                     </span>
@@ -150,3 +150,26 @@ export default async function PostsPage() {
       </div>
   );
 }
+
+function Description({ description }: { description: string }) {
+  const MAX_DESCRIPTION_LENGTH = 200;
+
+  const isClamped = description.length > MAX_DESCRIPTION_LENGTH;
+
+  return (
+    <div className="text-m text-gray-600 dark:text-gray-400 mt-2">
+      {/* Clamped description with CSS line-clamp */}
+      <p className="line-clamp-4">
+        {description}
+      </p>
+
+      {/* Conditionally render "See more" only if the text length exceeds the limit */}
+      {isClamped && (
+        <span className="inline text-black dark:text-white cursor-pointer hover:underline">
+          See more
+        </span>
+      )}
+    </div>
+  );
+}
+
