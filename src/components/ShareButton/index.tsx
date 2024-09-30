@@ -66,7 +66,7 @@ const ShareButton = () => {
       </button>
 
       <div
-        className={`fixed top-0 left-0 right-0 mx-auto transform mt-2 w-full max-w-full sm:w-2/5 h-10 text-center py-2 text-sm z-50
+        className={`fixed top-0 left-0 right-0 mx-auto transform mt-2 w-full max-w-full sm:w-1/2 h-10 text-center py-2 text-sm z-50
           transition-opacity duration-500 ease-in-out ${isNotificationVisible ? 'opacity-100 visible' : 'opacity-0 invisible'}
           bg-black dark:bg-white text-white dark:text-black`}
       >
