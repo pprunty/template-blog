@@ -93,7 +93,7 @@ export default async function PostsPage() {
                         border-b border-[#333] dark:border-[#f0f0f0] sm:border sm:border-gray-300 dark:sm:border-gray-600
                         sm:hover:border-gray-500 dark:sm:hover:border-gray-400
                         active:opacity-80 active:scale-98
-                        py-4 sm:px-4 sm:pb-4 sm:px-6
+                        py-4 sm:px-4 sm:pb-4 sm:px-4
                       "
                     >
                       {/* Image Container with responsive sizes */}
