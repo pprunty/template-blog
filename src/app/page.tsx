@@ -23,9 +23,9 @@ const MAX_DESCRIPTION_LENGTH = 200; // Set the max length for clamping
 const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
   const postsDirectory = path.join(process.cwd(), 'src', 'app', 'blog', '(post)');
   const dirEntries = await fs.readdir(postsDirectory, { withFileTypes: true });
-  const posts: BlogPostType[] = [];
 
-  for (const entry of dirEntries) {
+  // Create an array of promises for each post's metadata
+  const postsPromises = dirEntries.map(async (entry) => {
     if (
       entry.isDirectory() &&
       !['[slug]', 'layout.js', 'page.tsx', 'components'].includes(entry.name)
@@ -34,9 +34,10 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
       const filePath = path.join(postsDirectory, slug, 'page.mdx');
 
       try {
+        // Import the metadata from the MDX file
         const { metadata } = (await import(`./blog/(post)/${slug}/page.mdx`)) as { metadata: BlogMetadata };
 
-        posts.push({
+        return {
           slug,
           title: metadata.title || 'Untitled Post',
           date: metadata.date || null,
@@ -47,12 +48,16 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
           keywords: metadata.keywords || [],
           readingTime: metadata.readingTime || 5,
           views: metadata.views || 5,
-        });
+        } as BlogPostType;
       } catch (error) {
         console.error(`Error reading file ${filePath}:`, error);
+        return null; // Return null if there's an error
       }
     }
-  }
+  });
+
+  // Wait for all metadata to be fetched in parallel
+  const posts = (await Promise.all(postsPromises)).filter(Boolean) as BlogPostType[];
 
   // Sort blog posts by latest date first
   posts.sort((a, b) => {
