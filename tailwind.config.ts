@@ -16,7 +16,6 @@ const config: Config = {
       // Adding theme-system variant
       addVariant("theme-system", ".theme-system &");
     }),
-    require('@tailwindcss/line-clamp'), // Ensure this is added
   ],
   future: {
     hoverOnlyWhenSupported: true,

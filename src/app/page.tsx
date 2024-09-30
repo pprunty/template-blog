@@ -152,19 +152,19 @@ export default async function PostsPage() {
 }
 
 function Description({ description }: { description: string }) {
-  const MAX_DESCRIPTION_LENGTH = 200;
-
-  const isClamped = description.length > MAX_DESCRIPTION_LENGTH;
+  const truncatedDescription = description.length > MAX_DESCRIPTION_LENGTH
+    ? `${description.substring(0, 200)}...`
+    : description;
 
   return (
     <div className="text-m text-gray-600 dark:text-gray-400 mt-2">
       {/* Clamped description with CSS line-clamp */}
       <p className="line-clamp-4">
-        {description}
+        {truncatedDescription}
       </p>
 
-      {/* Conditionally render "See more" only if the text length exceeds the limit */}
-      {isClamped && (
+      {/* Conditionally render "See more" only if the text is truncated */}
+      {description.length > 200 && (
         <span className="inline text-black dark:text-white cursor-pointer hover:underline">
           See more
         </span>
@@ -172,4 +172,3 @@ function Description({ description }: { description: string }) {
     </div>
   );
 }
-
