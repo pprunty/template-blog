@@ -76,6 +76,6 @@
   }
 
   :root.dark code {
-    background-color: #111; /* Dark mode background for inline code */
+    background-color: #1c1c1c; /* Dark mode background for inline code */
   }
 }
