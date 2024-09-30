@@ -5,12 +5,23 @@ import React, { useState } from 'react';
 const ShareButton = () => {
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 
+  // Function to detect if the user is on a desktop device
+  const isDesktopDevice = () => {
+    return window.innerWidth >= 1024; // Adjust width as needed for desktop detection
+  };
+
   const handleShare = async () => {
     const url = window.location.href;
     const title = document.title;
     const text = 'Check out this blog post!';
 
-    if (navigator.share) {
+    // Always show the notification on desktop devices
+    if (isDesktopDevice()) {
+      setIsNotificationVisible(true);
+      setTimeout(() => setIsNotificationVisible(false), 2000); // Hide the notification after 2 seconds
+    }
+
+    if (navigator.share && !isDesktopDevice()) {
       try {
         await navigator.share({
           title,
@@ -24,8 +35,11 @@ const ShareButton = () => {
     } else {
       try {
         await navigator.clipboard.writeText(url);
-        setIsNotificationVisible(true);
-        setTimeout(() => setIsNotificationVisible(false), 2000); // Hide the notification after 2 seconds
+        if (!isDesktopDevice()) {
+          // Show notification if it's not already shown on desktop
+          setIsNotificationVisible(true);
+          setTimeout(() => setIsNotificationVisible(false), 2000); // Hide the notification after 2 seconds
+        }
       } catch (error) {
         console.error('Failed to copy URL:', error);
         alert('Failed to copy URL. Please copy it manually: ' + url);
@@ -51,11 +65,13 @@ const ShareButton = () => {
         </svg>
       </button>
 
-      {isNotificationVisible && (
-        <div className="fixed top-0 left-1/2 transform -translate-x-1/2 mt-2 w-1/2 md:w-4/5 h-10 bg-black text-white text-center py-2 text-sm animate-fadeInOut z-50">
-          <p className="m-0">Link copied</p>
-        </div>
-      )}
+      <div
+        className={`fixed top-0 left-0 right-0 mx-auto transform mt-2 w-full max-w-full sm:w-2/5 h-10 text-center py-2 text-sm z-50
+          transition-opacity duration-500 ease-in-out ${isNotificationVisible ? 'opacity-100 visible' : 'opacity-0 invisible'}
+          bg-black dark:bg-white text-white dark:text-black`}
+      >
+        <p className="m-0">Link copied</p>
+      </div>
     </>
   );
 };
