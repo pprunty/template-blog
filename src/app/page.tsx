@@ -4,6 +4,7 @@ import fs from 'fs/promises';
 import { BlogPostType } from '@/types/BlogPost';
 import Link from 'next/link';
 import Image from 'next/image';
+import React from 'react';
 
 interface BlogMetadata {
   title?: string;
@@ -63,6 +64,32 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
   return posts;
 });
 
+// Create a memoized Image component to prevent re-renders
+const OptimizedImage = React.memo(function OptimizedImage({
+  src,
+  alt,
+  width,
+  height,
+  priority,
+}: {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  priority?: boolean; // Optional priority prop for critical images
+}) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className="object-cover w-full h-full"
+      priority={priority} // Load critical images faster
+    />
+  );
+});
+
 export default async function PostsPage() {
   const posts = await getAllPosts();
 
@@ -99,12 +126,12 @@ export default async function PostsPage() {
                       {/* Image Container with responsive sizes */}
                       {post.image && (
                         <div className="flex-shrink-0 w-[100px] h-[100px] overflow-hidden mr-4">
-                          <Image
+                          <OptimizedImage
                             src={post.image}
                             alt={post.title || "Blog post image"}
                             width={100}
                             height={100}
-                            className="object-cover w-full h-full"
+                            priority
                           />
                         </div>
                       )}
