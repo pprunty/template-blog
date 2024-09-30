@@ -130,12 +130,12 @@ export default async function PostsPage() {
                     >
                       {/* Image Container with responsive sizes */}
                       {post.image && (
-                        <div className="flex-shrink-0 w-[100px] h-[100px] overflow-hidden mr-4">
+                        <div className="flex-shrink-0 w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] overflow-hidden mr-4">
                           <OptimizedImage
                             src={post.image}
                             alt={post.title || "Blog post image"}
-                            width={100}
-                            height={100}
+                            width={120}
+                            height={120}
                             priority
                           />
                         </div>

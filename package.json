@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "prebuild": "node scripts/generateMetadata.js",
     "lint:fix": "next lint --fix",
     "test": "echo \"No test specified\" && exit 1",
     "clean": "rm -rf .next node_modules",
@@ -14,6 +15,8 @@
     "docker-run": "docker run -p 3000:3000 my-blog:latest"
   },
   "dependencies": {
+    "@babel/parser": "^7.25.6",
+    "@babel/traverse": "^7.25.6",
     "@mdx-js/loader": "^3.0.1",
     "@next/mdx": "^14.2.13",
     "@tailwindcss/line-clamp": "^0.4.4",
