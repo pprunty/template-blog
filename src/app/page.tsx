@@ -85,6 +85,7 @@ const OptimizedImage = React.memo(function OptimizedImage({
       width={width}
       height={height}
       priority={priority} // Load critical images faster
+      className="object-cover w-full h-full"
     />
   );
 });
@@ -130,7 +131,6 @@ export default async function PostsPage() {
                             alt={post.title || "Blog post image"}
                             width={100}
                             height={100}
-                            className="object-cover w-full h-full"
                             priority
                           />
                         </div>
