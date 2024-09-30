@@ -9,6 +9,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import type { Viewport } from 'next';
 import { Analytics } from "./analytics";
+import { Suspense } from "react";
 
 // Define viewport settings
 export const viewport: Viewport = {
@@ -78,9 +79,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`dark:text-gray-100 max-w-2xl m-auto`}>
         <main className="p-6 pt-3 md:pt-6 min-h-screen">
+            <Suspense fallback={null}>
           <Header />
           {children}
           <Footer/>
+          </Suspense>
         </main>
         <Analytics />
       </body>

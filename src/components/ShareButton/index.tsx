@@ -37,7 +37,7 @@ const ShareButton = () => {
     <>
       <button
         onClick={handleShare}
-        className="bg-none border-none cursor-pointer inline-flex items-center justify-center px-2 py-0 m-0 transition-colors duration-300 hover:text-gray-700"
+        className="inline-flex items-center font-mono hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]"
         aria-label="Share"
       >
         <svg
@@ -45,7 +45,7 @@ const ShareButton = () => {
           height="40px"
           viewBox="0 -960 960 960"
           width="40px"
-          className="w-6 h-6 fill-current transition-colors"
+          className="w-6 h-6 fill-current"
         >
           <path d="M242.57-60q-25.79 0-44.18-18.39T180-122.57v-449.07q0-25.79 18.39-44.18 18.39-18.38 44.18-18.38h126.25v50.25H242.57q-4.62 0-8.47 3.85-3.84 3.84-3.84 8.46v449.07q0 4.62 3.84 8.47 3.85 3.84 8.47 3.84h474.86q4.62 0 8.47-3.84 3.84-3.85 3.84-8.47v-449.07q0-4.62-3.84-8.46-3.85-3.85-8.47-3.85H590.36v-50.25h127.07q25.79 0 44.18 18.38Q780-597.43 780-571.64v449.07q0 25.79-18.39 44.18T717.43-60H242.57Zm211.89-283.13v-446.1l-85.64 85.64-36.05-36 146.82-146.56 146.56 146.56-35.79 36-85.64-85.64v446.1h-50.26Z" />
         </svg>

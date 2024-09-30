@@ -1,7 +1,8 @@
+import { AUTHOR } from '@/config'; // Adjust the path to your config file
 
 export default function Footer() {
   return (
-    <footer className="flex text-md flex-col items-center pb-4 pt-4">
+    <footer className="flex text-md flex-col items-center pb-4 pt-4 font-mono">
       {/* Parent container that sets the color */}
       <div className="w-[125px] h-[54px] text-black dark:text-white">
         {/* SVG using currentColor to inherit text color */}
@@ -18,26 +19,26 @@ export default function Footer() {
         </svg>
       </div>
 
-      <div className="flex justify-center mt-10">
-        <a className="transition hover:underline" href="https://github.com/mayandev/notion-avatar">
+      <div className="flex justify-center mt-10 text-xs">
+        <a className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]" href={AUTHOR.githubUrl}>
           GitHub
         </a>
-        <span className="mx-2">·</span>
-        <a className="hover:underline" href="https://twitter.com/phillzou">
+          <span className="mx-2 flex items-center">·</span>
+        <a className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]" href={AUTHOR.twitterUrl}>
           Twitter
         </a>
-        <span className="mx-2">·</span>
-        <a className="transition hover:underline" href="https://www.buymeacoffee.com/">
-          Buy me a coffee
+  <span className="mx-2 flex items-center">·</span>
+        <a className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]" href={AUTHOR.redditUrl}>
+          Reddit
         </a>
-        <span className="mx-2">·</span>
-        <a className="transition hover:underline" href="https://www.strava.com/athletes/72636452">
+  <span className="mx-2 flex items-center">·</span>
+        <a className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]" href={AUTHOR.stravaUrl}>
           Strava
         </a>
       </div>
-      <div className="text-gray-500 mt-3 px-6 text-center">
+      <div className="text-gray-500 mt-3 px-6 text-center text-xs">
         Developed by{" "}
-        <a href="https://twitter.com/felix12777" className="hover:underline">
+        <a href={AUTHOR.twitterUrl} className="hover:underline">
           Patrick Prunty
         </a>{" "}
         under{" "}

@@ -15,7 +15,7 @@ const BottomBar = () => {
     <div className="flex justify-between items-center w-full max-w-2xl mt-10 mb-5 md:mb-10">
       <button
         onClick={handleBack}
-        className="text-sm uppercase font-mono font-medium cursor-pointer transition-colors duration-300 hover:text-gray-400"
+        className="inline-flex items-center font-mono text-sm uppercase hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]"
       >
         &larr; Back
       </button>

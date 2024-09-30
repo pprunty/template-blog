@@ -4,10 +4,11 @@
 
 @layer base {
   /* Apply smooth scrolling globally */
+/*
   html, body {
     scroll-behavior: smooth;
   }
-
+*/
   :root {
     /* Font setup */
     font-family: "Inter", sans-serif;
