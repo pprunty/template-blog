@@ -17,7 +17,7 @@
     color-scheme: light;
 
     @apply bg-[#fcfcfc];
-    @apply text-[#000];
+    @apply text-[#333];
   }
 
   /* Dark mode settings */
@@ -61,13 +61,12 @@
 
   pre code {
     font-family: monospace;
-    font-size: 13px; /* Ensure code within pre has smaller font */
+    font-size: 14px; /* Ensure code within pre has smaller font */
   }
 
   code {
     background-color: #eaeaea; /* Light background for inline code */
     padding: 0.25rem;
-    border-radius: 0.25rem;
     font-family: monospace;
   }
 

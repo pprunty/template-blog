@@ -38,7 +38,7 @@ const nextConfig = {
   },
   experimental: {
     swcMinify: true,
-//     scrollRestoration: true, // Doesn't work well with scroll-behavior: smooth, remove this in globals.css to enable reliable scrollRestoration
+    scrollRestoration: true, // Doesn't work well with scroll-behavior: smooth, remove this in globals.css to enable reliable scrollRestoration
   },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
