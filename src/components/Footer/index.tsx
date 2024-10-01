@@ -31,10 +31,10 @@ export default function Footer() {
                 <a className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]" href={AUTHOR.linkedinUrl}>
                   LinkedIn
                 </a>
-  <span className="mx-2 flex items-center">·</span>
+{/*  <span className="mx-2 flex items-center">·</span>
         <a className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]" href={AUTHOR.redditUrl}>
           Reddit
-        </a>
+        </a>*/}
   <span className="mx-2 flex items-center">·</span>
         <a className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]" href={AUTHOR.stravaUrl}>
           Strava
