@@ -1,6 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { AUTHOR } from '@/config';
 
 export function Logo() {
   const pathname = usePathname();
@@ -13,7 +14,7 @@ export function Logo() {
           href="/"
           className="hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] p-2 rounded-sm -ml-2 transition-[background-color]"
         >
-          Patrick Prunty
+          {AUTHOR.name}
         </Link>
       )}
     </span>

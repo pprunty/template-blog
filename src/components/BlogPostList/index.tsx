@@ -77,7 +77,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                     <div className="flex flex-col justify-between grow">
                       <span className="text-xs my-1 text-gray-700 dark:text-gray-300 flex items-center">
                         {post.date} &#8226;&nbsp;
-                           <Views id={post.slug} defaultValue={post.views} />
+                        <Views id={post.slug} defaultValue={post.views} />
                       </span>
                       <span className="text-lg font-semibold">
                         {post.title}
@@ -116,14 +116,14 @@ function Description({ description }: { description: string }) {
       : description;
 
   return (
-    <div className="text-m text-gray-700 dark:text-gray-300 mt-2">
+    <span className="text-sm mt-2 text-gray-700 dark:text-gray-300">
       <p className="line-clamp-4">{truncatedDescription}</p>
       {description.length > MAX_DESCRIPTION_LENGTH && (
         <span className="inline text-black cursor-pointer hover:underline">
           See more
         </span>
       )}
-    </div>
+    </span>
   );
 }
 

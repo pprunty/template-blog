@@ -51,7 +51,7 @@ const views = await getViewCount(slug);
             <span>
               <a
                 href={AUTHOR.url}
-                className="hover:text-gray-800 dark:hover:text-gray-400"
+                className="hover:text-gray-400 dark:hover:text-gray-400"
                 target="_blank"
                 rel="noopener noreferrer"
               >

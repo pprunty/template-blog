@@ -27,6 +27,10 @@ export default function Footer() {
         <a className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]" href={AUTHOR.twitterUrl}>
           Twitter
         </a>
+          <span className="mx-2 flex items-center">·</span>
+                <a className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]" href={AUTHOR.linkedinUrl}>
+                  LinkedIn
+                </a>
   <span className="mx-2 flex items-center">·</span>
         <a className="inline-flex items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]" href={AUTHOR.redditUrl}>
           Reddit
@@ -36,7 +40,7 @@ export default function Footer() {
           Strava
         </a>
       </div>
-      <div className="text-gray-500 mt-3 px-6 text-center text-xs">
+      <div className="text-gray-700 dark:text-gray-300 mt-3 px-6 text-center text-xs">
         Developed by{" "}
         <a href={AUTHOR.twitterUrl} className="hover:underline">
           Patrick Prunty

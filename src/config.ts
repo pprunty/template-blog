@@ -8,6 +8,7 @@ export const AUTHOR = {
   twitterUrl: "https://x.com/pprunty_",
   stravaUrl: "https://www.strava.com/athletes/72636452",
   githubUrl: "https://github.com/pprunty",
+  linkedinUrl: "https://www.linkedin.com/in/patrickprunty",
   redditUrl: "https://www.reddit.com/user/patrickprunty1997/",
 };
 

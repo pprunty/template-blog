@@ -63,6 +63,22 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": AUTHOR.name,
+    "jobTitle": "Software Engineer",
+    "description": `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
+    "url": SITE_URL,
+    "sameAs": [
+      AUTHOR.twitterUrl,
+      AUTHOR.stravaUrl,
+      AUTHOR.githubUrl,
+      AUTHOR.redditUrl,
+      AUTHOR.linkedinUrl
+    ]
+  };
+
   return (
     <html
       lang="en"
@@ -73,6 +89,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html: `(${themeEffect.toString()})();(${doge.toString()})();`,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
           }}
         />
         <meta name="google-site-verification" content="5GuQpmfOzq72Xmm56vDEj1o3L0LEngpUlkmqYPgn7iw" />
