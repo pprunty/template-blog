@@ -20,10 +20,20 @@ export default async function RelatedPosts({
     post.keywords.some((keyword) => currentPostKeywords.includes(keyword))
   );
 
-  // Limit to 3 related posts
+  // Limit to a maximum of 3 related posts
   const topRelatedPosts = relatedPosts.slice(0, 3);
 
-  // Exclude already selected posts to avoid duplicates
+  // If we have 4 related posts already, no need to add random posts
+  if (topRelatedPosts.length === 4) {
+    return (
+      <div className="mt-8">
+        <h1 className="text-2xl font-bold mb-4">Recommended For You:</h1>
+        <PostList posts={topRelatedPosts} />
+      </div>
+    );
+  }
+
+  // Find remaining posts to use for random selection (excluding already selected ones)
   const remainingPosts = otherPosts.filter(
     (post) => !topRelatedPosts.some((related) => related.slug === post.slug)
   );
@@ -31,10 +41,10 @@ export default async function RelatedPosts({
   // Shuffle the remaining posts to randomize
   const shuffledRemainingPosts = shuffleArray(remainingPosts);
 
-  // Get up to 2 random posts
-  const randomPosts = shuffledRemainingPosts.slice(0, 2);
+  // Add enough random posts to make up a total of 4 posts
+  const randomPosts = shuffledRemainingPosts.slice(0, 4 - topRelatedPosts.length);
 
-  // Combine related posts and random posts
+  // Combine related posts and random posts to make exactly 4 posts
   const combinedPosts = [...topRelatedPosts, ...randomPosts];
 
   if (combinedPosts.length === 0) {
