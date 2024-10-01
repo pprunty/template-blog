@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: `${AUTHOR.name}'s blog`,
     images: [
       {
-        url: `${SITE_URL}/icons/512x512.png`, // Path to your Open Graph image
+        url: `${SITE_URL}/images/icon.WEBP`, // Path to your Open Graph image
         width: 1200,
         height: 630,
         alt: `${AUTHOR.name}'s blog cover image`,
