@@ -9,10 +9,10 @@ export const metadata = {
   openGraph: {
     title: "The Magikarp Lesson: Integrate AI in Your SaaS Product or Get Left Behind",
     description: "How I built an AI agent in 11 hours, a revolutionary step towards the future of software development, AI, and SaaS business strategies.",
-    url: `${SITE_URL}/blog/monte-carlo`,
+    type: "article",
     images: [
       {
-        url: `${SITE_URL}/images/monte-carlo.png`,
+        url: `/images/monte-carlo.png`,
         alt: "Concept design of the Magikarp AI agent as an iPhone Application",
       },
     ],
@@ -37,7 +37,8 @@ export const metadata = {
     "productivity automation",
     "tech startups",
     "AI-driven SaaS",
-  ]
+  ],
+    metadataBase: new URL(SITE_URL)
 };
 
 ![An awesome image](/images/monte-carlo.png)

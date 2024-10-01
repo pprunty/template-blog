@@ -4,10 +4,11 @@ export const metadata = {
   title: "Untitled 01",
   image: `/images/mad.jpg`,
   description: "An experimental poem by Patrick Prunty.",
-  date: "2024-07-18", // Custom property for internal use if needed
+  date: "2024-07-18",
   openGraph: {
     title: "Untitled 01",
     description: "An experimental poem by Patrick Prunty.",
+    type: "article",
     url: `${SITE_URL}/blog/untitled-01`,
     images: [
       {
@@ -23,6 +24,7 @@ export const metadata = {
     image: `${SITE_URL}/images/mad.jpg`,
   },
   keywords: ["poetry", "experimental"],
+    metadataBase: new URL(SITE_URL),
 };
 
 Deliciously delicate so delectable this.

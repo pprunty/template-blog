@@ -2,17 +2,15 @@ import { AUTHOR, SITE_URL, DEFAULT_KEYWORDS } from '@/config';
 
 export const metadata = {
   title: `About - ${AUTHOR.name}`,
-  image: `${SITE_URL}/images/me.WEBP`,
+  image: `/images/me.WEBP`,
   description: `${AUTHOR.name} is a senior software engineer from Portmarnock, Dublin, Ireland. He shares his journey through software development, achievements, and adventures in triathlon, marathons, and travel.`,
   openGraph: {
     title: `About - ${AUTHOR.name}`,
     description: `${AUTHOR.name} is a senior software engineer from Portmarnock, Dublin, Ireland. He shares his journey through software development, achievements, and adventures.`,
-    url: `${SITE_URL}/about`,
     siteName: `${AUTHOR.name}'s website`,
-    image: `${SITE_URL}/images/me.WEBP`,
     images: [
       {
-        url: `${SITE_URL}/images/me.WEBP`,
+        url: `/images/me.WEBP`,
         width: 400,
         height: 400,
         alt: `${AUTHOR.name}'s profile picture`,
@@ -25,7 +23,7 @@ export const metadata = {
     creator: "@patrickprunty",
     images: [
       {
-        url: `${SITE_URL}/images/me.WEBP`,
+        url: `/images/me.WEBP`,
         alt: `${AUTHOR.name}'s profile picture`,
       },
     ],
