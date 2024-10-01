@@ -30,7 +30,7 @@ const OptimizedImage = React.memo(function OptimizedImage({
       width={width}
       height={height}
       priority={priority}
-      className="object-cover w-full h-full"
+      className="w-full h-full object-cover"
     />
   );
 });
@@ -95,7 +95,9 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                         </div>
                       )}
                       {post.description && (
-                        <Description description={post.description} />
+                        <span className="text-sm mt-2 text-gray-700 dark:text-gray-300">
+                          <p className="line-clamp-4">{post.description}</p>
+                        </span>
                       )}
                     </div>
                   </span>
@@ -108,23 +110,5 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
     </div>
   );
 };
-
-function Description({ description }: { description: string }) {
-  const truncatedDescription =
-    description.length > MAX_DESCRIPTION_LENGTH
-      ? `${description.substring(0, MAX_DESCRIPTION_LENGTH)}...`
-      : description;
-
-  return (
-    <span className="text-sm mt-2 text-gray-700 dark:text-gray-300">
-      <p className="line-clamp-4">{truncatedDescription}</p>
-      {description.length > MAX_DESCRIPTION_LENGTH && (
-        <span className="inline text-black cursor-pointer hover:underline">
-          See more
-        </span>
-      )}
-    </span>
-  );
-}
 
 export default BlogPostList;
