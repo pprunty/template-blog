@@ -11,6 +11,9 @@ export const AUTHOR = {
   redditUrl: "https://www.reddit.com/user/patrickprunty1997/",
 };
 
+
+export const DEFAULT_COUNTER_ID = "ppruntyx86";
+
 // Default section and keywords
 export const DEFAULT_SECTION = "Life & Adventures";
 export const DEFAULT_KEYWORDS = ["software development", "triathlon", "hiking", "travel", "outdoor adventures"];

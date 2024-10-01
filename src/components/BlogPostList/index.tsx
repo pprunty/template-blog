@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BlogPostType } from '@/types/BlogPost';
+import Views from '@/components/Views'; // Import the Views component
 
 const MAX_DESCRIPTION_LENGTH = 200;
 
@@ -52,7 +53,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
           <ul className="list-none p-0">
             {postsByYear[year].map((post) => (
               <li key={post.slug} className="mb-0 sm:mb-4">
-                <Link href={`/blog/${post.slug}`}>
+                <Link href={`/blog/${post.slug}`} className="no-underline">
                   <span
                     className="
                       flex items-center transition-all ease-in-out
@@ -74,8 +75,9 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                       </div>
                     )}
                     <div className="flex flex-col justify-between grow">
-                      <span className="text-xs my-1 text-gray-700 dark:text-gray-300">
-                        {post.date} &#8226; {post.views} views
+                      <span className="text-xs my-1 text-gray-700 dark:text-gray-300 flex items-center">
+                        {post.date} &#8226;&nbsp;
+                           <Views id={post.slug} defaultValue={post.views} />
                       </span>
                       <span className="text-lg font-semibold">
                         {post.title}
@@ -110,13 +112,13 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
 function Description({ description }: { description: string }) {
   const truncatedDescription =
     description.length > MAX_DESCRIPTION_LENGTH
-      ? `${description.substring(0, 200)}...`
+      ? `${description.substring(0, MAX_DESCRIPTION_LENGTH)}...`
       : description;
 
   return (
     <div className="text-m text-gray-700 dark:text-gray-300 mt-2">
       <p className="line-clamp-4">{truncatedDescription}</p>
-      {description.length > 200 && (
+      {description.length > MAX_DESCRIPTION_LENGTH && (
         <span className="inline text-black cursor-pointer hover:underline">
           See more
         </span>

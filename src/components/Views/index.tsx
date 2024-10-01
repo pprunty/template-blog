@@ -1,21 +1,38 @@
-"use client";
+// components/Views/index.tsx
 
-import { useEffect, useState } from 'react';
+'use client';
+
+import { useEffect, useState, useRef } from 'react';
+import { getViewCount, incrementViewCount } from '@/utils/fetchViewCount';
 
 interface ViewsProps {
   id: string;
   defaultValue?: number;
+  incrementOnMount?: boolean;
 }
 
-export default function Views({ id, defaultValue = 0 }: ViewsProps) {
-  const [views, setViews] = useState(defaultValue);
+export default function Views({ id, defaultValue = 0, incrementOnMount = false }: ViewsProps) {
+  const [views, setViews] = useState<number>(defaultValue);
+  const hasIncremented = useRef(false);
 
   useEffect(() => {
-    // Fetch view count from your API or analytics service
-    fetch(`/api/views/${id}`)
-      .then((res) => res.json())
-      .then((data) => setViews(data.views));
-  }, [id]);
+    const fetchViews = async () => {
+      try {
+        let count;
+        if (incrementOnMount && !hasIncremented.current) {
+          count = await incrementViewCount(id);
+          hasIncremented.current = true;
+        } else {
+          count = await getViewCount(id);
+        }
+        setViews(count);
+      } catch (error) {
+        console.error('Error fetching/incrementing view count:', error);
+      }
+    };
 
-  return <>{views} views</>;
+    fetchViews();
+  }, [id, incrementOnMount]);
+
+  return <span>{views} views</span>;
 }

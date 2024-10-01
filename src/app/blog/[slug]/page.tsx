@@ -7,6 +7,9 @@ import { getAllPosts } from '@/utils/getAllPosts';
 import BottomBar from '@/components/BottomBar';
 import { formatDistanceToNow } from 'date-fns';
 import { AUTHOR } from '@/config';
+import formatDate from '@/utils/formatDate';
+import Views from '@/components/Views';
+import { getViewCount } from '@/utils/fetchViewCount';
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -28,6 +31,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function PostPage({ params }: Params) {
   const { slug } = params;
   const { default: MDXContent, metadata } = await import(`./${slug}/page.mdx`);
+const views = await getViewCount(slug);
 
   const MDXComponents = useMDXComponents();
 
@@ -57,17 +61,13 @@ export default async function PostPage({ params }: Params) {
             <span className="mx-2">|</span>
           </span>
           <span suppressHydrationWarning={true}>
-            {metadata.date} ({timeAgo})
+            {formatDate(metadata.date)} ({timeAgo})
           </span>
         </span>
         {/* Views Component if you have one */}
-        {/* <span className="pr-1.5">
-          <Views
-            id={slug}
-            mutate={mutate}
-            defaultValue={metadata.viewsFormatted}
-          />
-        </span> */}
+          <span className="pr-1.5">
+              <Views id={slug} defaultValue={views} incrementOnMount={true} />
+          </span>
       </p>
 
       {/* Post Content */}

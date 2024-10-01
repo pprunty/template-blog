@@ -38,7 +38,7 @@ const MemoizedImage = React.memo(function MemoizedImage({
       alt={alt || "Image"}
       width={width}
       height={height}
-      quality={90}
+//       quality={90}
       priority={priority}
     />
   );
@@ -70,7 +70,7 @@ export function useMDXComponents(components?: { [component: string]: React.Compo
           }
 
           // Provide a numeric width and height to define the aspect ratio
-          const width = 600; // Width in pixels
+          const width = 620; // Width in pixels
           const height = 400; // Height in pixels
 
           return (

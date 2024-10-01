@@ -1,8 +1,11 @@
+// utils/getAllPosts.ts
+
 import { cache } from 'react';
 import path from 'path';
 import fs from 'fs/promises';
 import { BlogPostType } from '@/types/BlogPost';
 import formatDate from '@/utils/formatDate';
+import { getViewCount } from '@/utils/fetchViewCount';
 
 interface BlogMetadata {
   title?: string;
@@ -13,7 +16,7 @@ interface BlogMetadata {
   type?: string;
   keywords?: string[];
   readingTime?: number;
-  views?: number;
+  // Removed `views` from metadata as we'll fetch it separately
 }
 
 export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
@@ -39,6 +42,9 @@ export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
           `../app/blog/[slug]/${slug}/page.mdx`
         )) as { metadata: BlogMetadata };
 
+        // Fetch the view count for the post
+        const views = await getViewCount(slug);
+
         return {
           slug,
           title: metadata.title || 'Untitled Post',
@@ -49,13 +55,14 @@ export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
           type: metadata.type || 'article',
           keywords: metadata.keywords || [],
           readingTime: metadata.readingTime || 5,
-          views: metadata.views || 5,
+          views: views || 0, // Use the fetched view count
         } as BlogPostType;
       } catch (error) {
         console.error(`Error reading file ${filePath}:`, error);
         return null;
       }
     }
+    return null;
   });
 
   const posts = (await Promise.all(postsPromises)).filter(
