@@ -11,11 +11,13 @@ import type { Viewport } from 'next';
 import { Analytics } from "./analytics";
 import { Suspense } from "react";
 
+export const revalidate = 60; // Revalidate the page every 60 seconds
+
 // Define viewport settings
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
   userScalable: false,
   themeColor: "transparent",
 };

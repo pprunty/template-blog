@@ -16,12 +16,12 @@ const sanitizeId = (id: string): string => {
 // Function to get the view count
 export const getViewCount = async (id: string): Promise<number> => {
   const sanitizedId = sanitizeId(id);
-  console.log(`getViewCount called with id: "${id}", sanitizedId: "${sanitizedId}", DEFAULT_COUNTER_ID: "${DEFAULT_COUNTER_ID}"`);
+//   console.log(`getViewCount called with id: "${id}", sanitizedId: "${sanitizedId}", DEFAULT_COUNTER_ID: "${DEFAULT_COUNTER_ID}"`);
 
   try {
     const res = await counter.get(DEFAULT_COUNTER_ID, sanitizedId);
-    console.log('counter.get response:', res);
-    console.log(`Successfully fetched view count: ${res.Count}`);
+//     console.log('counter.get response:', res);
+//     console.log(`Successfully fetched view count: ${res.Count}`);
     return res.Count;
   } catch (error) {
     console.error('Error fetching view count with counter.get:', error);
@@ -32,12 +32,12 @@ export const getViewCount = async (id: string): Promise<number> => {
 // Function to increment the view count
 export const incrementViewCount = async (id: string): Promise<number> => {
   const sanitizedId = sanitizeId(id);
-  console.log(`incrementViewCount called with id: "${id}", sanitizedId: "${sanitizedId}", DEFAULT_COUNTER_ID: "${DEFAULT_COUNTER_ID}"`);
+//   console.log(`incrementViewCount called with id: "${id}", sanitizedId: "${sanitizedId}", DEFAULT_COUNTER_ID: "${DEFAULT_COUNTER_ID}"`);
 
   try {
     const res = await counter.up(DEFAULT_COUNTER_ID, sanitizedId);
-    console.log('counter.up response:', res);
-    console.log(`Successfully incremented view count to: ${res.Count}`);
+//     console.log('counter.up response:', res);
+//     console.log(`Successfully incremented view count to: ${res.Count}`);
     return res.Count;
   } catch (error) {
     console.error('Error incrementing view count with counter.up:', error);

@@ -28,7 +28,7 @@ const ShareButton = () => {
           text,
           url,
         });
-        console.log('Successfully shared');
+//         console.log('Successfully shared');
       } catch (error) {
         console.error('Error sharing:', error);
       }
