@@ -28,7 +28,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: `${AUTHOR.name}'s blog`,
   description: `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
-  image: `/images/icon.WEBP`,
+  image: `/images/icon.png`,
   manifest: process.env.NODE_ENV === 'production' ? "/manifest.prod.json" : "/manifest.json",
   openGraph: {
     title: `${AUTHOR.name}'s blog`,
@@ -36,9 +36,7 @@ export const metadata = {
     siteName: `${AUTHOR.name}'s blog`,
     images: [
       {
-        url: `/images/icon.WEBP`, // Path to your Open Graph image
-        width: 512,
-        height: 512,
+        url: `/images/icon.png`, // Path to your Open Graph image
         alt: `${AUTHOR.name}'s blog cover image`,
       }
     ],
@@ -49,7 +47,7 @@ export const metadata = {
     creator: "@patrickprunty",
     images: [
       {
-        url: `/images/icon.WEBP`, // Path to your Twitter image (can be same as OG image)
+        url: `/images/icon.png`, // Path to your Twitter image (can be same as OG image)
         alt: `${AUTHOR.name}'s blog cover image`,
       }
     ],
