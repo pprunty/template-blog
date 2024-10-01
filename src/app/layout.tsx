@@ -30,6 +30,7 @@ export const metadata: Metadata = {
   title: `${AUTHOR.name}'s blog`,
   description: `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
   generator: "Next.js",
+  image: `${SITE_URL}/images/icon.WEBP`,
   manifest: process.env.NODE_ENV === 'production' ? "/manifest.prod.json" : "/manifest.json",
   openGraph: {
     title: `${AUTHOR.name}'s blog`,
