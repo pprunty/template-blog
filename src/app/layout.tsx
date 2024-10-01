@@ -1,5 +1,4 @@
 import { Inter } from 'next/font/google';
-import type { Metadata } from "next";
 import "./globals.css";
 import { AUTHOR, SITE_URL, DEFAULT_KEYWORDS } from '@/config';
 import { doge } from "./doge";
@@ -26,7 +25,7 @@ export const viewport: Viewport = {
 const inter = Inter({ subsets: ['latin'] });
 
 // Define metadata
-export const metadata: Metadata = {
+export const metadata = {
   title: `${AUTHOR.name}'s blog`,
   description: `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
   generator: "Next.js",
