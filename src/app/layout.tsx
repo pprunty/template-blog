@@ -34,14 +34,14 @@ export const metadata = {
   openGraph: {
     title: `${AUTHOR.name}'s blog`,
     description: `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
-    url: SITE_URL,
+    url: `${SITE_URL}/`,
     siteName: `${AUTHOR.name}'s blog`,
     image: `${SITE_URL}/images/icon.WEBP`,
     images: [
       {
         url: `${SITE_URL}/images/icon.WEBP`, // Path to your Open Graph image
-        width: 1200,
-        height: 630,
+        width: 512,
+        height: 512,
         alt: `${AUTHOR.name}'s blog cover image`,
       }
     ],
