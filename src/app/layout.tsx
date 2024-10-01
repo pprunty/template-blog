@@ -36,6 +36,7 @@ export const metadata = {
     description: `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
     url: SITE_URL,
     siteName: `${AUTHOR.name}'s blog`,
+    image: `${SITE_URL}/images/icon.WEBP`,
     images: [
       {
         url: `${SITE_URL}/images/icon.WEBP`, // Path to your Open Graph image
