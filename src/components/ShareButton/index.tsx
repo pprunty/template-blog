@@ -1,9 +1,17 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ShareButton = () => {
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+  const [url, setUrl] = useState('');
+  const [title, setTitle] = useState('');
+
+  useEffect(() => {
+    // Client-side only: capture the URL and title
+    setUrl(window.location.href);
+    setTitle(document.title);
+  }, []); // Empty dependency array ensures this runs once after component mounts
 
   // Function to detect if the user is on a desktop device
   const isDesktopDevice = () => {
@@ -11,8 +19,6 @@ const ShareButton = () => {
   };
 
   const handleShare = async () => {
-    const url = window.location.href;
-    const title = document.title;
     const text = 'Check out this blog post!';
 
     // Always show the notification on desktop devices
@@ -28,7 +34,6 @@ const ShareButton = () => {
           text,
           url,
         });
-//         console.log('Successfully shared');
       } catch (error) {
         console.error('Error sharing:', error);
       }

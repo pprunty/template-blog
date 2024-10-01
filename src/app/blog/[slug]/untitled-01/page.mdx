@@ -1,15 +1,18 @@
+import { SITE_URL, AUTHOR } from '@/config'; // Import SITE_URL and AUTHOR from config
+
 export const metadata = {
   title: "Untitled 01",
-  image: "/images/mad.jpg",
+  image: `${SITE_URL}/images/mad.jpg`,
   description: "An experimental poem by Patrick Prunty.",
   date: "2024-07-18", // Custom property for internal use if needed
   openGraph: {
     title: "Untitled 01",
     description: "An experimental poem by Patrick Prunty.",
-    url: "/posts/untitled-01", // Replace with actual post URL
+    url: `${SITE_URL}/blog/untitled-01`,
+    image: `${SITE_URL}/images/mad.jpg`,
     images: [
       {
-        url: "/images/mad.jpg",
+        url: `${SITE_URL}/images/mad.jpg`,
         alt: "Artwork by Jak Ruiz for Untitled 01",
       },
     ],
@@ -18,7 +21,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Untitled 01",
     description: "An experimental poem by Patrick Prunty.",
-    image: "/images/mad.jpg",
+    image: `${SITE_URL}/images/mad.jpg`,
   },
   keywords: ["poetry", "experimental"],
 };

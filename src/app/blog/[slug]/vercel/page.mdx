@@ -1,15 +1,17 @@
+import { SITE_URL, AUTHOR } from '@/config'; // Import SITE_URL and AUTHOR from config
+
 export const metadata = {
   title: "New Blog. Who Dis?",
-  image: "/images/vercel.png",
+  image: `${SITE_URL}/images/vercel.png`,
   description: "A brief description.",
   date: "2023-10-01", // Custom property for internal use if needed
   openGraph: {
     title: "Your Post Title",
     description: "A brief description.",
-    url: "/posts/your-post-title", // Replace with actual post URL
+    url: `${SITE_URL}/blog/vercel`,
     images: [
       {
-        url: "/images/vercel.png",
+        url: `${SITE_URL}/images/vercel.png`,
         alt: "An image related to the post",
       },
     ],

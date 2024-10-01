@@ -1,15 +1,18 @@
+import { SITE_URL, AUTHOR } from '@/config'; // Import SITE_URL and AUTHOR from config
+
 export const metadata = {
   title: "What is High-Performance Computing?",
-  image: "/images/computer.WEBP",
+  image: `${SITE_URL}/images/computer.WEBP`,
   description: "In just 11 hours, I created an AI agent that could do the work of an entire data science team; a wake-up call for the future of software development and AI integration in SaaS.",
   date: "2024-07-24",
   openGraph: {
     title: "The Magikarp Lesson: Integrate AI in Your SaaS Product or Get Left Behind",
     description: "How I built an AI agent in 11 hours, a revolutionary step towards the future of software development, AI, and SaaS business strategies.",
-    url: "/posts/magikarp",
+    url: `${SITE_URL}/blog/high-performance-computing`,
+    image: `${SITE_URL}/images/computer.WEBP`,
     images: [
       {
-        url: "/images/computer.WEBP",
+        url: `${SITE_URL}/images/computer.WEBP`,
         alt: "Concept design of the Magikarp AI agent as an iPhone Application",
       },
     ],
@@ -18,7 +21,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "The Magikarp Lesson: Integrate AI in Your SaaS Product or Get Left Behind",
     description: "Learn how AI is revolutionizing SaaS and business strategies in the tech industry. An AI agent that can replace an entire data science team built in 11 hours.",
-    image: "/images/computer.WEBP",
+    image: `${SITE_URL}/images/computer.WEBP`,
   },
   keywords: [
     "ai",
