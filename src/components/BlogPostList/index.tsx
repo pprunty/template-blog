@@ -74,7 +74,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                       </div>
                     )}
                     <div className="flex flex-col justify-between grow">
-                      <span className="text-xs my-1 text-gray-500">
+                      <span className="text-xs my-1 text-gray-700 dark:text-gray-300">
                         {post.date} &#8226; {post.views} views
                       </span>
                       <span className="text-lg font-semibold">
@@ -85,7 +85,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                           {post.keywords.slice(0, 4).map((tag, index) => (
                             <span
                               key={index}
-                              className="text-[11px] border font-mono border-gray-400 text-gray-500 px-1"
+                              className="text-[11px] border font-mono border-gray-400 text-gray-700 dark:text-gray-300 px-1"
                             >
                               {tag}
                             </span>
@@ -114,7 +114,7 @@ function Description({ description }: { description: string }) {
       : description;
 
   return (
-    <div className="text-m text-gray-500 mt-2">
+    <div className="text-m text-gray-700 dark:text-gray-300 mt-2">
       <p className="line-clamp-4">{truncatedDescription}</p>
       {description.length > 200 && (
         <span className="inline text-black cursor-pointer hover:underline">

@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prebuild": "node scripts/generateMetadata.js",
     "lint:fix": "next lint --fix",
     "test": "echo \"No test specified\" && exit 1",
     "clean": "rm -rf .next node_modules",
