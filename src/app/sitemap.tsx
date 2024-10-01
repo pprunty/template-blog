@@ -18,7 +18,7 @@ interface BlogMetadata {
 
 // Function to fetch all blog posts with their metadata
 async function getPosts() {
-  const postsDirectory = path.join(process.cwd(), 'src', 'app', 'blog', '(post)');
+  const postsDirectory = path.join(process.cwd(), 'src', 'app', 'blog', '[slug]');
   const dirEntries = await fs.readdir(postsDirectory, { withFileTypes: true });
 
   const posts = [];
@@ -32,7 +32,7 @@ async function getPosts() {
 
       try {
         // Import the MDX file to get its metadata
-        const { metadata } = (await import(`./blog/(post)/${slug}/page.mdx`)) as {
+        const { metadata } = (await import(`./blog/[slug]/${slug}/page.mdx`)) as {
           metadata: BlogMetadata;
         };
 

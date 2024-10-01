@@ -3,7 +3,6 @@ import path from 'path';
 import fs from 'fs/promises';
 import { BlogPostType } from '@/types/BlogPost';
 import formatDate from '@/utils/formatDate';
-import BlogPostList from '@/components/BlogPostList'; // Import the new PostList component
 
 interface BlogMetadata {
   title?: string;
@@ -17,8 +16,14 @@ interface BlogMetadata {
   views?: number;
 }
 
-const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
-  const postsDirectory = path.join(process.cwd(), 'src', 'app', 'blog', '[slug]');
+export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
+  const postsDirectory = path.join(
+    process.cwd(),
+    'src',
+    'app',
+    'blog',
+    '[slug]'
+  );
   const dirEntries = await fs.readdir(postsDirectory, { withFileTypes: true });
 
   const postsPromises = dirEntries.map(async (entry) => {
@@ -30,8 +35,9 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
       const filePath = path.join(postsDirectory, slug, 'page.mdx');
 
       try {
-        // Use dynamic import with a generic to ensure type safety for the imported metadata
-        const { metadata } = (await import(`./blog/[slug]/${slug}/page.mdx`)) as { metadata: BlogMetadata };
+        const { metadata } = (await import(
+          `../app/blog/[slug]/${slug}/page.mdx`
+        )) as { metadata: BlogMetadata };
 
         return {
           slug,
@@ -52,7 +58,9 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
     }
   });
 
-  const posts = (await Promise.all(postsPromises)).filter(Boolean) as BlogPostType[];
+  const posts = (await Promise.all(postsPromises)).filter(
+    Boolean
+  ) as BlogPostType[];
 
   posts.sort((a, b) => {
     const dateA = a.date ? new Date(a.date).getTime() : 0;
@@ -62,18 +70,3 @@ const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
 
   return posts;
 });
-
-export default async function PostsPage() {
-  const posts = await getAllPosts();
-
-  const postsByYear = posts.reduce((acc, post) => {
-    const year = post.date ? new Date(post.date).getFullYear() : 'Unknown Year';
-    if (!acc[year]) {
-      acc[year] = [];
-    }
-    acc[year].push(post);
-    return acc;
-  }, {} as Record<string, BlogPostType[]>);
-
-  return <BlogPostList postsByYear={postsByYear} />;
-}
