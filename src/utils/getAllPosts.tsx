@@ -1,6 +1,7 @@
 import { cache } from 'react';
 import path from 'path';
 import fs from 'fs/promises';
+import matter from 'gray-matter'; // Library to parse front matter
 import { BlogPostType } from '@/types/BlogPost';
 import formatDate from '@/utils/formatDate';
 import { getViewCount } from '@/utils/fetchViewCount';
@@ -14,58 +15,73 @@ interface BlogMetadata {
   type?: string;
   keywords?: string[];
   readingTime?: number;
-  // Removed `views` from metadata as we'll fetch it separately
+  views?: number;
+  content?: string;
 }
 
-export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
-  const postsDirectory = path.join(process.cwd(), 'src', 'app', 'blog');
-  const dirEntries = await fs.readdir(postsDirectory, { withFileTypes: true });
+export const getAllPosts = cache(async (): Promise<Record<string, BlogPostType>> => {
+  const postsDirectory = path.join(process.cwd(), 'src', 'posts');
+  const fileNames = await fs.readdir(postsDirectory);
 
-  const postsPromises = dirEntries.map(async (entry) => {
-    if (
-      entry.isDirectory() &&
-      !['[slug]', 'layout.js', 'page.tsx', 'components'].includes(entry.name)
-    ) {
-      const slug = entry.name;
-      const filePath = path.join(postsDirectory, slug, 'page.mdx');
+  const postsPromises = fileNames.map(async (fileName) => {
+    const filePath = path.join(postsDirectory, fileName, 'page.mdx');
+    const fileContent = await fs.readFile(filePath, 'utf-8');
+    const { data, content } = matter(fileContent); // Parse front matter
 
-      try {
-        const { metadata } = (await import(
-          `../app/blog/${slug}/page.mdx`
-        )) as { metadata: BlogMetadata };
+    const slug = fileName.replace(/\.mdx?$/, '');
+    const views = await getViewCount(slug);
 
-        // Fetch the view count for the post
-        const views = await getViewCount(slug);
-
-        return {
-          slug,
-          title: metadata.title || 'Untitled Post',
-          date: metadata.date ? formatDate(metadata.date) : null,
-          image: metadata.image || '',
-          description: metadata.description || '',
-          excerpt: metadata.excerpt || '',
-          type: metadata.type || 'article',
-          keywords: metadata.keywords || [],
-          readingTime: metadata.readingTime || 5,
-          views: views || 0, // Use the fetched view count
-        } as BlogPostType;
-      } catch (error) {
-        console.error(`Error reading file ${filePath}:`, error);
-        return null;
-      }
-    }
-    return null;
+    return {
+      slug: slug,
+      title: data.title || 'Untitled Post',
+      date: data.date ? formatDate(data.date) : null,
+      image: data.image || '',
+      description: data.description || '',
+      excerpt: data.excerpt || '',
+      type: data.type || 'article',
+      keywords: data.keywords || [],
+      readingTime: data.readingTime || 5,
+      views: data.views || 5,
+      content: content,
+    } as BlogPostType;
   });
 
-  const posts = (await Promise.all(postsPromises)).filter(
-    Boolean
-  ) as BlogPostType[];
+  const postsArray = await Promise.all(postsPromises);
 
-  posts.sort((a, b) => {
-    const dateA = a.date ? new Date(a.date).getTime() : 0;
-    const dateB = b.date ? new Date(b.date).getTime() : 0;
-    return dateB - dateA;
-  });
+  // Convert the array of posts to a hash map (slug -> post)
+  const posts = postsArray.reduce((acc, post) => {
+    acc[post.slug] = post;
+    return acc;
+  }, {} as Record<string, BlogPostType>);
 
   return posts;
 });
+
+
+
+export async function getPostBySlug(slug: string): Promise<BlogPostType | null> {
+  const postsDirectory = path.join(process.cwd(), 'src', 'posts');
+  const filePath = path.join(postsDirectory, slug, 'page.mdx');
+  try {
+    const fileContent = await fs.readFile(filePath, 'utf-8');
+    const { data, content } = matter(fileContent); // Parse front matter and content
+    const views = await getViewCount(slug);
+
+    return {
+      slug: slug,
+      title: data.title || 'Untitled Post',
+      date: data.date ? formatDate(data.date) : null,
+      image: data.image || '',
+      description: data.description || '',
+      excerpt: data.excerpt || '',
+      type: data.type || 'article',
+      keywords: data.keywords || [],
+      readingTime: data.readingTime || 5,
+      views: views,
+      content: content,
+    } as BlogPostType;
+  } catch (error) {
+    console.error(`Error reading post for slug ${slug}:`, error);
+    return null;
+  }
+}
