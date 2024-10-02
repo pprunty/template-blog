@@ -1,3 +1,4 @@
+// utils/getAllPosts.ts
 import { cache } from 'react';
 import path from 'path';
 import fs from 'fs/promises';
@@ -18,7 +19,13 @@ interface BlogMetadata {
 }
 
 export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
-  const postsDirectory = path.join(process.cwd(), 'src', 'app', 'blog');
+  const postsDirectory = path.join(
+    process.cwd(),
+    'src',
+    'app',
+    'blog',
+    '[slug]'
+  );
   const dirEntries = await fs.readdir(postsDirectory, { withFileTypes: true });
 
   const postsPromises = dirEntries.map(async (entry) => {
@@ -31,7 +38,7 @@ export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
 
       try {
         const { metadata } = (await import(
-          `../app/blog/${slug}/page.mdx`
+          `../app/blog/[slug]/${slug}/page.mdx`
         )) as { metadata: BlogMetadata };
 
         // Fetch the view count for the post
