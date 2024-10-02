@@ -1,4 +1,4 @@
-export const SITE_URL = "https://template-blog-xi.vercel.app";
+export const SITE_URL = "https://patrickprunty.vercel.app";
 
 export const AUTHOR = {
   name: "Patrick Prunty",
