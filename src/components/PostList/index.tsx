@@ -67,7 +67,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                 <div className="flex flex-col justify-between grow">
                   <span className="text-xs my-1 text-gray-700 dark:text-gray-300 flex items-center">
                     {post.date} &#8226;&nbsp;
-                    <Views id={post.slug} defaultValue={post.views} />
+                    <Views id={post.slug} defaultValue={post.views ?? 0} />
                   </span>
                   <span className="text-xl font-semibold">
                     {post.title}

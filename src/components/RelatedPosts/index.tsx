@@ -65,7 +65,7 @@ export default function RelatedPosts({
   }
 
   return (
-    <div className="mt-8">
+    <div className="mt-8" suppressHydrationWarning={true}>
       <h1 className="text-2xl font-bold mb-4">Recommended For You:</h1>
       <PostList posts={combinedPosts} />
     </div>
