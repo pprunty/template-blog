@@ -47,7 +47,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
     <div className="mb-2 text-sm">
       {sortedYears.map((year) => (
         <div key={year} className="mb-2">
-          <h1 className="text-lg mb-0 sm:mb-4 sm:mt-0 mt-4 text-primary dark:text-primary-dark font-semibold">
+          <h1 className="text-xl mb-0 sm:mb-4 sm:mt-0 mt-4 text-primary dark:text-primary-dark font-semibold">
             {year}
           </h1>
           <ul className="list-none p-0">
@@ -79,7 +79,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                         {post.date} &#8226;&nbsp;
                         <Views id={post.slug} defaultValue={post.views} />
                       </span>
-                      <span className="text-lg font-semibold">
+                      <span className="text-xl font-semibold">
                         {post.title}
                       </span>
                       {post.keywords && post.keywords.length > 0 && (

@@ -39,7 +39,7 @@ const MemoizedImage = React.memo(function MemoizedImage({
       width={width}
       height={height}
 //       quality={90}
-      priority={priority}
+      priority
     />
   );
 });

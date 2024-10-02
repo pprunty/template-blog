@@ -1,7 +1,18 @@
-"use client";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from '@next/third-parties/google';
+import { GA_MEASUREMENT_ID } from "@/config";
 
-import { Analytics as AnalyticsComponent } from "@vercel/analytics/react";
 
 export function Analytics() {
-  return <AnalyticsComponent />;
+  // Only enable analytics in production mode
+  if (process.env.NODE_ENV !== "production") {
+    return null;
+  }
+  return (
+    <>
+      {/* Vercel & Google Analytics */}
+      <GoogleAnalytics gaId={GA_MEASUREMENT_ID}/>
+      <VercelAnalytics />
+    </>
+  );
 }
