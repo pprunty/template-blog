@@ -22,11 +22,11 @@ interface Params {
   };
 }
 
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { slug } = params;
-  const { metadata } = await import(`./${slug}/page.mdx`);
-  return metadata as Metadata;
-}
+// export async function generateMetadata({ params }: Params): Promise<Metadata> {
+//   const { slug } = params;
+//   const { metadata } = await import(`./${slug}/page.mdx`);
+//   return metadata as Metadata;
+// }
 
 export default async function PostPage({ params }: Params) {
   const { slug } = params;
