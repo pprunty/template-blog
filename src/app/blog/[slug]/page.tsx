@@ -25,7 +25,6 @@ interface Params {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = params;
   const { metadata } = await import(`./${slug}/page.mdx`);
-  console.log(metadata);
   return metadata as Metadata;
 }
 

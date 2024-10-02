@@ -55,6 +55,7 @@ export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
           type: metadata.type || 'article',
           keywords: metadata.keywords || [],
           readingTime: metadata.readingTime || 5,
+          views: views || 0, // Use the fetched view count
         } as BlogPostType;
       } catch (error) {
         console.error(`Error reading file ${filePath}:`, error);

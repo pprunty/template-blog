@@ -4,8 +4,6 @@ import Image from 'next/image';
 import { BlogPostType } from '@/types/BlogPost';
 import Views from '@/components/Views'; // Import the Views component
 
-const MAX_DESCRIPTION_LENGTH = 200;
-
 interface BlogPostListProps {
   postsByYear: Record<string, BlogPostType[]>;
 }

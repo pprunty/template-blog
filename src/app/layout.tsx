@@ -27,29 +27,29 @@ const inter = Inter({ subsets: ['latin'] });
 // Define metadata
 export const metadata = {
   title: `${AUTHOR.name}'s blog`,
-  description: `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
+  description: `${AUTHOR.name} is a professional software developer, who writes on the intersection of software development and the great outdoors.`,
   image: `/images/icon.png`,
   manifest: process.env.NODE_ENV === 'production' ? "/manifest.prod.json" : "/manifest.json",
   openGraph: {
     title: `${AUTHOR.name}'s blog`,
-    description: `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
+    description: `${AUTHOR.name} is a professional software developer, who writes on the intersection of software development and the great outdoors.`,
     siteName: `${AUTHOR.name}'s blog`,
     logo: `/images/icon.png`,
     images: [
       {
         url: `/images/icon.png`, // Path to your Open Graph image
-        alt: `${AUTHOR.name}'s blog cover image`,
+        alt: `${AUTHOR.name} out hiking`,
       }
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@patrickprunty",
-    creator: "@patrickprunty",
+    site: "@pprunty_",
+    creator: "@pprunty_",
     images: [
       {
         url: `/images/icon.png`, // Path to your Twitter image (can be same as OG image)
-        alt: `${AUTHOR.name}'s blog cover image`,
+        alt: `${AUTHOR.name} out hiking`,
       }
     ],
   },
@@ -67,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "Person",
     "name": AUTHOR.name,
     "jobTitle": "Software Engineer",
-    "description": `${AUTHOR.name} is a blogger and professional software developer who writes about life on screen, outdoor adventures, hiking, triathlons, and travel.`,
+    "description": `${AUTHOR.name} is a professional software developer, who writes on the intersection of software development and the great outdoors.`,
     "url": SITE_URL,
     "sameAs": [
       AUTHOR.twitterUrl,
