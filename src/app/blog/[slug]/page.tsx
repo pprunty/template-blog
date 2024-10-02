@@ -25,13 +25,14 @@ interface Params {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = params;
   const { metadata } = await import(`./${slug}/page.mdx`);
+  console.log(metadata);
   return metadata as Metadata;
 }
 
 export default async function PostPage({ params }: Params) {
   const { slug } = params;
   const { default: MDXContent, metadata } = await import(`./${slug}/page.mdx`);
-const views = await getViewCount(slug);
+  const views = await getViewCount(slug);
 
   const MDXComponents = useMDXComponents();
 
