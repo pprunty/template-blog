@@ -2,6 +2,8 @@ import { getAllPosts } from '@/utils/getAllPosts';
 import Header from './header';
 import RelatedPosts from '@/components/RelatedPosts';
 import { ReactNode } from 'react';
+import { Suspense } from 'react';
+import BottomBar from '@/components/BottomBar';
 
 interface LayoutProps {
   children: ReactNode;
@@ -14,7 +16,10 @@ export default async function Layout({ children }: LayoutProps) {
     <div>
       <Header />
       {children}
+      <Suspense>
       <RelatedPosts posts={posts} />
+      </Suspense>
+      <BottomBar/>
     </div>
   );
 }
