@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { withHeadingId } from "./utils";
 
 interface HeadingProps {
-  children: ReactNode; // Ensures children can be any valid React element
+  children?: ReactNode; // Ensures children can be any valid React element
 }
 
 export function H3({ children }: HeadingProps) {

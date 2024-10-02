@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 interface ULProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function UL({ children }: ULProps) {

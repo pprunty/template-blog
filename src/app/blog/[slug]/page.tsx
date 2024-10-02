@@ -1,5 +1,3 @@
-import { Metadata } from 'next';
-import { useMDXComponents } from '../../../../mdx-components';
 import RelatedPosts from '@/components/RelatedPosts';
 import { getAllPosts } from '@/utils/getAllPosts';
 import BottomBar from '@/components/BottomBar';
@@ -32,10 +30,9 @@ export default async function PostPage({ params }: Params) {
     return <div>Post not found</div>; // Handle case where post is not found
   }
 
-  const MDXComponents = useMDXComponents();
 
   // Format the date
-  const postDate = new Date(post.date);
+  const postDate = post.date ? new Date(post.date) : new Date(); // Fallback to current date if null
   const timeAgo = formatDistanceToNow(postDate, { addSuffix: true });
 
   return (
@@ -60,7 +57,7 @@ export default async function PostPage({ params }: Params) {
             <span className="mx-2">|</span>
           </span>
           <span suppressHydrationWarning={true}>
-            {formatDate(post.date)} ({timeAgo})
+            {formatDate(post.date || '')} ({timeAgo}) {/* Fallback to empty string */}
           </span>
         </span>
         {/* Views Component */}

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 interface LIProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function LI({ children }: LIProps) {

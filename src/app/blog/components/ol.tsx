@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 interface OLProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function OL({ children }: OLProps) {

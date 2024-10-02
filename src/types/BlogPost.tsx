@@ -1,3 +1,5 @@
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+
 // Import or define the BlogPostType that describes the shape of a post
 export interface BlogPostType {
   slug: string;
@@ -10,4 +12,5 @@ export interface BlogPostType {
   keywords: string[];
   readingTime: number;
     views?: number;
+    content: MDXRemoteSerializeResult;
 }
