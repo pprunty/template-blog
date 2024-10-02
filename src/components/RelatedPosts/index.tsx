@@ -1,23 +1,49 @@
-import { getAllPosts } from '@/utils/getAllPosts';
+"use client";
+
 import PostList from '@/components/PostList';
+import { BlogPostType } from '@/types/BlogPost';
+import { useSelectedLayoutSegments } from "next/navigation";
 
 interface RelatedPostsProps {
-  currentPostSlug: string;
-  currentPostKeywords: string[];
+  currentPostSlug?: string | null;
+  currentPostKeywords?: string[] | null;
+  posts: BlogPostType[];
 }
 
-export default async function RelatedPosts({
-  currentPostSlug,
-  currentPostKeywords,
+export default function RelatedPosts({
+  currentPostSlug = null,
+  currentPostKeywords = null,
+  posts,
 }: RelatedPostsProps) {
-  const posts = await getAllPosts();
+  const segments = useSelectedLayoutSegments();
 
-  // Exclude the current post
+  // If currentPostSlug is not passed as a prop, use the first segment
+  if (!currentPostSlug) {
+    if (!segments || segments.length === 0) return <></>;
+    currentPostSlug = segments[0];
+  }
+
+  // If currentPostKeywords are not provided, find the post that matches the current slug and use its metadata
+  if (!currentPostKeywords) {
+    const currentPost = posts.find(post => post.slug === currentPostSlug);
+
+    if (currentPost) {
+      currentPostKeywords = currentPost.keywords || [];
+    } else {
+      // If the post is not found, return null or handle accordingly
+      return null;
+    }
+  }
+
+  // Ensure currentPostKeywords is properly defined after the above logic
+  if (!currentPostKeywords) return null;
+
+  // Exclude the current post from the list of posts
   const otherPosts = posts.filter((post) => post.slug !== currentPostSlug);
 
   // Find related posts based on shared keywords
   const relatedPosts = otherPosts.filter((post) =>
-    post.keywords.some((keyword) => currentPostKeywords.includes(keyword))
+    post.keywords.some((keyword) => currentPostKeywords!.includes(keyword))
   );
 
   // Limit to a maximum of 3 related posts

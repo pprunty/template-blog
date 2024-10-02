@@ -1,4 +1,4 @@
-// app/blog/(post)/[slug]/head.tsx
+// app/blog/(post)/(post)/head.tsx
 
 import { AUTHOR, SITE_URL, DEFAULT_SECTION } from '@/config'; // Import variables from your config
 import path from 'path';

@@ -24,21 +24,21 @@ export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
     'src',
     'app',
     'blog',
-    '[slug]'
+    '(post)'
   );
   const dirEntries = await fs.readdir(postsDirectory, { withFileTypes: true });
 
   const postsPromises = dirEntries.map(async (entry) => {
     if (
       entry.isDirectory() &&
-      !['[slug]', 'layout.js', 'page.tsx', 'components'].includes(entry.name)
+      !['(post)', 'layout.js', 'page.tsx', 'components'].includes(entry.name)
     ) {
       const slug = entry.name;
       const filePath = path.join(postsDirectory, slug, 'page.mdx');
 
       try {
         const { metadata } = (await import(
-          `../app/blog/[slug]/${slug}/page.mdx`
+          `../app/blog/(post)/${slug}/page.mdx`
         )) as { metadata: BlogMetadata };
 
         // Fetch the view count for the post
