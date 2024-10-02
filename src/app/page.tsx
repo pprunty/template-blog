@@ -6,7 +6,8 @@ import { getAllPosts } from '@/utils/getAllPosts';
 export default async function PostsPage() {
   const posts = await getAllPosts();
 
-  const postsByYear = posts.reduce((acc, post) => {
+  // Group posts by year
+  const postsByYear = Object.values(posts).reduce((acc, post) => {
     const year = post.date ? new Date(post.date).getFullYear().toString() : 'Unknown Year';
     if (!acc[year]) {
       acc[year] = [];

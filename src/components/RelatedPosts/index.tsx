@@ -12,8 +12,11 @@ export default async function RelatedPosts({
 }: RelatedPostsProps) {
   const posts = await getAllPosts();
 
+  // Convert the posts hash map to an array
+  const postsArray = Object.values(posts);
+
   // Exclude the current post
-  const otherPosts = posts.filter((post) => post.slug !== currentPostSlug);
+  const otherPosts = postsArray.filter((post) => post.slug !== currentPostSlug);
 
   // Find related posts based on shared keywords
   const relatedPosts = otherPosts.filter((post) =>
