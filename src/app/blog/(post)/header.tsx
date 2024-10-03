@@ -16,17 +16,28 @@ const fetchMetadata = async (slug: string) => {
 
 export default function Header() {
   const segments = useSelectedLayoutSegments();
-  if (!segments || segments.length === 0) return <></>;
-
-  const slug = segments[0];
+  const slug = segments && segments.length > 0 ? segments[0] : null;
 
   // Using SWR to fetch MDX metadata
-  const { data: metadata, error: metadataError } = useSWR(slug ? `mdx-metadata-${slug}` : null, () => fetchMetadata(slug));
+  const { data: metadata, error: metadataError } = useSWR(slug ? `mdx-metadata-${slug}` : null, () => {
+    if (slug) {
+      return fetchMetadata(slug);
+    }
+  }, {
+    revalidateOnFocus: false,
+  });
 
   // Using SWR to fetch view count
-  const { data: views, error: viewsError } = useSWR(slug ? `views-${slug}` : null, () => getViewCount(slug));
+  const { data: views, error: viewsError } = useSWR(slug ? `views-${slug}` : null, () => {
+    if (slug) {
+      return getViewCount(slug);
+    }
+  }, {
+    revalidateOnFocus: false,
+  });
 
-  if (metadataError || viewsError) return <div>Error loading post...</div>;
+  // Early return for invalid states
+  if (!slug || metadataError || viewsError) return <div>Error loading post...</div>;
   if (!metadata || views === undefined) return <div>Loading...</div>;
 
   const postDate = new Date(metadata.date);
