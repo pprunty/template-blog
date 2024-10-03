@@ -16,10 +16,10 @@ export default async function Layout({ children }: LayoutProps) {
     <div>
       <Header />
       {children}
+      <BottomBar/>
       <Suspense>
       <RelatedPosts posts={posts} />
       </Suspense>
-      <BottomBar/>
     </div>
   );
 }

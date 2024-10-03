@@ -19,7 +19,7 @@ const Views: React.FC<ViewsProps> = ({ id, defaultValue, incrementOnMount = fals
 
     fetchViews();
 
-    if (incrementOnMount) {
+    if (incrementOnMount && process.env.NODE_ENV !== 'development') {
       incrementViewCount(id).then((newCount) => setViews(newCount));
     }
   }, [id, incrementOnMount]);

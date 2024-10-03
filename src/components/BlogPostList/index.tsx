@@ -52,15 +52,16 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
             {postsByYear[year].map((post) => (
               <li key={post.slug} className="mb-0 sm:mb-4">
                 <Link href={`/blog/${post.slug}`} className="no-underline">
-                  <span
-                    className="
-                      flex items-center transition-all ease-in-out
-                      border-b border-[#333] dark:border-[#fcfcfc] sm:border-2 sm:border-gray-200 dark:sm:border-gray-600
-                      sm:hover:border-gray-500 dark:sm:hover:border-gray-400
-                      active:opacity-80 active:scale-98
-                      py-4 sm:py-4 sm:px-4 sm:pb-4 sm:px-4
-                    "
-                  >
+<span
+  className="
+    flex items-center transition-all ease-in-out
+    border-b border-[#333333] dark:border-[#fcfcfc]
+    sm:border-2 sm:border-gray-200 dark:sm:border-[#333333]   /* Update this */
+    sm:hover:border-gray-500 dark:sm:hover:border-gray-400
+    active:opacity-80 active:scale-98
+    py-4 sm:py-4 sm:px-4 sm:pb-4 sm:px-4
+  "
+>
                     {post.image && (
                       <div className="flex-shrink-0 w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] overflow-hidden mr-4">
                         <OptimizedImage
