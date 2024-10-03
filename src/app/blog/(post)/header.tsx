@@ -47,10 +47,10 @@ export default function Header() {
   // Constructing the JSON-LD structured data
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": metadata.type || 'Article',
+    "@type": 'Article',
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `${SITE_URL}/${slug}`
+      "@id": `${SITE_URL}/blog/${slug}`
     },
     "headline": metadata.title,
     "description": metadata.description,
