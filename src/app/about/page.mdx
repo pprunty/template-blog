@@ -1,4 +1,5 @@
 import { AUTHOR, SITE_URL, DEFAULT_KEYWORDS } from '@/config';
+import Image from "next/image";
 
 export const metadata = {
   title: `About - ${AUTHOR.name}`,
@@ -40,12 +41,14 @@ export const metadata = {
 
 # About [#about]
 
-<img
+<Image
 src="/images/me.WEBP"
-alt="Patrick Prunty"
+alt="Guillermo Rauch"
 className="bg-gray-100 rounded-md block mt-2 mb-5 mx-auto w-full sm:w-80 md:float-right sm:ml-5 sm:mb-5"
-width={400}
-height={400}
+unoptimized
+width={160}
+height={160}
+priority
 />
 
 I&rsquo;m a senior software engineer at UnitedHealth Group. I&rsquo;m

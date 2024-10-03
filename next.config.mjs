@@ -15,16 +15,16 @@ const withMDX = createMDX({
 // Customize runtime caching for image optimization
 const customRuntimeCaching = [
   {
-    urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/i,
+    urlPattern: /^\/images\/.*\.(?:png|jpg|jpeg|svg|gif|webp|WEBP)$/i,
     handler: 'CacheFirst',
     options: {
       cacheName: 'images',
       expiration: {
-        maxEntries: 50, // Limit the number of images to cache
-        maxAgeSeconds: 30 * 24 * 60 * 60, // Cache images for 30 days
+        maxEntries: 100, // You may want to increase the max entries since all images are in /images
+        maxAgeSeconds: 60 * 60 * 24 * 365, // Cache images for 1 year
       },
       cacheableResponse: {
-        statuses: [0, 200], // Cache only if the response is successful
+        statuses: [0, 200],
       },
     },
   },
@@ -40,6 +40,19 @@ const nextConfig = {
     swcMinify: true,
     scrollRestoration: true,
   },
+  headers() {
+      return [
+        {
+          source: "/images/me.WEBP",
+          headers: [
+            {
+              key: "cache-control",
+              value: "public, max-age=31536000, immutable",
+            },
+          ],
+        },
+      ];
+    },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
 
