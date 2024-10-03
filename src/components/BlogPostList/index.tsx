@@ -94,8 +94,8 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                         </div>
                       )}
                       {post.description && (
-                        <span className="text-sm mt-2 text-gray-700 dark:text-gray-300">
-                          <p className="line-clamp-4">{post.description}</p>
+                        <span className="mt-2 text-gray-700 dark:text-gray-300">
+                          <p className="text-m line-clamp-4">{post.description}</p>
                         </span>
                       )}
                     </div>
