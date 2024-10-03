@@ -3,6 +3,8 @@ import { BlogPostType } from '@/types/BlogPost';
 import BlogPostList from '@/components/BlogPostList';
 import { getAllPosts } from '@/utils/getAllPosts';
 
+export const revalidate = 60; // Revalidate the page every 60 seconds
+
 export default async function PostsPage() {
   const posts = await getAllPosts();
 
