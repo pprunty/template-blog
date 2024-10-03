@@ -17,9 +17,7 @@ export default async function Layout({ children }: LayoutProps) {
       <Header />
       {children}
       <BottomBar/>
-      <Suspense>
       <RelatedPosts posts={posts} />
-      </Suspense>
     </div>
   );
 }
