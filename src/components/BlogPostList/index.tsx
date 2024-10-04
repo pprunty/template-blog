@@ -99,7 +99,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                         )}
                       </div>
                       {/* Views Component Positioned in the Top Right */}
-                      <div className="absolute top-3 right-4 text-[11px] text-gray-700 dark:text-gray-300 font-mono mb-4">
+                      <div className="absolute top-3 right-4 text-xs text-gray-700 dark:text-gray-300 font-mono mb-4">
                         <Views id={post.slug} defaultValue={post.views ?? 0} />
                       </div>
                     </div>
