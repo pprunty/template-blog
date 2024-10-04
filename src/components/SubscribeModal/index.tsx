@@ -130,7 +130,7 @@ export default function SubscribeModal({
         className="
           relative bg-[#fcfcfc] dark:bg-[#000]
           border-[#333] dark:border-[#333333] border-[1px] p-6
-          mx-4 w-full max-w-md
+          mx-4 w-full max-w-[320px]
           animate-scale-up shadow-lg rounded-lg
         "
         onClick={(e) => e.stopPropagation()}
@@ -145,14 +145,14 @@ export default function SubscribeModal({
           Be the first to read my latest blogs.
         </p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col items-center">
           <div className="mb-4">
             {/* Input without Label */}
             <input
               ref={firstFocusableElementRef}
               type="email"
               id="email"
-              className="block w-full px-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              className="px-2 py-1 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-theme-background dark:border-theme-border dark:text-theme-text"
               placeholder="Enter a valid email address..."
               required
               value={email}
@@ -173,7 +173,8 @@ export default function SubscribeModal({
             <button
               type="submit"
               className="
-                w-full px-4 py-2 text-sm
+                w-full
+                px-4 py-2 text-sm
                 bg-black text-white
                 rounded-md hover:bg-gray-900
                 transition-colors

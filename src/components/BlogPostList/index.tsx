@@ -49,58 +49,115 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
             {year}
           </h1>
           <ul className="list-none p-0">
-            {postsByYear[year].map((post) => (
+            {postsByYear[year].map((post, index) => (
               <li key={post.slug} className="mb-0 sm:mb-4">
-                <Link href={`/blog/${post.slug}`} className="no-underline">
+                {index === 0 ? (
+                  // Headline article for the first post
+                  <Link href={`/blog/${post.slug}`} className="no-underline">
+                    <div
+                      className="
+                        transition-all ease-in-out
+                        border-b border-[#333333] dark:border-[#fcfcfc]
+                        sm:border-2 sm:border-gray-200 dark:sm:border-[#333333]
+                        sm:hover:border-gray-500 dark:sm:hover:border-gray-400
+                        active:opacity-80 active:scale-98
+                        py-4 sm:py-5 sm:px-4
+                        relative
+                      "
+                    >
+                      {post.image && (
+                        <div className="w-full h-[200px] mt-6 sm:h-[300px] overflow-hidden mb-4">
+                          <OptimizedImage
+                            src={post.image}
+                            alt={post.title || 'Blog post image'}
+                            width={1200}
+                            height={300}
+                            priority
+                          />
+                        </div>
+                      )}
+                      <div className="flex flex-col justify-between grow">
+                        <span className="text-2xl font-bold mt-2">
+                          {post.title}
+                        </span>
+                        {post.keywords && post.keywords.length > 0 && (
+                          <div className="mt-2 flex gap-2 flex-wrap">
+                            {post.keywords.slice(0, 4).map((tag, index) => (
+                              <span
+                                key={index}
+                                className="text-[11px] border font-mono border-gray-400 text-gray-700 dark:text-gray-300 px-1"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        {post.description && (
+                          <span className="mt-2 text-gray-700 dark:text-gray-300">
+                            <p className="text-[15px]">{post.description}</p>
+                          </span>
+                        )}
+                      </div>
+                      {/* Views Component Positioned in the Top Right */}
+                      <div className="absolute top-3 right-4 text-[11px] text-gray-700 dark:text-gray-300 font-mono mb-4">
+                        <Views id={post.slug} defaultValue={post.views ?? 0} />
+                      </div>
+                    </div>
+                  </Link>
+                ) : (
+                  // Regular list item for other posts
+                  <Link href={`/blog/${post.slug}`} className="no-underline">
                     <span
                       className="
                         flex items-center transition-all ease-in-out
                         border-b border-[#333333] dark:border-[#fcfcfc]
-                        sm:border-2 sm:border-gray-200 dark:sm:border-[#333333]   /* Update this */
+                        sm:border-2 sm:border-gray-200 dark:sm:border-[#333333]
                         sm:hover:border-gray-500 dark:sm:hover:border-gray-400
                         active:opacity-80 active:scale-98
-                        py-4 sm:py-4 sm:px-4 sm:pb-4 sm:px-4
+                        py-4 sm:py-4 sm:px-4
+                        relative
                       "
                     >
-                    {post.image && (
-                      <div className="flex-shrink-0 w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] overflow-hidden mr-4">
-                        <OptimizedImage
-                          src={post.image}
-                          alt={post.title || 'Blog post image'}
-                          width={120}
-                          height={120}
-                          priority
-                        />
-                      </div>
-                    )}
-                    <div className="flex flex-col justify-between grow">
-                      <span className="text-xs my-1 text-gray-700 dark:text-gray-300 flex items-center">
-                        {post.date} &#8226;&nbsp;
-                        <Views id={post.slug} defaultValue={post.views ?? 0} />
-                      </span>
-                      <span className="text-xl font-semibold">
-                        {post.title}
-                      </span>
-                      {post.keywords && post.keywords.length > 0 && (
-                        <div className="mt-2 flex gap-2 flex-wrap">
-                          {post.keywords.slice(0, 4).map((tag, index) => (
-                            <span
-                              key={index}
-                              className="text-[11px] border font-mono border-gray-400 text-gray-700 dark:text-gray-300 px-1"
-                            >
-                              {tag}
-                            </span>
-                          ))}
+                      {post.image && (
+                        <div className="flex-shrink-0 w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] overflow-hidden mr-4">
+                          <OptimizedImage
+                            src={post.image}
+                            alt={post.title || 'Blog post image'}
+                            width={120}
+                            height={120}
+                            priority
+                          />
                         </div>
                       )}
-                      {post.description && (
-                        <span className="mt-2 text-gray-700 dark:text-gray-300">
-                            <p className="text-m">{post.description}</p>
+                      <div className="flex flex-col justify-between grow">
+                        <span className="text-xl font-semibold">
+                          {post.title}
                         </span>
-                      )}
-                    </div>
-                  </span>
-                </Link>
+                        {post.keywords && post.keywords.length > 0 && (
+                          <div className="mt-2 flex gap-2 flex-wrap">
+                            {post.keywords.slice(0, 4).map((tag, index) => (
+                              <span
+                                key={index}
+                                className="text-[11px] border font-mono border-gray-400 text-gray-700 dark:text-gray-300 px-1"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        {post.description && (
+                          <span className="mt-2 text-gray-700 dark:text-gray-300">
+                            <p className="text-[15px]">{post.description}</p>
+                          </span>
+                        )}
+                      </div>
+                      {/* Views Component Positioned in the Top Right */}
+                      <div className="hidden sm:block absolute top-2 right-4 text-[11px] text-gray-700 dark:text-gray-300 font-mono">
+                        <Views id={post.slug} defaultValue={post.views ?? 0} />
+                      </div>
+                    </span>
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
