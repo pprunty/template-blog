@@ -43,7 +43,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
       <ul className="list-none p-0">
         {posts.map((post) => (
           <li key={post.slug} className="mb-0 sm:mb-4">
-            <Link href={`/blog/${post.slug}`} className="no-underline" prefetch={true}>
+            <Link href={`/blog/${post.slug}`} className="no-underline" passHref>
               <span
                 className="
                   flex items-center transition-all ease-in-out

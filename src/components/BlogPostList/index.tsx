@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BlogPostType } from '@/types/BlogPost';
-import Views from '@/components/Views';
+import Views from '@/components/Views'; // Import the Views component
 
 interface BlogPostListProps {
   postsByYear: Record<string, BlogPostType[]>;
@@ -51,7 +51,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
           <ul className="list-none p-0">
             {postsByYear[year].map((post) => (
               <li key={post.slug} className="mb-0 sm:mb-4">
-                <Link href={`/blog/${post.slug}`} className="no-underline" prefetch={false}>
+                <Link href={`/blog/${post.slug}`} className="no-underline">
                     <span
                       className="
                         flex items-center transition-all ease-in-out
