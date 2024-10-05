@@ -114,7 +114,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                         sm:border-2 sm:border-gray-200 dark:sm:border-[#333333]
                         sm:hover:border-gray-500 dark:sm:hover:border-gray-400
                         active:opacity-80 active:scale-98
-                        py-4 sm:py-4 sm:px-4
+                        py-4 sm:py-6 sm:px-4
                         relative
                       "
                     >
