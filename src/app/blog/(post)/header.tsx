@@ -22,21 +22,17 @@ export default function Header() {
   // Call useSWR unconditionally
   const slug = segments && segments.length > 0 ? segments[0] : null;
 
-const isServer = typeof window === 'undefined';
+  const { data: metadata, error: metadataError } = useSWR(
+    slug ? `mdx-metadata-${slug}` : null,
+    () => slug ? fetchMetadata(slug) : null,  // Ensuring slug is a string before calling the fetcher
+    { suspense: false }
+  );
 
-
-const { data: metadata, error: metadataError } = useSWR(
-  slug ? `mdx-metadata-${slug}` : null,
-  () => slug ? fetchMetadata(slug) : null,
-  { suspense: !isServer }
-);
-
-const { data: views, error: viewsError } = useSWR(
-  slug ? `views-${slug}` : null,
-  () => slug ? getViewCount(slug) : null,
-  { suspense: !isServer }
-);
-
+  const { data: views, error: viewsError } = useSWR(
+    slug ? `views-${slug}` : null,
+    () => slug ? getViewCount(slug) : null,  // Ensuring slug is a string before calling the fetcher
+    { suspense: false }
+  );
 
   // Early return for error state
   if (metadataError || viewsError) return <div>Error loading post...</div>;
