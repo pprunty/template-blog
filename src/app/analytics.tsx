@@ -1,4 +1,4 @@
-import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+// import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { GA_MEASUREMENT_ID } from "@/config";
 
