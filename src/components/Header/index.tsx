@@ -40,7 +40,7 @@ export default function Header() {
             <button
               onClick={handleSubscribeClick}
               className="
-                inline-flex text-xs items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]
+                inline-flex font-mono text-xs items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]
               "
             >
               <EmailIcon className="mr-2" /> Subscribe

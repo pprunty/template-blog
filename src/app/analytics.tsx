@@ -12,7 +12,7 @@ export function Analytics() {
     <>
       {/* Vercel & Google Analytics */}
       <GoogleAnalytics gaId={GA_MEASUREMENT_ID}/>
-      <VercelAnalytics />
+{/*      <VercelAnalytics /> */}
     </>
   );
 }
