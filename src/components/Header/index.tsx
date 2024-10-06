@@ -27,7 +27,7 @@ export default function Header() {
                <a
                       href={AUTHOR.twitterUrl}
                       target="_blank"
-                      className="inline-flex hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] items-center p-2 rounded-sm transition-[background-color] whitespace-nowrap -mr-2"
+                      className="inline-flex font-mono hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] items-center p-2 rounded-sm transition-[background-color] whitespace-nowrap -mr-2"
                     >
                       <TweetIcon className="mr-2" /> Follow{" "}
                       <span className="hidden md:inline">&nbsp;me</span>
