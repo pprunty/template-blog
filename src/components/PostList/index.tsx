@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BlogPostType } from '@/types/BlogPost';
-import Views from '@/components/Views'; // Import the Views component
+// import Views from '@/components/Views'; // Import the Views component
 
 const MAX_DESCRIPTION_LENGTH = 200;
 
@@ -65,10 +65,6 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                   </div>
                 )}
                 <div className="flex flex-col justify-between grow">
-                  <span className="text-xs my-1 text-gray-700 dark:text-gray-300 flex items-center">
-                    {post.date} &#8226;&nbsp;
-                    <Views id={post.slug} defaultValue={post.views ?? 0} />
-                  </span>
                   <span className="text-xl font-semibold">
                     {post.title}
                   </span>
