@@ -25,7 +25,7 @@ const Views: React.FC<ViewsProps> = ({ id, defaultValue, incrementOnMount = fals
   }, [id, incrementOnMount]);
 
   return (
-    <span>{views} views</span>
+    <span>{views.toLocaleString()} views</span>
   );
 };
 
