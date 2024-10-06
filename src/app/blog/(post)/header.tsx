@@ -82,7 +82,7 @@ const jsonLd = {
               </span>
             </span>
             {/* Views Component if you have one */}
-              <span className="pr-1.5">
+              <span className="pr-1.5" suppressHydrationWarning={true}>
                   <Views id={slug} defaultValue={views} incrementOnMount={true} />
               </span>
           </p>
