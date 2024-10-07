@@ -27,7 +27,7 @@ const OptimizedImage = React.memo(function OptimizedImage({
       alt={alt}
       width={width}
       height={height}
-      className={`object-cover max-h-inherit min-w-[${width}px] min-h-[${height}px]`}
+      className={`object-cover w-[${width}px] h-[${height}px]`}
       priority={priority} // Use the priority prop here
     />
   );
@@ -54,7 +54,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
               <li key={post.slug} className="mb-0 sm:mb-4">
                 {index === 0 ? (
                   // Headline article for the first post
-                 <Link href={`/blog/${post.slug}`} className="no-underline" prefetch={false}>
+                 <Link href={`/blog/${post.slug}`} className="no-underline" >
                    <div
                      className="
                        transition-all ease-in-out
