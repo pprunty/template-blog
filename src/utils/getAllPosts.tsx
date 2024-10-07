@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs/promises';
 import { BlogPostType } from '@/types/BlogPost';
 import formatDate from '@/utils/formatDate';
-import { getViewCount } from '@/utils/fetchViewCount';
+// import { getViewCount } from '@/utils/fetchViewCount';
 
 interface BlogMetadata {
   title?: string;
@@ -42,7 +42,7 @@ export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
         )) as { metadata: BlogMetadata };
 
         // Fetch the view count for the post
-        const views = await getViewCount(slug);
+//         const views = await getViewCount(slug);
 
         return {
           slug,
@@ -54,7 +54,7 @@ export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
           type: metadata.type || 'article',
           keywords: metadata.keywords || [],
           readingTime: metadata.readingTime || 5,
-          views: views || 0, // Use the fetched view count
+//           views: views || 0, // Use the fetched view count
         } as BlogPostType;
       } catch (error) {
         console.error(`Error reading file ${filePath}:`, error);

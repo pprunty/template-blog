@@ -13,7 +13,7 @@ export default async function Layout({ children }: LayoutProps) {
 
   return (
     <div>
-        <Header />
+      <Header />
       {children}
       <BottomBar />
       <RelatedPosts posts={posts} />

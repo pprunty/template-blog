@@ -13,13 +13,13 @@ const OptimizedImage = React.memo(function OptimizedImage({
   alt,
   width,
   height,
-  priority,
+  priority = false,
 }: {
   src: string;
   alt: string;
   width: number;
   height: number;
-  priority?: boolean;
+  priority?: boolean; // Optional prop
 }) {
   return (
     <Image
@@ -27,11 +27,12 @@ const OptimizedImage = React.memo(function OptimizedImage({
       alt={alt}
       width={width}
       height={height}
-      priority={priority}
       className="w-full h-full object-cover"
+      priority={priority} // Use the priority prop here
     />
   );
 });
+
 
 const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
   const sortedYears = Object.keys(postsByYear)
@@ -53,7 +54,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
               <li key={post.slug} className="mb-0 sm:mb-4">
                 {index === 0 ? (
                   // Headline article for the first post
-                 <Link href={`/blog/${post.slug}`} className="no-underline">
+                 <Link href={`/blog/${post.slug}`} className="no-underline" prefetch={false}>
                    <div
                      className="
                        transition-all ease-in-out
@@ -102,7 +103,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                  </Link>
                 ) : (
                   // Regular list item for other posts
-                 <Link href={`/blog/${post.slug}`} className="no-underline">
+                 <Link href={`/blog/${post.slug}`} className="no-underline" prefetch={false}>
                    <span
                      className="
                        flex items-center transition-all ease-in-out
@@ -121,7 +122,6 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                            alt={post.title || 'Blog post image'}
                            width={120}
                            height={120}
-                           priority
                          />
                        </div>
                      )}
