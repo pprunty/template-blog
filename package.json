@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "generate-slugs": "node scripts/generate-slugs.js",
+    "build": "npm run generate-slugs && next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",

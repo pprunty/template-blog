@@ -1,73 +1,46 @@
-"use client";
+// src/components/RelatedPosts/index.tsx
 
 import PostList from '@/components/PostList';
 import { BlogPostType } from '@/types/BlogPost';
-import { useSelectedLayoutSegments } from "next/navigation";
-import { useMemo, useState, useEffect } from 'react';
 
 interface RelatedPostsProps {
-  currentPostSlug?: string | null;
-  currentPostKeywords?: string[] | null;
+  currentPostSlug: string;
+  currentPostKeywords: string[];
   posts: BlogPostType[];
 }
 
 export default function RelatedPosts({
-  currentPostSlug = null,
-  currentPostKeywords = null,
+  currentPostSlug,
+  currentPostKeywords,
   posts,
 }: RelatedPostsProps) {
-  const segments = useSelectedLayoutSegments();
-  const [slug, setSlug] = useState<string | null>(currentPostSlug);
+  // Filter out the current post from the list
+  const otherPosts = posts.filter(post => post.slug !== currentPostSlug);
 
-  // Set slug once on initial mount or when segments change
-  useEffect(() => {
-    if (!currentPostSlug && segments && segments.length > 0) {
-      setSlug(segments[0]);
-    }
-  }, [currentPostSlug, segments]);
+  // Find related posts based on shared keywords
+  const relatedPosts = otherPosts.filter(post =>
+    post.keywords.some(keyword => currentPostKeywords.includes(keyword))
+  ).slice(0, 3); // Limit to a maximum of 3 related posts
 
-  // Memoize keywords calculation, unconditionally called
-  const keywords = useMemo(() => {
-    if (!currentPostKeywords) {
-      const currentPost = posts.find(post => post.slug === slug);
-      return currentPost ? currentPost.keywords || [] : [];
-    }
-    return currentPostKeywords;
-  }, [currentPostKeywords, posts, slug]);
-
-  // Memoize otherPosts and relatedPosts, unconditionally called
-  const otherPosts = useMemo(() => {
-    return posts.filter(post => post.slug !== slug);
-  }, [posts, slug]);
-
-  const relatedPosts = useMemo(() => {
-    return otherPosts.filter(post =>
-      post.keywords.some(keyword => keywords.includes(keyword))
-    ).slice(0, 3); // Limit to a maximum of 3 related posts
-  }, [otherPosts, keywords]);
-
-  // Memoize shuffledRemainingPosts, unconditionally called
-  const shuffledRemainingPosts = useMemo(() => {
-    const remainingPosts = otherPosts.filter(post =>
-      !relatedPosts.some(relatedPost => relatedPost.slug === post.slug)
-    );
-    return shuffleArray(remainingPosts);
-  }, [otherPosts, relatedPosts]);
-
-  // Add enough random posts to make up a total of 4 posts
-  const randomPosts = shuffledRemainingPosts.slice(0, 4 - relatedPosts.length);
+  // If not enough related posts, fill with random posts
+  const remainingPostsNeeded = 4 - relatedPosts.length;
+  const remainingPosts = otherPosts.filter(
+    post => !relatedPosts.some(relatedPost => relatedPost.slug === post.slug)
+  );
+  const shuffledRemainingPosts = shuffleArray(remainingPosts);
+  const randomPosts = shuffledRemainingPosts.slice(0, remainingPostsNeeded);
 
   // Combine related posts and random posts to make exactly 4 posts
   const combinedPosts = [...relatedPosts, ...randomPosts];
 
-  if (!slug || combinedPosts.length === 0) {
-    return null; // Return null if no posts found or slug is not ready
+  if (combinedPosts.length === 0) {
+    return null; // Return null if no posts found
   }
 
   return (
     <div className="mt-8">
       <h1 className="text-2xl font-bold mb-4">Recommended For You:</h1>
-      <PostList posts={combinedPosts}/>
+      <PostList posts={combinedPosts} />
     </div>
   );
 }
