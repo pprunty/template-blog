@@ -23,7 +23,6 @@ const inter = Inter({ subsets: ['latin'] });
 
 // Define metadata
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
   title: `${AUTHOR.name}'s blog`,
   description: `${AUTHOR.name} is a professional software developer who writes on the intersection of software development and the great outdoors.`,
   keywords: DEFAULT_KEYWORDS,

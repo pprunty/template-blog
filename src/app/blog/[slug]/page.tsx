@@ -1,7 +1,6 @@
 // src/app/blog/[slug]/page.tsx
 import { Metadata } from 'next';
 import { SITE_URL } from '@/config';
-// import { ReactNode } from 'react';
 
 interface PageProps {
   params: { slug: string };
@@ -9,8 +8,10 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = params;
-  const { metadata } = await import(`@/posts/${slug}/page.mdx`);
-  console.log('Imported module in generateMetadata:', module);
+  const postModule = await import(`@/posts/${slug}/page.mdx`);
+  console.log('Imported module in generateMetadata:', postModule);
+
+  const { metadata } = postModule;
 
   return {
     title: metadata.title,
@@ -19,26 +20,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: metadata.title,
       description: metadata.description,
       url: `${SITE_URL}/blog/${slug}`,
-      images: metadata.images ? [{ url: `${SITE_URL}${metadata.image}` }] : [],
-      type: metadata.openGraph.type,
-      tags: metadata.openGraph.tags
+      images: metadata.image ? [{ url: `${SITE_URL}${metadata.image}` }] : [],
+      type: metadata.openGraph?.type,
+      tags: metadata.openGraph?.tags,
     },
     twitter: {
       card: 'summary_large_image',
       title: metadata.title,
       description: metadata.description,
-      images: metadata.images ? [`${SITE_URL}${metadata.image}`] : [],
+      images: metadata.image ? [`${SITE_URL}${metadata.image}`] : [],
     },
-    keywords: metadata.keywords
+    keywords: metadata.keywords,
   };
 }
 
-export default function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps) {
   const { slug } = params;
-  const module = require(`@/posts/${slug}/page.mdx`);
-  console.log('Imported module in Page:', module);
+  const postModule = await import(`@/posts/${slug}/page.mdx`);
+  console.log('Imported module in Page:', postModule);
 
-  const Content = module.default;
+  const Content = postModule.default;
 
   return (
     <div>
