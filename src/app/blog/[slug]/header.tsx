@@ -14,8 +14,6 @@ export default async function Header({ slug }: HeaderProps) {
   const { metadata } = await import(`@/posts/${slug}/page.mdx`);
   const views = await getViewCount(slug);
 
-  console.log("Got the metadata for the header")
-
   const postDate = new Date(metadata.date);
   const timeAgo = formatDistanceToNow(postDate, { addSuffix: true });
 

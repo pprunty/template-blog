@@ -9,7 +9,6 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = params;
   const postModule = await import(`@/posts/${slug}/page.mdx`);
-  console.log('Imported module in generateMetadata:', postModule);
 
   const { metadata } = postModule;
 
@@ -37,7 +36,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function Page({ params }: PageProps) {
   const { slug } = params;
   const postModule = await import(`@/posts/${slug}/page.mdx`);
-  console.log('Imported module in Page:', postModule);
 
   const Content = postModule.default;
 
