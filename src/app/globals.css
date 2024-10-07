@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
   /* Apply smooth scrolling globally */
 /*
@@ -9,6 +10,7 @@
     scroll-behavior: smooth;
   }
 */
+
   :root {
     /* Font setup */
     font-family: "Inter", sans-serif;
@@ -19,6 +21,10 @@
     @apply bg-[#fcfcfc];
     @apply text-[#111];
   }
+
+img {
+  height: inherit !important;
+}
 
   /* Dark mode settings */
   :root.dark {

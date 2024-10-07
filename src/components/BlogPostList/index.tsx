@@ -27,7 +27,7 @@ const OptimizedImage = React.memo(function OptimizedImage({
       alt={alt}
       width={width}
       height={height}
-      className="w-full h-full object-cover"
+      className={`object-cover max-h-inherit min-w-[${width}px] min-h-[${height}px]`}
       priority={priority} // Use the priority prop here
     />
   );
@@ -67,7 +67,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                      "
                    >
                      {post.image && (
-                       <div className="w-full h-[200px] mt-6 sm:h-[300px] overflow-hidden mb-4">
+                       <div className="w-full h-[200px] mt-2 sm:h-[300px] overflow-hidden mb-4">
                          <OptimizedImage
                            src={post.image}
                            alt={post.title || 'Blog post image'}

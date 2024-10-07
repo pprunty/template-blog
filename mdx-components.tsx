@@ -17,6 +17,7 @@ import { YouTube } from "./src/app/blog/components/youtube";
 import { Ref, FootNotes, FootNote } from "./src/app/blog/components/footnotes";
 import { Blockquote as blockquote } from "./src/app/blog/components/blockquote";
 import React from "react";
+import 'highlight.js/styles/atom-one-dark.css';
 
 // Memoized Image component to prevent re-renders unless props change
 const MemoizedImage = React.memo(function MemoizedImage({
