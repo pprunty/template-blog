@@ -5,37 +5,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BlogPostType } from '@/types/BlogPost';
 // import Views from '@/components/Views'; // Import the Views component
+import OptimizedImage from '@/components/OptimizedImage';
 
 const MAX_DESCRIPTION_LENGTH = 200;
 
 interface PostListProps {
   posts: BlogPostType[];
 }
-
-const OptimizedImage = React.memo(function OptimizedImage({
-  src,
-  alt,
-  width,
-  height,
-  priority,
-}: {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  priority?: boolean;
-}) {
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      priority={priority}
-      className="object-cover w-full h-full"
-    />
-  );
-});
 
 const PostList: React.FC<PostListProps> = ({ posts }) => {
   return (
@@ -54,15 +30,13 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                 "
               >
                 {post.image && (
-                  <div className="flex-shrink-0 w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] overflow-hidden mr-4">
-                    <OptimizedImage
-                      src={post.image}
-                      alt={post.title || 'Blog post image'}
-                      width={120}
-                      height={120}
-                      priority
-                    />
-                  </div>
+                <div className="relative w-[113px] h-[113px] sm:w-[120x] sm:h-[120x] overflow-hidden mr-4 flex-shrink-0">
+                  <OptimizedImage
+                    src={post.image}
+                    alt={post.title || 'Blog post image'}
+                    sizes="(max-width: 640px) 113px, 120x"
+                  />
+                </div>
                 )}
                 <div className="flex flex-col justify-between grow">
                   <span className="text-xl font-semibold">

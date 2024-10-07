@@ -3,35 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BlogPostType } from '@/types/BlogPost';
 // import Views from '@/components/Views'; // Import the Views component
+import OptimizedImage from '@/components/OptimizedImage';
 
 interface BlogPostListProps {
   postsByYear: Record<string, BlogPostType[]>;
 }
-
-const OptimizedImage = React.memo(function OptimizedImage({
-  src,
-  alt,
-  width,
-  height,
-  priority = false,
-}: {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  priority?: boolean; // Optional prop
-}) {
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      className={`object-cover w-[${width}px] h-[${height}px]`}
-      priority={priority} // Use the priority prop here
-    />
-  );
-});
 
 
 const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
@@ -67,13 +43,12 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                      "
                    >
                      {post.image && (
-                       <div className="w-full h-[200px] mt-2 sm:h-[300px] overflow-hidden mb-4">
+                       <div className="relative w-full h-[200px] mt-2 sm:h-[300px] overflow-hidden mb-4">
                          <OptimizedImage
                            src={post.image}
                            alt={post.title || 'Blog post image'}
-                           width={1200}
-                           height={300}
                            priority
+                           loading={"eager"}
                          />
                        </div>
                      )}
@@ -104,7 +79,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                 ) : (
                   // Regular list item for other posts
                  <Link href={`/blog/${post.slug}`} className="no-underline" prefetch={false}>
-                   <span
+                   <div
                      className="
                        flex items-center transition-all ease-in-out
                        border-b border-[#333333] dark:border-[#fcfcfc]
@@ -116,14 +91,13 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                      "
                    >
                      {post.image && (
-                       <div className="flex-shrink-0 w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] overflow-hidden mr-4">
-                         <OptimizedImage
-                           src={post.image}
-                           alt={post.title || 'Blog post image'}
-                           width={120}
-                           height={120}
-                         />
-                       </div>
+                    <div className="relative w-[113px] h-[113px] sm:w-[120x] sm:h-[120x] overflow-hidden mr-4 flex-shrink-0">
+                      <OptimizedImage
+                        src={post.image}
+                        alt={post.title || 'Blog post image'}
+                        sizes="(max-width: 640px) 113px, 120x"
+                      />
+                    </div>
                      )}
                      <div className="flex flex-col justify-between grow">
                        {/* Views Component Positioned above the Title on the Left */}
@@ -148,7 +122,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                          </span>
                        )}
                      </div>
-                   </span>
+                   </div>
                  </Link>
                 )}
               </li>

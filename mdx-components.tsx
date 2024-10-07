@@ -80,7 +80,7 @@ export function useMDXComponents(components?: { [component: string]: React.Compo
               alt={alt || "Image"}
               width={width}
               height={height}
-              priority={true}
+              loading={"lazy"}
             />
           );
         },
