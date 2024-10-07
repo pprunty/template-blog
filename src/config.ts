@@ -12,7 +12,7 @@ export const AUTHOR = {
   redditUrl: "https://www.reddit.com/user/patrickprunty1997/",
 };
 
-export const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+export const GA_MEASUREMENT_ID = "G-LSBKKYLNC4";
 export const DEFAULT_COUNTER_ID = "ppruntyx86";
 
 // Default section and keywords
