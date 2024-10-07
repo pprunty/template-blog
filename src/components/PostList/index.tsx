@@ -81,8 +81,8 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                     </div>
                   )}
                   {post.description && (
-                    <span className="text-sm mt-2 text-gray-700 dark:text-gray-300">
-                      <p className="line-clamp-4">
+                    <span className="mt-2 text-gray-700 dark:text-gray-300">
+                      <p className="line-clamp-4 text-[16px]">
                         {post.description.length > MAX_DESCRIPTION_LENGTH
                           ? `${post.description.substring(0, MAX_DESCRIPTION_LENGTH)}...`
                           : post.description}
