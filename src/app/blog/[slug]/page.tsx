@@ -10,6 +10,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = params;
   const { metadata } = await import(`@/posts/${slug}/page.mdx`);
+  console.log('Imported module in generateMetadata:', module);
 
   return {
     title: metadata.title,
@@ -32,9 +33,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function Page({ params }: PageProps) {
+export default function Page({ params }: PageProps) {
   const { slug } = params;
-  const Content = (await import(`@/posts/${slug}/page.mdx`)).default;
+  const module = require(`@/posts/${slug}/page.mdx`);
+  console.log('Imported module in Page:', module);
+
+  const Content = module.default;
 
   return (
     <div>

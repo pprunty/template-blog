@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import type { Viewport } from 'next';
 import { Analytics } from "./analytics";
 import { Suspense } from "react";
+import type { Metadata } from 'next';
 
 // Define viewport settings
 export const viewport: Viewport = {
@@ -21,39 +22,44 @@ export const viewport: Viewport = {
 const inter = Inter({ subsets: ['latin'] });
 
 // Define metadata
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: `${AUTHOR.name}'s blog`,
-  description: `${AUTHOR.name} is a professional software developer, who writes on the intersection of software development and the great outdoors.`,
-  image: `/images/icon.png`,
-  manifest: process.env.NODE_ENV === 'production' ? "/manifest.prod.json" : "/manifest.json",
+  description: `${AUTHOR.name} is a professional software developer who writes on the intersection of software development and the great outdoors.`,
+  keywords: DEFAULT_KEYWORDS,
+  manifest: process.env.NODE_ENV === 'production' ? '/manifest.prod.json' : '/manifest.json',
   openGraph: {
     title: `${AUTHOR.name}'s blog`,
-    description: `${AUTHOR.name} is a professional software developer, who writes on the intersection of software development and the great outdoors.`,
+    description: `${AUTHOR.name} is a professional software developer who writes on the intersection of software development and the great outdoors.`,
+    url: SITE_URL,
     siteName: `${AUTHOR.name}'s blog`,
-    logo: `/images/icon.png`,
     images: [
       {
-        url: `/images/icon.png`, // Path to your Open Graph image
+        url: `${SITE_URL}/images/icon.png`,
         alt: `${AUTHOR.name} out hiking`,
-      }
+      },
     ],
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    site: "@pprunty_",
-    creator: "@pprunty_",
+    card: 'summary_large_image',
+    site: '@pprunty_',
+    creator: '@pprunty_',
     images: [
       {
-        url: `/images/icon.png`, // Path to your Twitter image (can be same as OG image)
+        url: `${SITE_URL}/images/icon.png`,
         alt: `${AUTHOR.name} out hiking`,
-      }
+      },
     ],
   },
-  keywords: DEFAULT_KEYWORDS,
-  icons: [
-    { rel: "apple-touch-icon", url: "/icons/180x180.png", sizes: "180x180" },
-    { rel: "icon", url: "/icons/192x192.png", sizes: "192x192", type: "image/png" },
-  ],
+  icons: {
+    icon: [
+      { url: '/icons/192x192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/icons/180x180.png', sizes: '180x180' },
+    ],
+  },
   metadataBase: new URL(SITE_URL),
 };
 
