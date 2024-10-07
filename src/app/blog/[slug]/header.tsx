@@ -18,7 +18,7 @@ export default async function Header({ slug }: HeaderProps) {
   const timeAgo = formatDistanceToNow(postDate, { addSuffix: true });
 
   return (
-    <div>
+    <div suppressHydrationWarning={true}>
       {/* Header Section */}
       <h1 className="text-2xl font-bold mb-1 dark:text-gray-100">
         {metadata.title}

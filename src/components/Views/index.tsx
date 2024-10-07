@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from 'react';
 import { getViewCount, incrementViewCount } from '@/utils/fetchViewCount'; // Adjust your imports
 
