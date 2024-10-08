@@ -15,13 +15,10 @@
     "docker-run": "docker run -p 3000:3000 my-blog:latest"
   },
   "dependencies": {
-    "@babel/parser": "^7.25.6",
-    "@babel/traverse": "^7.25.6",
     "@mdx-js/loader": "^3.0.1",
     "@next/mdx": "^14.2.13",
     "@next/third-parties": "^14.2.14",
     "@tailwindcss/line-clamp": "^0.4.4",
-    "@vercel/analytics": "^1.3.1",
     "autoprefixer": "^10.4.20",
     "counterapi": "^1.78.0",
     "date-fns": "^4.1.0",
@@ -29,14 +26,10 @@
     "next-pwa": "^5.6.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-toggle-dark-mode": "^1.1.1",
-    "react-tweet": "^3.2.1",
     "react-wrap-balancer": "^1.1.1",
     "react-youtube": "^10.1.0",
     "rehype-highlight": "^7.0.0",
-    "remark-gfm": "^4.0.0",
-    "styled-components": "^6.1.13",
-    "styled-normalize": "^8.1.1"
+    "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
