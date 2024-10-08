@@ -42,7 +42,7 @@ const MemoizedImage = React.memo(function MemoizedImage({
       width={width}
       height={height}
 //       quality={90}
-      priority
+      priority={priority}
     />
   );
 });
@@ -83,6 +83,7 @@ export function useMDXComponents(components?: { [component: string]: React.Compo
               width={width}
               height={height}
               loading={"lazy"}
+              priority={false}
             />
           );
         },

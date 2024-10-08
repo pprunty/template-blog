@@ -35,7 +35,8 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                     src={post.image}
                     alt={post.title || 'Blog post image'}
                     sizes="(max-width: 640px) 113px, 120x"
-                  priority={index === 0} // Prioritize the first image
+                    priority={index === 0} // Prioritize the first image
+                    loading={index === 0 ? "eager" : "lazy"}
                   />
                 </div>
                 )}
