@@ -1,42 +1,44 @@
-// src/components/OptimizedImage/index.tsx
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import Image from 'next/image';
 
 interface OptimizedImageProps {
   src: string;
   alt: string;
-  priority?: boolean;
   sizes?: string;
-  className?: string;
-  width?: number;
-  height?: number;
-  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+  loading?: 'eager' | 'lazy';
 }
 
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
   src,
   alt,
-  priority = false,
-  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
-  className = '',
-  width,
-  height,
-  loading = 'lazy',
+  sizes,
+  priority,
+  loading,
 }) => {
-  // Decide whether to use `fill` or `width` and `height` based on the props
-  const imageProps = width && height ? { width, height } : { fill: true };
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <Image
-      src={src}
-      alt={alt}
-      {...imageProps}
-      className={`object-cover ${className}`}
-      priority={priority}
-      sizes={sizes}
-      loading={loading}
-    />
+    <div className="relative w-full h-full">
+      {isLoading && (
+        <div className="absolute inset-0 bg-gray-300 dark:bg-gray:800 animate-pulse"></div>
+      )}
+      <Image
+        src={src}
+        alt={alt}
+        sizes={sizes}
+        priority={priority}
+        loading={loading}
+        fill
+        className={`object-cover transition-opacity duration-100 ${
+          isLoading ? 'opacity-0' : 'opacity-100'
+        }`}
+        onLoad={() => setIsLoading(false)}
+      />
+    </div>
   );
 };
 
-export default React.memo(OptimizedImage);
+export default OptimizedImage;

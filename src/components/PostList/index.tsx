@@ -17,7 +17,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
   return (
     <div className="mb-2 text-sm">
       <ul className="list-none p-0">
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <li key={post.slug} className="mb-0 sm:mb-4">
             <Link href={`/blog/${post.slug}`} className="no-underline" passHref>
               <span
@@ -35,6 +35,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                     src={post.image}
                     alt={post.title || 'Blog post image'}
                     sizes="(max-width: 640px) 113px, 120x"
+                  priority={index === 0} // Prioritize the first image
                   />
                 </div>
                 )}

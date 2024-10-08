@@ -29,7 +29,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
               <li key={post.slug} className="mb-0 sm:mb-4">
                 {index === 0 ? (
                   // Headline article for the first post
-                 <Link href={`/blog/${post.slug}`} className="no-underline" >
+                 <Link href={`/blog/${post.slug}`} className="no-underline cursor-pointer" >
                    <div
                      className="
                        transition-all ease-in-out
@@ -77,7 +77,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                  </Link>
                 ) : (
                   // Regular list item for other posts
-                 <Link href={`/blog/${post.slug}`} className="no-underline" prefetch={false}>
+                 <Link href={`/blog/${post.slug}`} className="no-underline cursor-pointer" prefetch={false}>
                    <div
                      className="
                        flex items-center transition-all ease-in-out
@@ -95,6 +95,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                         src={post.image}
                         alt={post.title || 'Blog post image'}
                         sizes="(max-width: 640px) 113px, 120x"
+                      priority={index === 0} // Prioritize the first image
                       />
                     </div>
                      )}
