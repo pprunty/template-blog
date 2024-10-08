@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { BlogPostType } from '@/types/BlogPost';
 // import Views from '@/components/Views'; // Import the Views component
 import OptimizedImage from '@/components/OptimizedImage';

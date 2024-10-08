@@ -26,12 +26,14 @@ const MemoizedImage = React.memo(function MemoizedImage({
   width,
   height,
   priority,
+  loading = "eager"
 }: {
   src: string;
   alt?: string;
   width: number;
   height: number;
   priority?: boolean;
+  loading?: string
 }) {
   return (
     <Image
