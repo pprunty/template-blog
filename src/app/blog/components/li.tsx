@@ -9,6 +9,7 @@ export function LI({ children }: LIProps) {
     <li
       className={`
         my-2
+        text-[17px]
         [ul_&]:relative
         [ul_&]:pl-4
         [ul_&]:before:text-gray-400

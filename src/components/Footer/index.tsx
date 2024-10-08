@@ -42,7 +42,8 @@ export default function Footer() {
       </div>
       <div className="text-gray-700 dark:text-gray-300 mt-3 px-6 text-center text-xs">
         Developed by{" "}
-        <a href={AUTHOR.twitterUrl} className="hover:underline">
+        {/* Please give credit where credit is due, abide by MIT License, and keep this in the footer to accredit me (the creator) if you are using this template. */}
+        <a href={"https://patrickprunty.com/"} className="hover:underline">
           Patrick Prunty
         </a>{" "}
         under{" "}
