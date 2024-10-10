@@ -19,7 +19,7 @@ import { Blockquote as blockquote } from "./src/app/blog/components/blockquote";
 import React from "react";
 import 'highlight.js/styles/atom-one-dark.css';
 import { InlineCode } from "./src/app/blog/components/code";
-import { Admonition } from './src/app/blog/components/Admonition';
+import { Admonition } from './src/app/blog/components/admonition';
 
 // Memoized Image component to prevent re-renders unless props change
 const MemoizedImage = React.memo(function MemoizedImage({
