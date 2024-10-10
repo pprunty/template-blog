@@ -18,6 +18,8 @@ import { Ref, FootNotes, FootNote } from "./src/app/blog/components/footnotes";
 import { Blockquote as blockquote } from "./src/app/blog/components/blockquote";
 import React from "react";
 import 'highlight.js/styles/atom-one-dark.css';
+import { InlineCode } from "./src/app/blog/components/code";
+import { Admonition } from './src/app/blog/components/Admonition';
 
 // Memoized Image component to prevent re-renders unless props change
 const MemoizedImage = React.memo(function MemoizedImage({
@@ -59,10 +61,11 @@ export function useMDXComponents(components?: { [component: string]: React.Compo
     ul,
     li,
     hr,
-//     code,
+    code: InlineCode,
 //     pre: Snippet,
 //     img: Image,
     blockquote,
+    Admonition,
 //     Tweet,
     img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
           const { src, alt } = props;
