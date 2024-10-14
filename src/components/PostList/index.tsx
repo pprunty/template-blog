@@ -7,8 +7,6 @@ import { BlogPostType } from '@/types/BlogPost';
 // import Views from '@/components/Views'; // Import the Views component
 import OptimizedImage from '@/components/OptimizedImage';
 
-const MAX_DESCRIPTION_LENGTH = 200;
-
 interface PostListProps {
   posts: BlogPostType[];
 }
@@ -19,7 +17,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
       <ul className="list-none p-0">
         {posts.map((post, index) => (
           <li key={post.slug} className="mb-0 sm:mb-4">
-            <Link href={`/blog/${post.slug}`} className="no-underline" passHref>
+            <Link href={`/blog/${post.slug}`} className="no-underline">
               <span
                 className="
                   flex items-center transition-all ease-in-out
@@ -57,19 +55,10 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                     </div>
                   )}
                   {post.description && (
-                    <span className="mt-2 text-gray-700 dark:text-gray-300">
-                      <p className="line-clamp-4 text-[16px]">
-                        {post.description.length > MAX_DESCRIPTION_LENGTH
-                          ? `${post.description.substring(0, MAX_DESCRIPTION_LENGTH)}...`
-                          : post.description}
-                      </p>
-                      {post.description.length > MAX_DESCRIPTION_LENGTH && (
-                        <span className="inline text-black cursor-pointer hover:underline">
-                          See more
-                        </span>
-                      )}
-                    </span>
-                  )}
+                         <span className="mt-2 text-gray-700 dark:text-gray-300">
+                           <p className="text-[16px] line-clamp-4">{post.description}</p>
+                         </span>
+                       )}
                 </div>
               </span>
             </Link>

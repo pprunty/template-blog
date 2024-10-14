@@ -24,17 +24,17 @@ const inter = Inter({ subsets: ['latin'] });
 // Define metadata
 export const metadata: Metadata = {
   title: `${AUTHOR.name}'s blog`,
-  description: `${AUTHOR.name} is a professional software developer who writes on the intersection of software development and the great outdoors.`,
+  description: `${AUTHOR.description}`, // Use AUTHOR's updated description from config
   keywords: DEFAULT_KEYWORDS,
   manifest: process.env.NODE_ENV === 'production' ? '/manifest.prod.json' : '/manifest.json',
   openGraph: {
     title: `${AUTHOR.name}'s blog`,
-    description: `${AUTHOR.name} is a professional software developer who writes on the intersection of software development and the great outdoors.`,
+    description: `${AUTHOR.description}`, // Use AUTHOR's updated description from config
     url: SITE_URL,
     siteName: `${AUTHOR.name}'s blog`,
     images: [
       {
-        url: `${SITE_URL}/images/icon.png`,
+        url: `${SITE_URL}/icon.png`,
         alt: `${AUTHOR.name} out hiking`,
       },
     ],
@@ -42,11 +42,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@pprunty_',
-    creator: '@pprunty_',
+    site: `${AUTHOR.twitterHandle}`,
+    creator: `${AUTHOR.twitterHandle}`,
     images: [
       {
-        url: `${SITE_URL}/images/icon.png`,
+        url: `${SITE_URL}/icon.png`,
         alt: `${AUTHOR.name} out hiking`,
       },
     ],
@@ -97,7 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify(jsonLd),
           }}
         />
-        <meta name="google-site-verification" content="5GuQpmfOzq72Xmm56vDEj1o3L0LEngpUlkmqYPgn7iw" />
+        <link rel="icon" href="/logo.png" sizes="any" />
       </head>
       <body className={`dark:text-gray-100 max-w-2xl m-auto`}>
         <main className="p-6 pt-3 md:pt-6 min-h-screen">

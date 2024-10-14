@@ -29,7 +29,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
               <li key={post.slug} className="mb-0 sm:mb-4">
                 {index === 0 ? (
                   // Headline article for the first post
-                 <Link href={`/blog/${post.slug}`} className="no-underline cursor-pointer" >
+                 <Link href={`/blog/${post.slug}`} className="no-underline cursor-pointer" prefetch={true}>
                    <div
                      className="
                        transition-all ease-in-out
@@ -77,7 +77,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                  </Link>
                 ) : (
                   // Regular list item for other posts
-                 <Link href={`/blog/${post.slug}`} className="no-underline cursor-pointer" prefetch={false}>
+                 <Link href={`/blog/${post.slug}`} className="no-underline cursor-pointer" prefetch={true}>
                    <div
                      className="
                        flex items-center transition-all ease-in-out
@@ -118,7 +118,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                        )}
                        {post.description && (
                          <span className="mt-2 text-gray-700 dark:text-gray-300">
-                           <p className="text-[16px]">{post.description}</p>
+                           <p className="text-[16px] line-clamp-4">{post.description}</p>
                          </span>
                        )}
                      </div>

@@ -1,15 +1,17 @@
-export const SITE_URL = "https://patrickprunty.vercel.app";
+export const SITE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://patrickprunty.vercel.app";
 
 export const AUTHOR = {
   name: "Patrick Prunty",
   url: `${SITE_URL}/about`, // Full URL to the about page
   publisherName: "Patrick's Blog",
-  publisherLogo: `${SITE_URL}/512x512.png`, // Full URL to the publisher logo
-  twitterUrl: "https://x.com/pprunty_",
-  stravaUrl: "https://www.strava.com/athletes/72636452",
-  githubUrl: "https://github.com/pprunty",
-  linkedinUrl: "https://www.linkedin.com/in/patrickprunty",
-  redditUrl: "https://www.reddit.com/user/patrickprunty1997/",
+  publisherLogo: `${SITE_URL}/icon.png`,
+  description: "A professional in the industry of the world with a passion for writing about things.",
+  twitterHandle: "@pprunty_",
+  twitterUrl: "https://twitter.com/pprunty_", // TODO: Update this with your Twitter URL
+  stravaUrl: "https://www.strava.com/athletes/72636452", // TODO: Update this with your Strava URL
+  githubUrl: "https://github.com/pprunty", // TODO: Update this with your GitHub URL
+  linkedinUrl: "https://www.linkedin.com/in/patrickprunty/", // TODO: Update this with your LinkedIn URL
+  redditUrl: "https://www.reddit.com/user/patrickprunty97/", // TODO: Update this with your Reddit URL
 };
 
 export const GA_MEASUREMENT_ID = "G-LSBKKYLNC4";

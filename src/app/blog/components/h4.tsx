@@ -6,10 +6,10 @@ interface HeadingProps {
   classname?: string;
 }
 
-export function H3({ children, classname = '' }: HeadingProps) {
+export function H4({ children, classname = '' }: HeadingProps) {
   return (
-    <h3 className={`group font-bold text-lg my-8 relative ${classname}`}>
+    <h4 className={`group font-bold text-md my-8 relative ${classname}`}>
       {withHeadingId(children)}
-    </h3>
+    </h4>
   );
 }

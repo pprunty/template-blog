@@ -1,53 +1,26 @@
-import { A as a } from "./src/app/blog/components/a";
-import { P as p } from "./src/app/blog/components/p";
-import { H1 as h1 } from "./src/app/blog/components/h1";
-import { H2 as h2 } from "./src/app/blog/components/h2";
-import { H3 as h3 } from "./src/app/blog/components/h3";
-import { OL as ol } from "./src/app/blog/components/ol";
-import { UL as ul } from "./src/app/blog/components/ul";
-import { LI as li } from "./src/app/blog/components/li";
-import { HR as hr } from "./src/app/blog/components/hr";
-// import { Code as code } from "./src/app/blog/components/code";
-// import { Tweet } from "./src/app/blog/components/tweet";
-import Image from "next/image";
-import { Figure } from "./src/app/blog/components/figure";
-// import { Snippet } from "./src/app/blog/components/snippet";
-import { Caption } from "./src/app/blog/components/caption";
-import { YouTube } from "./src/app/blog/components/youtube";
-import { Ref, FootNotes, FootNote } from "./src/app/blog/components/footnotes";
-import { Blockquote as blockquote } from "./src/app/blog/components/blockquote";
-import React from "react";
+// Main file
+import { A as a } from "@/app/blog/components/a";
+import { P as p } from "@/app/blog/components/p";
+import { H1 as h1 } from "@/app/blog/components/h1";
+import { H2 as h2 } from "@/app/blog/components/h2";
+import { H3 as h3 } from "@/app/blog/components/h3";
+import { H4 as h4 } from "@/app/blog/components/h4";
+import { OL as ol } from "@/app/blog/components/ol";
+import { UL as ul } from "@/app/blog/components/ul";
+import { LI as li } from "@/app/blog/components/li";
+import { HR as hr } from "@/app/blog/components/hr";
+import { Figure } from "@/app/blog/components/figure";
+import { Caption } from "@/app/blog/components/caption";
+import { YouTube } from "@/app/blog/components/youtube";
+import { Ref, FootNotes, FootNote } from "@/app/blog/components/footnotes";
+import { Blockquote as blockquote } from "@/app/blog/components/blockquote";
 import 'highlight.js/styles/atom-one-dark.css';
-import { InlineCode } from "./src/app/blog/components/code";
-import { Admonition } from './src/app/blog/components/admonition';
+import { InlineCode } from "@/app/blog/components/code";
+import { Admonition } from '@/app/blog/components/admonition';
+import { TableOfContents } from "@/app/blog/components/toc";
 
-// Memoized Image component to prevent re-renders unless props change
-const MemoizedImage = React.memo(function MemoizedImage({
-  src,
-  alt,
-  width,
-  height,
-  priority,
-  loading = "eager"
-}: {
-  src: string;
-  alt?: string;
-  width: number;
-  height: number;
-  priority?: boolean;
-  loading?: string
-}) {
-  return (
-    <Image
-      src={src}
-      alt={alt || "Image"}
-      width={width}
-      height={height}
-//       quality={90}
-      priority={priority}
-    />
-  );
-});
+// Import MemoizedImage from the new file
+import { MemoizedImage } from "@/components/MemoizedImage";
 
 export function useMDXComponents(components?: { [component: string]: React.ComponentType }) {
   return {
@@ -56,45 +29,40 @@ export function useMDXComponents(components?: { [component: string]: React.Compo
     h1,
     h2,
     h3,
+    h4,
     p,
     ol,
     ul,
     li,
     hr,
     code: InlineCode,
-//     pre: Snippet,
-//     img: Image,
     blockquote,
     Admonition,
-//     Tweet,
     img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-          const { src, alt } = props;
+      const { src, alt } = props;
 
-          // Return null if src is undefined
-          if (!src) {
-            return null; // No image rendered
-          }
+      if (!src) return null; // No image rendered
 
-          // Provide a numeric width and height to define the aspect ratio
-          const width = 620; // Width in pixels
-          const height = 400; // Height in pixels
+      const width = 620;
+      const height = 400;
 
-          return (
-            <MemoizedImage
-              src={src}
-              alt={alt || "Image"}
-              width={width}
-              height={height}
-              loading={"lazy"}
-              priority={false}
-            />
-          );
-        },
+      return (
+        <MemoizedImage
+          src={src}
+          alt={alt || "Image"}
+          width={width}
+          height={height}
+          loading="lazy"
+          priority={false}
+        />
+      );
+    },
     Figure,
     Caption,
     YouTube,
     Ref,
     FootNotes,
     FootNote,
+    TableOfContents,
   };
 }
