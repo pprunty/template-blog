@@ -97,7 +97,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify(jsonLd),
           }}
         />
-        <link rel="icon" href="/logo.png" sizes="any" />
+        {/* ensure your logo/icon is named "icon.png" and in the public directory for favicon support */}
+        <link rel="icon" href="/icon.png" sizes="any" />
       </head>
       <body className={`dark:text-gray-100 max-w-2xl m-auto`}>
         <main className="p-6 pt-3 md:pt-6 min-h-screen">
