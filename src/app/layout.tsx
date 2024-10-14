@@ -6,9 +6,10 @@ import { themeEffect } from "@/components/ThemeSwitcher/theme-effect";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import type { Viewport } from 'next';
-import { Analytics } from "./analytics";
 import { Suspense } from "react";
 import type { Metadata } from 'next';
+
+const Analytics = dynamic(() => import('./analytics'), { ssr: false });
 
 // Define viewport settings
 export const viewport: Viewport = {
@@ -108,8 +109,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer/>
          </Suspense>
         </main>
-        <Analytics />
       </body>
+     <Analytics />
     </html>
   );
 }
