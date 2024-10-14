@@ -8,7 +8,9 @@ import Footer from '@/components/Footer';
 import type { Viewport } from 'next';
 import { Suspense } from "react";
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic'; // Import dynamic
 
+// Lazy load analytics component
 const Analytics = dynamic(() => import('./analytics'), { ssr: false });
 
 // Define viewport settings
@@ -108,9 +110,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <Footer/>
          </Suspense>
+         <Analytics />
         </main>
       </body>
-     <Analytics />
     </html>
   );
 }

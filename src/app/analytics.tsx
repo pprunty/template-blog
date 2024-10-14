@@ -1,17 +1,28 @@
-import { GoogleAnalytics } from '@next/third-parties/google';
-import { GA_MEASUREMENT_ID } from "@/config";
+// analytics.tsx
+'use client';
 
+import Script from 'next/script';
+import { GA_MEASUREMENT_ID } from '@/config';
 
-export function Analytics() {
-  // Only enable analytics in production mode
-  if (process.env.NODE_ENV !== "production") {
+export default function Analytics() {
+  if (process.env.NODE_ENV !== 'production') {
     return null;
   }
   return (
     <>
-      {/* Vercel & Google Analytics */}
-      <GoogleAnalytics gaId={GA_MEASUREMENT_ID}/>
-{/*      <VercelAnalytics /> */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${GA_MEASUREMENT_ID}');
+        `}
+      </Script>
     </>
   );
 }
