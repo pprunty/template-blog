@@ -47,7 +47,7 @@ export const MemoizedImage = React.memo(function MemoizedImage({
 
       {isModalOpen && (
         <div
-          className="fixed inset-0 bg-white bg-opacity-45 backdrop-blur-lg dark:bg-black dark:bg-opacity-50 flex justify-center items-center z-50 transition-colors duration-300"
+          className="fixed inset-0 bg-white bg-opacity-45 backdrop-blur-lg dark:bg-black dark:bg-opacity-50 flex justify-center items-center z-50 p-4 transition-colors duration-300"
           onClick={closeModal}
         >
           <div className="relative">

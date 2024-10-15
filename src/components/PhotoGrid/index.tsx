@@ -14,8 +14,8 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ images }) => {
           <MemoizedImage
             src={src}
             alt={`Photo ${index + 1}`}
-            width={300}
-            height={300}
+            width={500}
+            height={500}
             sizes="(min-width: 1024px) 20vw, (min-width: 768px) 50vw, 100vw"
             className="object-cover cursor-pointer"
           />
