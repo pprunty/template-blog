@@ -20,10 +20,10 @@ function updateMetadata(content: string, readingTimeInMinutes: number): string {
   // Check if `readingTime` already exists in the metadata
   if (metadataString.includes('readingTime')) {
     // Update the existing readingTime value
-    metadataString = metadataString.replace(/readingTime:\s?\d+/, `readingTime: ${readingTimeInMinutes},\n`);
+    metadataString = metadataString.replace(/readingTime:\s?\d+/, `readingTime: ${readingTimeInMinutes}`);
   } else {
     // Remove any trailing comma and whitespace before the closing }
-    metadataString = metadataString.replace(/,?\s*}$/, `,readingTime: ${readingTimeInMinutes}}\n`);
+    metadataString = metadataString.replace(/,?\s*}$/, `,readingTime: ${readingTimeInMinutes}}`);
   }
 
   // Replace the old metadata with the updated one in the content
