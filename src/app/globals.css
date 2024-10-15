@@ -28,6 +28,7 @@
   /* Dark mode settings */
   :root.dark {
     color-scheme: dark;
+    /* You can change theme dark color here to #131313 for example, remember to change it in theme-effect.ts too */
     @apply bg-[#000];
     @apply text-[#fcfcfc];
   }
@@ -48,7 +49,7 @@
     }
   }
 
-  
+
   /* Optimize font rendering */
   @supports (font-variation-settings: normal) {
     :root {

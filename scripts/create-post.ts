@@ -110,10 +110,11 @@ async function createPost(): Promise<void> {
   fs.ensureDirSync(postDir);
 
   // If the image is not the default, copy it to the public/images directory
-  const imageName = path.basename(cleanedAnswers.image);
+  let imageName = path.basename(cleanedAnswers.image);
   const imageDestination = path.join(process.cwd(), 'public', 'images', imageName); // Use process.cwd() for root
 
-  if (cleanedAnswers.image !== '/placeholders/__placeholder.png') {
+console.log("cleaned image answers = " + cleanedAnswers.image)
+  if (cleanedAnswers.image !== 'placeholders/__placeholder.png') {
     try {
       fs.copySync(cleanedAnswers.image, imageDestination);
 
@@ -140,6 +141,7 @@ async function createPost(): Promise<void> {
   } else {
     // Create an info message box
     const infoMessage = `ℹ️ Default image placeholder used, skipping image copy.\nYou can update metadata.image.url in your page.mdx later to add a custom image.`;
+    imageName = cleanedAnswers.image;
     console.log(
       boxen(infoMessage, {
         padding: 1,
@@ -179,6 +181,8 @@ export const metadata = {
     image: \`\${SITE_URL}/images/${imageName}\`,
   },
   keywords: [${cleanedAnswers.keywords.split(',').map((kw) => `"${kw.trim()}"`).join(', ')}],
+  slug: "${slug}",
+  readingTime: 1
 };
 
 Start adding your blog post content here...
@@ -190,8 +194,7 @@ Start adding your blog post content here...
 
   // Boxed log for post creation
   const combinedMessage = `✅ Your post "${cleanedAnswers.title}" has been created at:\n\n ${mdxFilePath}.\n\n` +
-    `⚠️ Reminder: Please ensure that the development server at localhost:3000 is not running.\n\n` +
-    `Restart the server by running the command:\n\nnpm run dev`;
+    `✏️ Reminder: Time to start writing great content!.\n`;
   console.log(
     boxen(combinedMessage, {
       padding: 1,

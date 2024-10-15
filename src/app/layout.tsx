@@ -10,7 +10,6 @@ import { Suspense } from "react";
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic'; // Import dynamic
 
-// Lazy load analytics component
 const Analytics = dynamic(() => import('./analytics'), { ssr: false });
 
 // Define viewport settings
@@ -22,7 +21,10 @@ export const viewport: Viewport = {
 };
 
 // Font settings
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+  subsets: ['latin'], // Only include necessary subsets
+  weight: ['400', '700'], // Specify required font weights
+});
 
 // Define metadata
 export const metadata: Metadata = {
@@ -110,8 +112,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <Footer/>
          </Suspense>
-         <Analytics />
         </main>
+       <Analytics />
       </body>
     </html>
   );

@@ -60,7 +60,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                            {post.keywords.slice(0, 4).map((tag, index) => (
                              <span
                                key={index}
-                               className="text-[11px] border font-mono border-gray-400 text-gray-700 dark:text-gray-300 px-1"
+                               className="text-[11px] text-lowercase border font-mono border-gray-400 text-gray-700 dark:text-gray-300 px-1"
                              >
                                {tag}
                              </span>
@@ -104,12 +104,20 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
                        <span className="text-xl font-semibold">
                          {post.title}
                        </span>
+
+{/*                      <div className="flex items-center text-gray-600 dark:text-gray-400 text-[11px] mt-1">
+                        {post.date && (
+                          <span className="mr-4 font-mono text-[12px]">
+                            {post.date} | {post.readingTime} min read | {post.slug}
+                          </span>
+                        )}
+                      </div>*/}
                        {post.keywords && post.keywords.length > 0 && (
                          <div className="mt-2 flex gap-2 flex-wrap">
                            {post.keywords.slice(0, 4).map((tag, index) => (
                              <span
                                key={index}
-                               className="text-[11px] border font-mono border-gray-400 text-gray-700 dark:text-gray-300 px-1"
+                               className="text-[11px] text-lowercase border font-mono border-gray-400 text-gray-700 dark:text-gray-300 px-1"
                              >
                                {tag}
                              </span>

@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build": "ts-node scripts/generate-slugs.ts && ts-node scripts/generate-pwa-icons.ts && next build",
+    "build": "ts-node scripts/generate-slugs.ts && ts-node scripts/update-reading-time.ts && ts-node scripts/generate-pwa-icons.ts && next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -24,35 +24,30 @@
     "generate-pwa-icons": "ts-node scripts/generate-pwa-icons.ts",
     "generate-slugs": "ts-node scripts/generate-slugs.ts",
     "create-blog": "ts-node scripts/create-blog.ts && ts-node scripts/generate-pwa-icons.ts",
-    "create-post": "ts-node scripts/create-post.ts"
+    "create-post": "ts-node scripts/create-post.ts && ts-node scripts/generate-slugs.ts && ts-node scripts/update-reading-time.ts",
+    "update-reading-time": "ts-node scripts/update-reading-time.ts"
   },
   "dependencies": {
+    "@fontsource/inter": "^4.5.15",
+    "@fontsource/roboto-mono": "^4.5.10",
     "@mdx-js/loader": "^3.0.1",
     "@next/mdx": "^14.2.13",
-    "@next/third-parties": "^14.2.14",
     "@tailwindcss/line-clamp": "^0.4.4",
     "autoprefixer": "^10.4.20",
-    "clsx": "^2.1.1",
     "counterapi": "^1.91.0",
     "date-fns": "^4.1.0",
-    "mdast-util-to-string": "^4.0.0",
     "next": "^14.2.15",
+    "next-mdx-remote": "^5.0.0",
     "next-pwa": "^5.6.0",
-    "punycode": "^2.3.1",
     "react": "^18",
     "react-dom": "^18",
     "react-wrap-balancer": "^1.1.1",
     "react-youtube": "^10.1.0",
+    "reading-time": "^1.5.0",
     "rehype-highlight": "^7.0.0",
     "remark-gfm": "^4.0.0",
-    "remark-mdx": "^3.0.1",
-    "remark-parse": "^11.0.0",
-    "sharp": "^0.33.5",
     "slugify": "^1.6.6",
-    "tailwind-scrollbar-hide": "^1.1.7",
-    "unified": "^11.0.5",
-    "unist-util-visit": "^5.0.0",
-    "uuid": "^10.0.0"
+    "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
@@ -65,9 +60,12 @@
     "eslint-config-next": "14.2.13",
     "fs-extra": "^11.2.0",
     "inquirer": "^12.0.0",
+    "lighthouse": "^12.2.1",
     "postcss": "^8.4.47",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.4.13",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "uuid": "^10.0.0"
   }
 }

@@ -1,53 +1,36 @@
 // utils/getAllPosts.ts
+
+import slugs from '@/posts/slugs.json';
 import { BlogPostType } from '@/types/BlogPost';
-import formatDate from '@/utils/formatDate';
-import slugs from '@/posts/slugs.json'; // Import the generated slugs
+import { cache } from 'react';
+import { AUTHOR } from '@/config';
+import formatDate from './formatDate';
 
-interface BlogMetadata {
-  title?: string;
-  date?: string;
-  image?: string;
-  description?: string;
-  excerpt?: string;
-  type?: string;
-  keywords?: string[];
-  readingTime?: number;
-}
+export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
+  const posts = await Promise.all(
+    slugs.map(async (slug: string) => {
+      try {
+        const { metadata } = await import(`@/posts/${slug}/page.mdx`);
 
-export const getAllPosts = async (): Promise<BlogPostType[]> => {
-  const postsPromises = slugs.map(async (slug: string) => {
-    try {
-      const { metadata } = (await import(`@/posts/${slug}/page.mdx`)) as {
-        metadata: BlogMetadata;
-      };
+        return {
+          slug,
+          title: metadata.title || 'Untitled Post',
+          date: metadata.date ? formatDate(metadata.date) : null,
+          author: metadata.author || AUTHOR.name,
+          authorUrl: metadata.authorUrl || AUTHOR.url,
+          image: metadata.image || '',
+          description: metadata.description || '',
+          excerpt: metadata.excerpt || '',
+          type: metadata.type || 'article',
+          keywords: metadata.keywords || [],
+          readingTime: metadata.readingTime || 6,
+        } as BlogPostType;
+      } catch (error) {
+        console.error(`Error processing post ${slug}:`, error);
+        return null;
+      }
+    })
+  );
 
-      return {
-        slug,
-        title: metadata.title || 'Untitled Post',
-        date: metadata.date ? formatDate(metadata.date) : null,
-        image: metadata.image || '',
-        description: metadata.description || '',
-        excerpt: metadata.excerpt || '',
-        type: metadata.type || 'article',
-        keywords: metadata.keywords || [],
-        readingTime: metadata.readingTime || 5,
-      } as BlogPostType;
-    } catch (error) {
-      console.error(`Error importing post ${slug}:`, error);
-      return null;
-    }
-  });
-
-  const posts = (await Promise.all(postsPromises)).filter(
-    Boolean
-  ) as BlogPostType[];
-
-  // Sort posts by date
-  posts.sort((a, b) => {
-    const dateA = a.date ? new Date(a.date).getTime() : 0;
-    const dateB = b.date ? new Date(b.date).getTime() : 0;
-    return dateB - dateA;
-  });
-
-  return posts;
-};
+  return posts.filter(Boolean) as BlogPostType[];
+});

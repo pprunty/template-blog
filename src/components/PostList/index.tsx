@@ -47,7 +47,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                       {post.keywords.slice(0, 4).map((tag, index) => (
                         <span
                           key={index}
-                          className="text-[11px] border font-mono border-gray-400 text-gray-700 dark:text-gray-300 px-1"
+                          className="text-[11px] text-lowercase border font-mono border-gray-400 text-gray-700 dark:text-gray-300 px-1"
                         >
                           {tag}
                         </span>

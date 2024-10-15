@@ -1,4 +1,4 @@
-# Makefile for my-nextjs-app
+# Makefile for blog-v2
 
 # Variables
 NODE_ENV=production
@@ -27,21 +27,42 @@ start:
 lint:
 	npm run lint
 
-# Clean the build artifacts
+# Clean the build artifacts and node_modules
 .PHONY: clean
 clean:
-	rm -rf .next
+	npm run clean
 
 # Install dependencies
 .PHONY: install
 install:
 	npm install
 
-# Generate Lighthouse badges
+# Generate PWA icons
+.PHONY: icons
+icons:
+	npm run generate-pwa-icons
+
+# Generate slugs
+.PHONY: slugs
+slugs:
+	npm run generate-slugs
+
+# Create a new blog
+.PHONY: blog
+blog:
+	npm run create-blog
+
+# Create a new post
+.PHONY: post
+post:
+	npm run create-post
+
+# Generate Lighthouse report
 .PHONY: lighthouse
 lighthouse:
 	$(eval URL ?= https://blog-v2-template.vercel.app/)
-	lighthouse-badges --url $(URL) -o test_results
+	$(eval DEVICE ?= mobile)  # Default to mobile if not specified
+	lighthouse $(URL) --emulated-form-factor=$(DEVICE) --output=html --view --chrome-flags="--incognito" --output-path=./lighthouse_report_$(DEVICE).html
 
 # Help
 .PHONY: help
@@ -49,11 +70,14 @@ help:
 	@echo "Usage: make [target]"
 	@echo ""
 	@echo "Targets:"
-	@echo "  dev       Start the development server"
-	@echo "  build     Build the project for production"
-	@echo "  start     Start the production server"
-	@echo "  lint      Lint the project"
-	@echo "  clean     Remove build artifacts"
-	@echo "  install   Install dependencies"
-	@echo "  help      Show this help message"
-	@echo "  lighthouse Generate Lighthouse badges (optional: URL=<custom_url>)"
+	@echo "  dev        Start the development server"
+	@echo "  build      Build the project for production"
+	@echo "  start      Start the production server"
+	@echo "  lint       Lint the project"
+	@echo "  clean      Remove build artifacts and node_modules"
+	@echo "  install    Install dependencies"
+	@echo "  icons      Generate PWA icons"
+	@echo "  slugs      Generate slugs for the blog posts"
+	@echo "  blog       Create a new blog"
+	@echo "  post       Create a new post"
+	@echo "  lighthouse Generate Lighthouse report (optional: URL=<custom_url>)"

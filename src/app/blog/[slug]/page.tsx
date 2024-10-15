@@ -40,8 +40,8 @@ export default async function Page({ params }: PageProps) {
   const Content = postModule.default;
 
   return (
-    <div>
+    <article>
       <Content />
-    </div>
+    </article>
   );
 }

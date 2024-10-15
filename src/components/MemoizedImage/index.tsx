@@ -40,9 +40,9 @@ export const MemoizedImage = React.memo(function MemoizedImage({
         onClick={openModal}
         priority={priority}
         loading={loading}
-        fill={fill}  // Pass the fill prop
-        sizes={sizes}  // Pass the sizes prop
-        {...rest}  // Pass any other props dynamically
+        fill={fill}
+        sizes={sizes}
+        {...rest}
       />
 
       {isModalOpen && (
@@ -58,6 +58,7 @@ export const MemoizedImage = React.memo(function MemoizedImage({
               height={height}
               className="cursor-pointer p-4"
               onClick={closeModal}
+              priority={true}  // Ensure preloading for the modal image
               {...rest}  // Ensure rest props are also passed to the modal image
             />
           </div>

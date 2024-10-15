@@ -23,8 +23,9 @@ export function InlineCode({
   return (
     <pre className="
                           text-sm
-                          bg-[#1c1c1c] text-white
-                          dark:bg-[#1c1c1c] dark:text-gray-300
+                          bg-gray-800 text-white
+                          dark:bg-[#222] dark:text-gray-300
+
                           overflow-scroll">
       <code className={className}>{children}</code>
     </pre>

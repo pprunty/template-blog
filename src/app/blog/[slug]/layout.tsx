@@ -16,13 +16,13 @@ export default async function Layout({ children, params }: LayoutProps) {
   const posts = await getAllPosts();
 
   // Find the current post
-  const currentPost = posts.find(post => post.slug === slug);
+  const currentPost = posts.find((post) => post.slug === slug);
 
-  // If current post is not found, you may want to handle this case
+  // If current post is not found, handle the case (e.g., return 404 page)
   if (!currentPost) {
     return (
       <div>
-        <Header slug={slug} />
+        <Header currentPost={null} />
         {children}
         <BottomBar />
       </div>
@@ -31,7 +31,7 @@ export default async function Layout({ children, params }: LayoutProps) {
 
   return (
     <div>
-      <Header slug={slug} />
+      <Header currentPost={currentPost} />
       {children}
       <BottomBar />
       <RelatedPosts
