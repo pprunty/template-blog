@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Image, { ImageProps } from "next/image";  // Import ImageProps to use all valid props
+import React, { useState, useEffect, useRef } from "react";
+import Image, { ImageProps } from "next/image";
 
-interface MemoizedImageProps extends Omit<ImageProps, 'onClick'> { // Extend the props from ImageProps except onClick
-  focusable?: boolean;  // Add any custom props (like focusable) if needed
+interface MemoizedImageProps extends Omit<ImageProps, 'onClick'> {
+  focusable?: boolean;
 }
 
 export const MemoizedImage = React.memo(function MemoizedImage({
@@ -20,39 +20,46 @@ export const MemoizedImage = React.memo(function MemoizedImage({
   ...rest
 }: MemoizedImageProps) {
   const [isModalOpen, setModalOpen] = useState(false);
-
-  // Function to prevent scrolling on mobile and desktop
-  const preventScroll = (e: Event) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
+  const scrollPositionRef = useRef(0);
 
   const openModal = () => {
     if (focusable) {
-      setModalOpen(true);
-      document.body.style.overflow = "hidden";  // Disable scrolling
+      // Save the current scroll position
+      scrollPositionRef.current = window.scrollY || window.pageYOffset;
 
-      // Add event listeners to prevent scrolling on touch and wheel events
-      document.addEventListener('touchmove', preventScroll, { passive: false });
-      document.addEventListener('wheel', preventScroll, { passive: false });
+      // Apply fixed positioning to the body
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPositionRef.current}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+
+      setModalOpen(true);
     }
   };
 
   const closeModal = () => {
     setModalOpen(false);
-    document.body.style.overflow = "";  // Re-enable scrolling
 
-    // Remove event listeners to allow scrolling again
-    document.removeEventListener('touchmove', preventScroll);
-    document.removeEventListener('wheel', preventScroll);
+    // Remove the fixed positioning
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+
+    // Restore the scroll position
+    window.scrollTo({
+      top: scrollPositionRef.current,
+      behavior: 'instant', // Use 'instant' or 'auto' for immediate scrolling
+    });
   };
 
-  // Ensure scrolling is restored when the modal is closed using the escape key or other methods
   useEffect(() => {
+    // Cleanup on unmount to prevent side effects
     return () => {
-      document.body.style.overflow = "";  // Cleanup on component unmount
-      document.removeEventListener('touchmove', preventScroll);
-      document.removeEventListener('wheel', preventScroll);
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
     };
   }, []);
 
@@ -77,7 +84,7 @@ export const MemoizedImage = React.memo(function MemoizedImage({
           className="fixed inset-0 bg-white bg-opacity-45 backdrop-blur-lg dark:bg-black dark:bg-opacity-50 flex justify-center items-center z-50 p-4 transition-colors duration-300"
           onClick={closeModal}
         >
-          <div className="relative">
+          <div className="relative" onClick={(e) => e.stopPropagation()}>
             <Image
               src={src}
               alt={alt || 'Image'}
@@ -85,8 +92,8 @@ export const MemoizedImage = React.memo(function MemoizedImage({
               height={height}
               className="cursor-pointer p-4"
               onClick={closeModal}
-              priority={true}  // Ensure preloading for the modal image
-              {...rest}  // Ensure rest props are also passed to the modal image
+              priority={true}
+              {...rest}
             />
           </div>
         </div>
