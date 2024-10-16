@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image, { ImageProps } from "next/image";  // Import ImageProps to use all valid props
 
 interface MemoizedImageProps extends Omit<ImageProps, 'onClick'> { // Extend the props from ImageProps except onClick
@@ -15,19 +15,46 @@ export const MemoizedImage = React.memo(function MemoizedImage({
   priority,
   loading = "eager",
   focusable = true,
-  fill,       // Now supporting fill prop
-  sizes,      // Now supporting sizes prop
-  ...rest     // Rest operator for any other props you might want to pass
+  fill,
+  sizes,
+  ...rest
 }: MemoizedImageProps) {
   const [isModalOpen, setModalOpen] = useState(false);
+
+  // Function to prevent scrolling on mobile and desktop
+  const preventScroll = (e: Event) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   const openModal = () => {
     if (focusable) {
       setModalOpen(true);
+      document.body.style.overflow = "hidden";  // Disable scrolling
+
+      // Add event listeners to prevent scrolling on touch and wheel events
+      document.addEventListener('touchmove', preventScroll, { passive: false });
+      document.addEventListener('wheel', preventScroll, { passive: false });
     }
   };
 
-  const closeModal = () => setModalOpen(false);
+  const closeModal = () => {
+    setModalOpen(false);
+    document.body.style.overflow = "";  // Re-enable scrolling
+
+    // Remove event listeners to allow scrolling again
+    document.removeEventListener('touchmove', preventScroll);
+    document.removeEventListener('wheel', preventScroll);
+  };
+
+  // Ensure scrolling is restored when the modal is closed using the escape key or other methods
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "";  // Cleanup on component unmount
+      document.removeEventListener('touchmove', preventScroll);
+      document.removeEventListener('wheel', preventScroll);
+    };
+  }, []);
 
   return (
     <>
