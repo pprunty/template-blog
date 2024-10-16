@@ -90,7 +90,7 @@ export const MemoizedImage = React.memo(function MemoizedImage({
               alt={alt || 'Image'}
               width={width}
               height={height}
-              className="cursor-pointer p-4 bg-gray-100"
+              className="cursor-pointer p-4"
               onClick={closeModal}
               priority={true}
               {...rest}
