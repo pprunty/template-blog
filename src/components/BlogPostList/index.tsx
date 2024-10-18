@@ -21,7 +21,7 @@ const BlogPostList: React.FC<BlogPostListProps> = ({ postsByYear }) => {
     <div className="mb-2 text-sm">
       {sortedYears.map((year) => (
         <div key={year} className="mb-2">
-          <h1 className="text-xl mb-0 sm:mb-4 sm:mt-0 mt-4 text-primary dark:text-primary-dark font-semibold">
+          <h1 className="text-2xl mb-0 sm:mb-4 sm:mt-0 mt-4 text-primary dark:text-primary-dark font-semibold">
             {year}
           </h1>
           <ul className="list-none p-0">

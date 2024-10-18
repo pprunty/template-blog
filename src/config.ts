@@ -5,7 +5,7 @@ export const AUTHOR = {
   url: `${SITE_URL}/about`, // Full URL to the about page
   publisherName: "Patrick's Blog",
   publisherLogo: `${SITE_URL}/icon.png`,
-  description: "A professional in the industry of the world with a passion for writing about things.",
+  description: `Patrick Prunty is a senior software engineer from Portmarnock, Dublin, Ireland. He shares his journey through software development, achievements, and adventures in triathlon, marathons, and travel.`,
   twitterHandle: "@pprunty_",
   twitterUrl: "https://twitter.com/pprunty_", // TODO: Update this with your Twitter URL
   stravaUrl: "https://www.strava.com/athletes/72636452", // TODO: Update this with your Strava URL

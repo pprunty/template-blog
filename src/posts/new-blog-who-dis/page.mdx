@@ -1,109 +1,34 @@
-import { SITE_URL, AUTHOR } from '@/config'; // Import SITE_URL and AUTHOR from config
+import { SITE_URL } from '@/config';
 
 export const metadata = {
   title: "New Blog. Who Dis?",
-  image: `/images/vercel.png`,
-  description: "A brief description.",
-  date: "2023-10-01",
+  description: "Discover the inspiration and development process behind blog.v2, the NextJS 14 blog template. The most high-performance, minimalist, yet feature-rich open-sourced blogging platform.",
+  image: "/images/new-blog-who-dis/vercel.webp",
+  date: "2024-10-18",
+  author: "Patrick Prunty",
+  authorUrl: "https://patrickprunty.vercel.app/about",
   openGraph: {
-    title: "Your Post Title",
-    description: "A brief description.",
+    title: "New Blog. Who Dis?",
+    description: "Discover the inspiration and development process behind blog.v2, the NextJS 14 blog template. The most high-performance, minimalist, yet feature-rich open-sourced blogging platform.",
     url: "/blog/new-blog-who-dis",
-        type: "article",
-        images: [
+    images: [
       {
-        url: `${SITE_URL}/images/vercel.png`,
-        alt: "An image related to the post",
+        url: `${SITE_URL}/images/new-blog-who-dis/vercel.webp`,
+        alt: "New Blog. Who Dis?",
       },
     ],
+    type: 'article',
+    tags: ["blog.v2", "programming", "open source", "blogging", "technology", "nextjs", "react", "software developement"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Your Post Title",
-    description: "A brief description.",
-    image: `${SITE_URL}/images/vercel.png`,
+    title: "New Blog. Who Dis?",
+    description: "Discover the inspiration and development process behind blog.v2, the NextJS 14 blog template. The most high-performance, minimalist, yet feature-rich open-sourced blogging platform.",
+    image: `${SITE_URL}/images/new-blog-who-dis/vercel.webp`,
   },
-  keywords: [
-    "ai",
-    "saas",
-    "technology",
-    "programming",
-    "data science",
-    "machine learning",
-    "technology trends",
-    "business strategy",
-  ],
-  metadataBase: new URL(SITE_URL),
+  keywords: ["blog.v2", "programming", "open source", "blogging", "technology", "nextjs", "react", "software developement"],
   slug: "new-blog-who-dis",
-  readingTime: 4,
+  readingTime: 1
 };
 
-![An awesome image](/images/vercel.png)
-
-
-It's important to understand the [Larges Contentful Paint]().
-
-The term "Largest Contentful Paint" was introduced by Google as part of their focus on improving web performance.
-LCP is one of the Core Web Vitals introduced by Google to measure user experience and help improve website performance. The target is to have LCP occur within 2.5 seconds of when the page first starts loading.
-
-Largest Contentful Paint (LCP) often takes longer to load on mobile compared to desktop due to several factors:
-
-
-There are [server]() and [client]() component.
-
-
-![Chrome Lighthouse Report for https://patrickprunty.com](/images/lighthouse.png)
-
-A few years ago I tweeted a simple guideline that challenged conventional wisdom and became the norm for many people learning how to test their frontends effectively.
-
-
-JavaScript has undeniably become an indispensable tool for frontend developers. Its usage is now expanding into other areas like [servers](http://nodejs.org/) and [microcontrollers](https://tessel.io/). It's the language of choice for [introducing](http://web.stanford.edu/class/cs101/) computer science concepts by prestigious universities.
-
-## Pre rendered pages are not optional [#pre-rendered-pages-are-not-optional]
-
-<YouTube videoId="rKUJG5TdAl8" />
-
-
-> The best way to display a loading spinner is by not needing to display one at all.
-
-This is an **MDX** document with some `inline code` and math:
-
-## Second header
-
-```javascript
-console.log('Hello, MDX!');
-```
-
-1. Step 1
-2. Step 3
-3. Step 4
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam placerat nec lacus quis sodales. Curabitur ultricies, tellus a elementum imperdiet, tortor metus convallis risus, in ullamcorper quam risus sed arcu. Nunc ullamcorper eros vel interdum vehicula. Fusce aliquam nec leo quis vestibulum. Aliquam venenatis leo eu efficitur pellentesque. Nunc venenatis libero in dictum finibus. Ut sed diam tortor. In elementum, justo eget bibendum lacinia, mauris orci iaculis risus, id molestie urna massa convallis ligula. Aliquam maximus non velit at condimentum.
-
-> Tao had been working on a different problem early in September, when a timely comment on his blog suggested that the problem might be related to the Erdős conjecture. "At first, I thought the connection was only superficial," says Tao. But he quickly realized that combining the commenter's fresh insight with previous results could lead to a solution. He submitted his paper less than two weeks later and included an acknowledgement thanking the commenter, Uwe Stroinski, a maths instructor in Reutlingen, Germany.
-
-## Hello World
-
-
-
-- Should JavaScript be used to replace browser functions like history, navigation and page rendering?
-- Is the backend dying? Should I render HTML at all?
-- Are Single Page Applications (SPAs) the future?
-- Is JS supposed to augment pages for websites, but render pages in web apps?
-- Should techniques like PJAX or TurboLinks be used?
-- What's the precise distinction between a website and a web application? Should there be one at all?
-
-
-Etiam quis lorem volutpat, dignissim metus interdum, accumsan mauris. <Ref id="1" /> Ut ac dignissim ex, a dapibus libero. Ut porttitor lacus tempor mollis vulputate. Donec nec eros non metus fermentum bibendum. Integer et massa dignissim, semper arcu sed, accumsan metus. Suspendisse dapibus dui elit, ut viverra massa aliquet eget. Integer porttitor pretium egestas. Integer lacus libero, laoreet lacinia magna et, gravida fermentum urna.
-
-Nam ut lacus convallis, commodo mauris in, porta nisl. Ut convallis ante id lacus feugiat, vitae venenatis metus porta. Donec molestie venenatis augue ac placerat. Donec hendrerit eros arcu, ut fermentum nisi ornare sit amet. Aenean tincidunt justo risus, ac accumsan quam mollis id. Duis molestie mi vitae nibh dignissim, at dictum mauris bibendum. Suspendisse sit amet ornare sem. Integer molestie sit amet arcu in blandit. Suspendisse faucibus viverra quam, eget cursus tellus venenatis eget.
-
-Etiam quis lorem volutpat, dignissim metus interdum, accumsan mauris. Ut ac dignissim ex, a dapibus libero. Ut porttitor lacus tempor mollis vulputate. Donec nec eros non metus fermentum bibendum. Integer et massa dignissim, semper arcu sed, accumsan metus. Suspendisse dapibus dui elit, ut viverra massa aliquet eget. Integer porttitor pretium egestas. Integer lacus libero, laoreet lacinia magna et, gravida fermentum urna.
-
-Etiam quis lorem volutpat, dignissim metus interdum, accumsan mauris. Ut ac dignissim ex, a dapibus libero. Ut porttitor lacus tempor mollis vulputate. Donec nec eros non metus fermentum bibendum. Integer et massa dignissim, semper arcu sed, accumsan metus. Suspendisse dapibus dui elit, ut viverra massa aliquet eget. Integer porttitor pretium egestas. Integer lacus libero, laoreet lacinia magna et, gravida fermentum urna.
-
----
-
-<FootNotes>
-  <FootNote id="1">If there's a way to [hedge](https://en.wikipedia.org/wiki/Hedge_(finance)) the risky personal investment of launching a startup company, it surely must be to do it with people you love and respect.</FootNote>
-</FootNotes>
+![Vercel Logo](/images/new-blog-who-dis/vercel.webp)

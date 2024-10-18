@@ -2,13 +2,31 @@ import { AUTHOR, SITE_URL, DEFAULT_KEYWORDS } from '@/config';
 import Image from "next/image";
 import PhotoGrid from '@/components/PhotoGrid';
 
+export const photographyImages = [
+    "/photography/0a94d7f5-834a-4567-86db-93f1ce8dc3ca.JPG",
+    "/photography/232afccf-fb3e-443d-af60-c1c67a6189d0.JPG",
+    "/photography/2add6d50-7a3e-4142-9707-b3d7d0e8ed7e.JPG",
+    "/photography/2d8324a2-e783-47d8-aa1c-3891e7a8b541.JPG",
+    "/photography/3cf5f5a9-843c-44e2-9482-45c765a84d30.JPG",
+    "/photography/60a53698-deec-4b91-94a8-5513e534c24a.JPG",
+    "/photography/62b1ca5f-d849-41a7-a83e-42ca04b3b47c.jpg",
+    "/photography/9977ee3f-d4bd-4ce6-a57c-04397898b222.JPG",
+    "/photography/IMG_3572.jpg",
+    "/photography/IMG_4648.jpg",
+    "/photography/IMG_5905.png",
+    "/photography/IMG_6023.jpg",
+    "/photography/IMG_6798.jpg",
+    "/photography/IMG_7462.png",
+    "/photography/c57ad8ca-ee1e-4d3d-a9f6-9b0222e211da.JPG"
+];
+
 export const metadata = {
   title: `About - ${AUTHOR.name}`,
   image: `/images/me.WEBP`,
-  description: `${AUTHOR.name} is a senior software engineer from Portmarnock, Dublin, Ireland. He shares his journey through software development, achievements, and adventures in triathlon, marathons, and travel.`,
+  description: `${AUTHOR.description}`,
   openGraph: {
     title: `About - ${AUTHOR.name}`,
-    description: `${AUTHOR.name} is a senior software engineer from Portmarnock, Dublin, Ireland. He shares his journey through software development, achievements, and adventures.`,
+    description: `${AUTHOR.description}`,
     siteName: `${AUTHOR.name}'s website`,
     images: [
       {
@@ -73,32 +91,15 @@ Since then, I have used Web Development as a creative output.
 * Graduated with a MSc. in High-Performance Computing (HPC) from Trinity College Dublin in 2020. [Learn more about HPC here](/blog/high-performance-computing).
 * Completed my first full-distance marathon, the Dublin Marathon 2023, [finishing in 3:24:53](https://www.strava.com/activities/10125503113/best-efforts).
 * Completed my first triathlon, the RDJ Try-A-Triathlon 2024, [finishing second place in 00:51:24](https://www.strava.com/activities/12229188198).
-* Created [blog.v2](https://github.com/pprunty/blog.v2), a high-performance, minimalistic and feature-rich open-sourced blog template built with [NextJS 14](https://nextjs.org/blog/next-14). The inspiration behind creating this template is detailed in this [article](./blog/new-blog-who-dis).
+* Created [blog.v2](https://github.com/pprunty/blog.v2), a high-performance, minimalistic and feature-rich open-sourced blog template built with [NextJS 14](https://nextjs.org/blog/next-14). The inspiration behind creating this template is detailed in my blog post, [New Blog. Who Dis?](/blog/new-blog-who-dis)
 
 # Reading List [#reading-list]
 
-1. ~~*Blood Meridian* by Cormac McCarthy~~
+1. ~~*[Blood Meridian](https://en.wikipedia.org/wiki/Blood_Meridian)* by Cormac McCarthy~~
 2. ~~*[A Dance with Dragons]()* by George R.R Martin~~
 3. [*On The Road*](https://en.wikipedia.org/wiki/On_the_Road) by Jack Kerouac
 3. [*The Winds of Winter Preview Chapters*](https://thehawke.github.io/twow-excerpts/) by George R.R Martin
 
 # Photography [#photography]
 
-<PhotoGrid images={
-[
-  "/photography/0a94d7f5-834a-4567-86db-93f1ce8dc3ca.JPG",
-  "/photography/232afccf-fb3e-443d-af60-c1c67a6189d0.JPG",
-  "/photography/2add6d50-7a3e-4142-9707-b3d7d0e8ed7e.JPG",
-  "/photography/2d8324a2-e783-47d8-aa1c-3891e7a8b541.JPG",
-  "/photography/3cf5f5a9-843c-44e2-9482-45c765a84d30.JPG",
-  "/photography/60a53698-deec-4b91-94a8-5513e534c24a.JPG",
-  "/photography/62b1ca5f-d849-41a7-a83e-42ca04b3b47c.jpg",
-  "/photography/9977ee3f-d4bd-4ce6-a57c-04397898b222.JPG",
-  "/photography/IMG_3572.jpg",
-  "/photography/IMG_4648.jpg",
-  "/photography/IMG_5905.png",
-  "/photography/IMG_6023.jpg",
-  "/photography/IMG_6798.jpg",
-  "/photography/IMG_7462.png",
-  "/photography/c57ad8ca-ee1e-4d3d-a9f6-9b0222e211da.JPG"
-]}/>
+<PhotoGrid images={photographyImages} />

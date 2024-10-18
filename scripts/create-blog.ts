@@ -55,9 +55,20 @@ async function updateManifest(websiteURL: string, fullName: string, profileDescr
   }
 }
 
+// Display an initial prompt to the user to inform them about skipping inputs
+console.log(
+  boxen(
+    '📝 Press "Enter" to skip any input.\nYou can change it manually later in the src/config.ts file!',
+    {
+      padding: 1,
+      margin: 1,
+      borderStyle: 'round' as Options['borderStyle'], // Cast to valid type
+    }
+  )
+);
+
 // Function to update the config.ts file
 async function updateConfig(): Promise<void> {
-  console.log("Config path:", configPath);
 
   try {
     // Prompt user for input
@@ -89,7 +100,7 @@ async function updateConfig(): Promise<void> {
         type: 'input',
         name: 'profileImage',
         message: 'Enter your profile image / blog logo (absolute path):',
-        default: `${process.cwd()}/public/images/placeholders/__icon.png`, // Set default logo
+        default: `${process.cwd()}/public/images/_placeholders/icon.png`, // Set default logo
       },
       {
         type: 'input',
@@ -150,7 +161,7 @@ export const DEFAULT_KEYWORDS = [${answers.keywords.split(',').map((kw: string) 
 
     // Determine the logo source path
     const logoSourcePath = answers.profileImage === path.join(process.cwd(), 'public/images/placeholders/__icon.png') ?
-      path.join(__dirname, '../public/images/placeholders/__icon.png') :
+      path.join(__dirname, '../public/images/_placeholders/icon.png') :
       answers.profileImage;
 
     try {

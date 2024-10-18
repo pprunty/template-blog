@@ -23,7 +23,7 @@ function updateMetadata(content: string, readingTimeInMinutes: number): string {
     metadataString = metadataString.replace(/readingTime:\s?\d+/, `readingTime: ${readingTimeInMinutes}`);
   } else {
     // Remove any trailing comma and whitespace before the closing }
-    metadataString = metadataString.replace(/,?\s*}$/, `,readingTime: ${readingTimeInMinutes}}`);
+    metadataString = metadataString.replace(/,?\s*}$/, `,readingTime: ${readingTimeInMinutes}}\n`);
   }
 
   // Replace the old metadata with the updated one in the content

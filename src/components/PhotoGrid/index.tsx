@@ -1,6 +1,9 @@
+// PhotoGrid.tsx
+
 'use client';
 
-import {MemoizedImage} from '@/components/MemoizedImage';
+import React from 'react';
+import { MemoizedImage } from '@/components/MemoizedImage';
 
 interface PhotoGridProps {
   images: string[];
@@ -14,9 +17,9 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ images }) => {
           <MemoizedImage
             src={src}
             alt={`Photo ${index + 1}`}
-            width={500}
-            height={500}
-            loading={"lazy"}
+            width={600}
+            height={600}
+            loading="lazy"
             priority={false}
             sizes="(min-width: 1024px) 20vw, (min-width: 768px) 50vw, 100vw"
             className="object-cover cursor-pointer"
@@ -27,4 +30,5 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ images }) => {
   );
 };
 
-export default PhotoGrid;
+// Wrap and export with React.memo
+export default React.memo(PhotoGrid);

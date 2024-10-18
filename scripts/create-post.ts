@@ -1,6 +1,7 @@
 import inquirer from 'inquirer';
 import fs from 'fs-extra';
 import path from 'path';
+import sharp from 'sharp'; // Import sharp for image processing
 import boxen, { Options } from 'boxen'; // Import boxen for styled logs
 import { AUTHOR, SITE_URL } from '../src/config'; // Import AUTHOR and SITE_URL from config
 
@@ -32,6 +33,18 @@ const validateOrDefaultDate = (input: string): string => {
   }
 };
 
+// Display an initial prompt to the user to inform them about skipping inputs
+console.log(
+  boxen(
+    '📝 Press "Enter" to skip any input (except the title).\nYou can complete it later in the generated page.mdx file!',
+    {
+      padding: 1,
+      margin: 1,
+      borderStyle: 'round' as Options['borderStyle'], // Cast to valid type
+    }
+  )
+);
+
 interface PostAnswers {
   title: string;
   description: string;
@@ -44,8 +57,8 @@ interface PostAnswers {
 
 async function createPost(): Promise<void> {
   // Get author and authorUrl from config file
-  const defaultAuthor = AUTHOR.name || "John Doe";
-  const defaultAuthorUrl = AUTHOR.url || "https://johndoe.com";
+  const defaultAuthor = AUTHOR.name || "Patrick Prunty";
+  const defaultAuthorUrl = AUTHOR.url || "https://patrickprunty.com";
 
   // Prompt the user for post details
   const answers: PostAnswers = await inquirer.prompt([
@@ -53,6 +66,7 @@ async function createPost(): Promise<void> {
       type: 'input',
       name: 'title',
       message: 'Enter the title of your post:',
+      validate: (input) => input.trim() !== '' || '⚠️ Title is required', // Validate that title is not empty
     },
     {
       type: 'input',
@@ -70,7 +84,7 @@ async function createPost(): Promise<void> {
       type: 'input',
       name: 'image',
       message: 'Enter the image for your post (absolute path):',
-      default: 'placeholders/__placeholder.png',
+      default: '_placeholders/no-image.png',
     },
     {
       type: 'input',
@@ -109,47 +123,76 @@ async function createPost(): Promise<void> {
   // Create the directory for the post
   fs.ensureDirSync(postDir);
 
-  // If the image is not the default, copy it to the public/images directory
-  let imageName = path.basename(cleanedAnswers.image);
-  const imageDestination = path.join(process.cwd(), 'public', 'images', imageName); // Use process.cwd() for root
+  // If the image is not the default, convert it to .webp and copy it to the public/images/{slug} directory
+let imageName = `${path.basename(cleanedAnswers.image, path.extname(cleanedAnswers.image))}.webp`; // Convert image name to .webp
+const imageSlugDir = path.join(process.cwd(), 'public', 'images', slug); // Use process.cwd() for the image path
+const imageDestination = path.join(imageSlugDir, imageName); // Define the destination path for the converted image
 
-console.log("cleaned image answers = " + cleanedAnswers.image)
-  if (cleanedAnswers.image !== 'placeholders/__placeholder.png') {
-    try {
-      fs.copySync(cleanedAnswers.image, imageDestination);
+if (cleanedAnswers.image === '_placeholders/no-image.png') {
+  // Handle default image separately
+  imageName = 'no-image.webp'; // Default image name
+  try {
+    fs.ensureDirSync(imageSlugDir); // Ensure the slug directory exists
+    // Copy the default image to the post's image directory
+    fs.copySync(path.join(process.cwd(), 'public', 'images', '_placeholders/no-image.png'), path.join(imageSlugDir, imageName));
 
-      // Create a success message box
-      const message = `✅ Image has been copied to ${imageDestination}`;
-      console.log(
-        boxen(message, {
-          padding: 1,
-          margin: 1,
-          borderStyle: 'double' as Options['borderStyle'], // Cast to valid type
-        })
-      );
-    } catch (err) {
-      // Create an error message box
-      const errorMessage = `❌ Failed to copy image: ${(err as Error).message}`;
-      console.error(
-        boxen(errorMessage, {
-          padding: 1,
-          margin: 1,
-          borderStyle: 'double' as Options['borderStyle'], // Cast to valid type
-        })
-      );
-    }
-  } else {
-    // Create an info message box
-    const infoMessage = `ℹ️ Default image placeholder used, skipping image copy.\nYou can update metadata.image.url in your page.mdx later to add a custom image.`;
-    imageName = cleanedAnswers.image;
     console.log(
-      boxen(infoMessage, {
+      boxen(
+        `ℹ️ Default placeholder image has been copied to ${imageDestination}`,
+        { padding: 1, margin: 1, borderStyle: 'double' as Options['borderStyle'] }
+      )
+    );
+  } catch (err) {
+    console.error(
+      boxen(
+        `❌ Failed to copy default image: ${(err as Error).message}`,
+        { padding: 1, margin: 1, borderStyle: 'double' as Options['borderStyle'] }
+      )
+    );
+  }
+} else {
+  // Process custom image
+  try {
+    fs.ensureDirSync(imageSlugDir); // Ensure the slug directory exists
+
+    // Convert the image to .webp format and save it to the destination
+    await sharp(cleanedAnswers.image)
+      .webp({ quality: 80 }) // Convert to .webp with 80% quality
+      .toFile(imageDestination);
+
+    // Create a success message box
+    const message = `✅ Image has been converted to .webp and copied to ${imageDestination}`;
+    console.log(
+      boxen(message, {
+        padding: 1,
+        margin: 1,
+        borderStyle: 'double' as Options['borderStyle'], // Cast to valid type
+      })
+    );
+  } catch (err) {
+    // Create an error message box
+    const errorMessage = `❌ Failed to convert and copy image: ${(err as Error).message}`;
+    console.error(
+      boxen(errorMessage, {
         padding: 1,
         margin: 1,
         borderStyle: 'double' as Options['borderStyle'], // Cast to valid type
       })
     );
   }
+}
+
+ if (imageName === "_placeholders/no-image.png") {
+ const infoMessage = `ℹ️ Default image placeholder: 'no-image.webp' will be used since you did not specify an image.\nYou can update metadata.image.url in your page.mdx later to add a custom image.`;
+     imageName = cleanedAnswers.image;
+     console.log(
+       boxen(infoMessage, {
+         padding: 1,
+         margin: 1,
+         borderStyle: 'double' as Options['borderStyle'], // Cast to valid type
+       })
+     );
+ }
 
   // Define the MDX content
   const mdxContent = `import { SITE_URL } from '@/config';
@@ -157,7 +200,7 @@ console.log("cleaned image answers = " + cleanedAnswers.image)
 export const metadata = {
   title: "${cleanedAnswers.title}",
   description: "${cleanedAnswers.description}",
-  image: "/images/${imageName}",
+  image: "/images/${slug}/${imageName}",
   date: "${cleanedAnswers.date}",
   author: "${cleanedAnswers.author}",
   authorUrl: "${cleanedAnswers.authorUrl}",
@@ -167,7 +210,7 @@ export const metadata = {
     url: "/blog/${slug}",
     images: [
       {
-        url: \`\${SITE_URL}/images/${imageName}\`,
+        url: \`\${SITE_URL}/images/${slug}/${imageName}\`,
         alt: "${cleanedAnswers.title}",
       },
     ],
@@ -178,7 +221,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "${cleanedAnswers.title}",
     description: "${cleanedAnswers.description}",
-    image: \`\${SITE_URL}/images/${imageName}\`,
+    image: \`\${SITE_URL}/images/${slug}/${imageName}\`,
   },
   keywords: [${cleanedAnswers.keywords.split(',').map((kw) => `"${kw.trim()}"`).join(', ')}],
   slug: "${slug}",
@@ -192,9 +235,31 @@ Start adding your blog post content here...
   const mdxFilePath = path.join(postDir, 'page.mdx');
   fs.writeFileSync(mdxFilePath, mdxContent, 'utf8');
 
+
   // Boxed log for post creation
-  const combinedMessage = `✅ Your post "${cleanedAnswers.title}" has been created at:\n\n ${mdxFilePath}.\n\n` +
-    `✏️ Reminder: Time to start writing great content!.\n`;
+const imageMessage = cleanedAnswers.image === '_placeholders/no-image.png'
+  ? `⚠️  Default image 'no-image.webp' has been used since you skipped this input.\nYou can update metadata.image.url in your page.mdx later to add a custom image.`
+  : `    Your image has been web-optimized and saved to:\npublic/images/${slug}/${imageName}`;
+
+const combinedMessage = [
+  `✅ Your post "${cleanedAnswers.title}" has been created successfully!`,
+  ``,
+  `📁 File location:`,
+  `   ${mdxFilePath}`,
+  ``,
+  `🏞️ Image optimization:`,
+  imageMessage,  // Add the conditional image message
+  ``,
+  `💡 Tip: Store all images for this post in the public/images/${slug}/ directory`,
+  ``,
+  `✏️  Next steps:`,
+  `   1. Open the created file`,
+  `   2. Start writing your content`,
+  `   3. Add any additional images to the post's image directory`,
+  ``,
+  `Happy writing! 🚀`
+].join('\n');
+
   console.log(
     boxen(combinedMessage, {
       padding: 1,
