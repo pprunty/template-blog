@@ -73,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "Person",
     "name": AUTHOR.name,
     "jobTitle": "Software Engineer",
-    "description": `${AUTHOR.name} is a professional software developer, who writes on the intersection of software development and the great outdoors.`,
+    "description": `${AUTHOR.description}`,
     "url": SITE_URL,
     "sameAs": [
       AUTHOR.twitterUrl,
