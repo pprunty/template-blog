@@ -138,3 +138,50 @@
     color: #2b6cb0; /* Example hover color */
   }
 }
+
+/* Initial state */
+[data-animate-image] .image-animate {
+  opacity: 0;
+}
+
+/* Initial state */
+[data-animate-image] .image-animate {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Animation when the image comes into view */
+[data-animate-image] .image-animate.animate-once[data-animate="zoom-fade-small"] {
+  animation: zoom-fade-small 0.8s ease-in forwards;
+}
+
+/* New animation when the image is clicked */
+.image-click-animate {
+  animation: click-animation 0.5s ease;
+}
+
+@keyframes zoom-fade-small {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes click-animation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

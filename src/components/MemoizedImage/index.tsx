@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image, { ImageProps } from "next/image";
 
 interface MemoizedImageProps extends Omit<ImageProps, 'onClick'> {
   focusable?: boolean;
+  className?: string;
 }
 
 export const MemoizedImage = React.memo(function MemoizedImage({
   src,
-  alt,
+  alt = "Image",
   width,
   height,
   priority,
@@ -17,17 +18,19 @@ export const MemoizedImage = React.memo(function MemoizedImage({
   focusable = true,
   fill,
   sizes,
+  className = '',
   ...rest
 }: MemoizedImageProps) {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isImageLoaded, setImageLoaded] = useState(false);
   const scrollPositionRef = useRef(0);
+  const imageRef = useRef<HTMLSpanElement>(null); // Changed to HTMLSpanElement
+  const hasIntersectedRef = useRef(false);
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     if (focusable) {
-      // Save the current scroll position
       scrollPositionRef.current = window.scrollY || window.pageYOffset;
 
-      // Apply fixed positioning to the body
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollPositionRef.current}px`;
       document.body.style.left = '0';
@@ -35,62 +38,83 @@ export const MemoizedImage = React.memo(function MemoizedImage({
 
       setModalOpen(true);
     }
-  };
+  }, [focusable]);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setModalOpen(false);
 
-    // Remove the fixed positioning
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.left = '';
     document.body.style.right = '';
 
-    // Restore the scroll position
     window.scrollTo({
       top: scrollPositionRef.current,
-      behavior: 'instant', // Use 'instant' or 'auto' for immediate scrolling
+      behavior: 'instant',
     });
-  };
+  }, []);
 
   useEffect(() => {
-    // Cleanup on unmount to prevent side effects
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !hasIntersectedRef.current) {
+          setImageLoaded(true);
+          hasIntersectedRef.current = true;
+          observer.disconnect();
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      root: null,
+      threshold: 0.1,
+    });
+
+    if (imageRef.current) {
+      observer.observe(imageRef.current);
+    }
+
     return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
+      observer.disconnect();
     };
   }, []);
 
   return (
     <>
-      <Image
-        src={src}
-        alt={alt || "Image"}
-        width={width}
-        height={height}
-        className={`mt-4 mb-4 ${focusable ? 'cursor-pointer' : ''}`}
+      <span // Changed from <div> to <span>
+        ref={imageRef}
+        data-animate-image
+        className={`${focusable ? 'cursor-pointer' : ''}`}
         onClick={openModal}
-        priority={priority}
-        loading={loading}
-        fill={fill}
-        sizes={sizes}
-        {...rest}
-      />
+      >
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          className={`image-animate ${isImageLoaded ? 'animate-once' : ''} ${className}`}
+          data-animate={isImageLoaded ? "zoom-fade-small" : ""}
+          priority={priority}
+          loading={loading}
+          fill={fill}
+          sizes={sizes}
+          {...rest}
+        />
+      </span>
 
       {isModalOpen && (
         <div
           className="fixed inset-0 bg-white bg-opacity-45 backdrop-blur-lg dark:bg-black dark:bg-opacity-50 flex justify-center items-center z-50 p-4 transition-colors duration-300"
           onClick={closeModal}
+          data-animate-image
         >
           <div className="relative" onClick={(e) => e.stopPropagation()}>
             <Image
               src={src}
-              alt={alt || 'Image'}
+              alt={alt}
               width={width}
               height={height}
-              className="cursor-pointer p-4"
+              className="cursor-pointer p-4 image-click-animate"
               onClick={closeModal}
               priority={true}
               {...rest}

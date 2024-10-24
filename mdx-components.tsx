@@ -44,7 +44,7 @@ export function useMDXComponents(components?: { [component: string]: React.Compo
       if (!src) return null; // No image rendered
 
       const width = 620;
-      const height = 400;
+      const height = 500;
 
       return (
         <MemoizedImage
