@@ -14,7 +14,7 @@ export const MemoizedImage = React.memo(function MemoizedImage({
   width,
   height,
   priority,
-  loading = "eager",
+  loading = "lazy",
   focusable = true,
   fill,
   sizes,
