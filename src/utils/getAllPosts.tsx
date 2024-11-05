@@ -2,7 +2,7 @@
 
 import slugs from '@/posts/slugs.json';
 import { BlogPostType } from '@/types/BlogPost';
-import { cache } from 'next/cache';
+import { cache } from 'react';
 import { AUTHOR } from '@/config';
 import formatDate from './formatDate';
 
