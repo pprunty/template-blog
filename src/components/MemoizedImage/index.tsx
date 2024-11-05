@@ -103,12 +103,12 @@ export const MemoizedImage = React.memo(function MemoizedImage({
       </span>
 
       {isModalOpen && (
-        <div
+        <span
           className="fixed inset-0 bg-white bg-opacity-45 backdrop-blur-lg dark:bg-black dark:bg-opacity-50 flex justify-center items-center z-50 p-4 transition-colors duration-300"
           onClick={closeModal}
           data-animate-image
         >
-          <div className="relative" onClick={(e) => e.stopPropagation()}>
+          <span className="relative" onClick={(e) => e.stopPropagation()}>
             <Image
               src={src}
               alt={alt}
@@ -119,8 +119,8 @@ export const MemoizedImage = React.memo(function MemoizedImage({
               priority={true}
               {...rest}
             />
-          </div>
-        </div>
+          </span>
+        </span>
       )}
     </>
   );
