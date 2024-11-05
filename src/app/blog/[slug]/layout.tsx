@@ -41,7 +41,7 @@ export default async function Layout({ children, params }: LayoutProps) {
       <BottomBar />
       {/* to be added in next version <CommentsSection/> */}
       <RelatedPosts
-        currentPostSlug={slug[0]}
+        currentPostSlug={slug}
         currentPostKeywords={currentPost.keywords}
         posts={posts}
       />
