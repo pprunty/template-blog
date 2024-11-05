@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 interface FigureProps {
   wide?: boolean;
@@ -26,7 +26,7 @@ export function Figure({ wide = false, children }: FigureProps) {
               before:absolute
               before:z-[-1]
             `
-            : ""
+            : ''
         }
       `}
     >

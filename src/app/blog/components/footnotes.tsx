@@ -1,6 +1,6 @@
-import { A } from "./a";
-import { P } from "./p";
-import { ReactNode } from "react";
+import { A } from './a';
+import { P } from './p';
+import { ReactNode } from 'react';
 
 interface FootNotesProps {
   children: ReactNode;
@@ -33,10 +33,10 @@ interface FootNoteProps {
 
 export const FootNote = ({ id, children }: FootNoteProps) => (
   <P>
-    {id}.{" "}
+    {id}.{' '}
     <A href={`#s${id}`} id={`f${id}`} className="no-underline">
       ^
-    </A>{" "}
+    </A>{' '}
     {children}
   </P>
 );

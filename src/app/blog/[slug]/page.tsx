@@ -1,13 +1,18 @@
-// src/app/blog/[slug]/page.tsx
 import { Metadata } from 'next';
 import { SITE_URL } from '@/config';
 
+// Define params type as a promise
+type Params = Promise<{ slug: string }>;
+
 interface PageProps {
-  params: { slug: string };
+  params: Params;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = params;
+// Adjust generateMetadata to handle async params
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
   const postModule = await import(`@/posts/${slug}/page.mdx`);
 
   const { metadata } = postModule;
@@ -34,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const postModule = await import(`@/posts/${slug}/page.mdx`);
 
   const Content = postModule.default;

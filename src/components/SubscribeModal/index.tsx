@@ -186,7 +186,6 @@ export default function SubscribeModal({
             >
               {isSubmitting ? 'Subscribing...' : 'Subscribe'}
             </button>
-
           )}
         </form>
       </div>

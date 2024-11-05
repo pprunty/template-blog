@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import ShareButton from '@/components/ShareButton'; // Assuming ShareButton component is in the same directory

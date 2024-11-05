@@ -15,17 +15,20 @@ export default function RelatedPosts({
   posts,
 }: RelatedPostsProps) {
   // Filter out the current post from the list
-  const otherPosts = posts.filter(post => post.slug !== currentPostSlug);
+  const otherPosts = posts.filter((post) => post.slug !== currentPostSlug);
 
   // Find related posts based on shared keywords
-  const relatedPosts = otherPosts.filter(post =>
-    post.keywords.some(keyword => currentPostKeywords.includes(keyword))
-  ).slice(0, 3); // Limit to a maximum of 3 related posts
+  const relatedPosts = otherPosts
+    .filter((post) =>
+      post.keywords.some((keyword) => currentPostKeywords.includes(keyword)),
+    )
+    .slice(0, 3); // Limit to a maximum of 3 related posts
 
   // If not enough related posts, fill with random posts
   const remainingPostsNeeded = 4 - relatedPosts.length;
   const remainingPosts = otherPosts.filter(
-    post => !relatedPosts.some(relatedPost => relatedPost.slug === post.slug)
+    (post) =>
+      !relatedPosts.some((relatedPost) => relatedPost.slug === post.slug),
   );
   const shuffledRemainingPosts = shuffleArray(remainingPosts);
   const randomPosts = shuffledRemainingPosts.slice(0, remainingPostsNeeded);

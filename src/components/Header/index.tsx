@@ -1,40 +1,39 @@
-import Link from "next/link";
+import Link from 'next/link';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
-import {Logo} from "@/components/Logo";
+import { Logo } from '@/components/Logo';
 import React from 'react';
-import {AUTHOR} from '@/config';
-
+import { AUTHOR } from '@/config';
 
 export default function Header() {
   return (
     <header className="flex mb-5 md:mb-10 items-center">
-        <nav className="flex justify-between items-center w-full">
-          {/* Left: Logo */}
-          <div className="flex items-center">
-            <Logo />
-          </div>
+      <nav className="flex justify-between items-center w-full">
+        {/* Left: Logo */}
+        <div className="flex items-center">
+          <Logo />
+        </div>
 
-          {/* Right: Navbar Links */}
-          <div className="flex items-center text-xs gap-2 sm:gap-4">
-            <ThemeSwitcher />
+        {/* Right: Navbar Links */}
+        <div className="flex items-center text-xs gap-2 sm:gap-4">
+          <ThemeSwitcher />
 
-            <Link
-              href="/about"
-              className="inline-flex font-mono items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]"
-            >
-              About
-            </Link>
-               <a
-                      href={AUTHOR.twitterUrl}
-                      target="_blank"
-                      className="inline-flex font-mono hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] items-center p-2 rounded-sm transition-[background-color] whitespace-nowrap -mr-2"
-                    >
-                      <TweetIcon className="mr-2" /> Follow{" "}
-                      <span className="hidden md:inline">&nbsp;me</span>
-                    </a>
-          </div>
-        </nav>
-      </header>
+          <Link
+            href="/about"
+            className="inline-flex font-mono items-center hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] rounded-sm p-2 transition-[background-color]"
+          >
+            About
+          </Link>
+          <a
+            href={AUTHOR.twitterUrl}
+            target="_blank"
+            className="inline-flex font-mono hover:bg-gray-200 dark:hover:bg-[#313131] active:bg-gray-300 dark:active:bg-[#242424] items-center p-2 rounded-sm transition-[background-color] whitespace-nowrap -mr-2"
+          >
+            <TweetIcon className="mr-2" /> Follow{' '}
+            <span className="hidden md:inline">&nbsp;me</span>
+          </a>
+        </div>
+      </nav>
+    </header>
   );
 }
 

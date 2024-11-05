@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from 'react';
 import { getViewCount, incrementViewCount } from '@/utils/fetchViewCount'; // Adjust your imports
@@ -9,7 +9,11 @@ interface ViewsProps {
   incrementOnMount?: boolean;
 }
 
-const Views: React.FC<ViewsProps> = ({ id, defaultValue, incrementOnMount = false }) => {
+const Views: React.FC<ViewsProps> = ({
+  id,
+  defaultValue,
+  incrementOnMount = false,
+}) => {
   const [views, setViews] = useState<number>(defaultValue);
 
   useEffect(() => {
@@ -25,9 +29,7 @@ const Views: React.FC<ViewsProps> = ({ id, defaultValue, incrementOnMount = fals
     }
   }, [id, incrementOnMount]);
 
-  return (
-    <span>{views.toLocaleString()} views</span>
-  );
+  return <span>{views.toLocaleString()} views</span>;
 };
 
 export default Views;

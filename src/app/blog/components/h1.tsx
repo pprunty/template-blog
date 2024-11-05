@@ -8,8 +8,8 @@ interface H1Props {
 // Refactored H1 component using StyledH1
 export function H1({ children }: H1Props) {
   return (
-      <h1 className="text-2xl font-bold mt-2 mb-1 dark:text-gray-100">
-        {withHeadingId(children)}
-      </h1>
-    );
+    <h1 className="text-2xl font-bold mt-2 mb-1 dark:text-gray-100">
+      {withHeadingId(children)}
+    </h1>
+  );
 }

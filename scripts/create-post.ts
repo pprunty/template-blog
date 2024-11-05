@@ -157,7 +157,7 @@ if (cleanedAnswers.image === '_placeholders/no-image.png') {
 
     // Convert the image to .webp format and save it to the destination
     await sharp(cleanedAnswers.image)
-      .webp({ quality: 80 }) // Convert to .webp with 80% quality
+      .webp({ quality: 100 }) // Convert to .webp with 80% quality
       .toFile(imageDestination);
 
     // Create a success message box
@@ -225,7 +225,8 @@ export const metadata = {
   },
   keywords: [${cleanedAnswers.keywords.split(',').map((kw) => `"${kw.trim()}"`).join(', ')}],
   slug: "${slug}",
-  readingTime: 1
+  readingTime: 1,
+  draft: true
 };
 
 Start adding your blog post content here...

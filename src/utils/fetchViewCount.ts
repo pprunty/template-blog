@@ -23,7 +23,9 @@ export const getViewCount = async (id: string): Promise<number> => {
   } catch (error) {
     // Narrow the error type
     if (error) {
-      console.log(`View count for "${sanitizedId}" does not exist. Initializing the view count.`);
+      console.log(
+        `View count for "${sanitizedId}" does not exist. Initializing the view count.`,
+      );
       // Increment the view count for the first time
       return await incrementViewCount(id);
     }

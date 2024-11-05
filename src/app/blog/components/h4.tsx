@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { withHeadingId } from "./utils";
+import { ReactNode } from 'react';
+import { withHeadingId } from './utils';
 
 interface HeadingProps {
   children: ReactNode; // Ensures children can be any valid React element

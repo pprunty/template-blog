@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import createMDX from '@next/mdx';
 
+// Define the configuration for MDX
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
@@ -20,7 +21,7 @@ const customRuntimeCaching = [
     options: {
       cacheName: 'images',
       expiration: {
-        maxEntries: 100, // You may want to increase the max entries since all images are in /images
+        maxEntries: 100,
         maxAgeSeconds: 60 * 60 * 24 * 365, // Cache images for 1 year
       },
       cacheableResponse: {
@@ -37,7 +38,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV !== 'development',
   },
   experimental: {
-    swcMinify: true,
+    turbo: true,
     scrollRestoration: true,
   },
   headers() {
@@ -65,4 +66,5 @@ const withBoth = (config) =>
     disable: process.env.NODE_ENV === 'development',
   })(withMDX(config));
 
+// Export configuration as default
 export default withBoth(nextConfig);

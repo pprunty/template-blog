@@ -1,10 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useLayoutEffect, useState, useCallback } from "react";
-import { themeEffect } from "./theme-effect";
+import { useEffect, useLayoutEffect, useState, useCallback } from 'react';
+import { themeEffect } from './theme-effect';
 
 export function ThemeSwitcher() {
-  const [preference, setPreference] = useState<undefined | null | string>(undefined);
+  const [preference, setPreference] = useState<undefined | null | string>(
+    undefined,
+  );
   const [currentTheme, setCurrentTheme] = useState<null | string>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isHoveringOverride, setIsHoveringOverride] = useState(false);
@@ -15,20 +17,20 @@ export function ThemeSwitcher() {
   }, []);
 
   useLayoutEffect(() => {
-    setPreference(localStorage.getItem("theme"));
+    setPreference(localStorage.getItem('theme'));
     const current = themeEffect();
     setCurrentTheme(current);
 
-    const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
-    matchMedia.addEventListener("change", onMediaChange);
-    return () => matchMedia.removeEventListener("change", onMediaChange);
+    const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    matchMedia.addEventListener('change', onMediaChange);
+    return () => matchMedia.removeEventListener('change', onMediaChange);
   }, [onMediaChange]);
 
   const onStorageChange = useCallback(
     (event: StorageEvent) => {
-      if (event.key === "theme") setPreference(event.newValue);
+      if (event.key === 'theme') setPreference(event.newValue);
     },
-    [setPreference]
+    [setPreference],
   );
 
   useEffect(() => {
@@ -36,22 +38,28 @@ export function ThemeSwitcher() {
   }, [preference]);
 
   useEffect(() => {
-    window.addEventListener("storage", onStorageChange);
-    return () => window.removeEventListener("storage", onStorageChange);
+    window.addEventListener('storage', onStorageChange);
+    return () => window.removeEventListener('storage', onStorageChange);
   });
 
   return (
     <>
       {isHovering && (
         <span className="text-[9px] text-gray-400 mr-[-5px] hidden md:inline">
-          {preference === null ? "System" : preference === "dark" ? "Dark" : "Light"}
+          {preference === null
+            ? 'System'
+            : preference === 'dark'
+              ? 'Dark'
+              : 'Light'}
         </span>
       )}
 
       <button
         aria-label="Toggle theme"
         className={`inline-flex ${
-          isHovering && !isHoveringOverride ? "bg-gray-200 dark:bg-[#313131]" : ""
+          isHovering && !isHoveringOverride
+            ? 'bg-gray-200 dark:bg-[#313131]'
+            : ''
         } active:bg-gray-300 transition-[background-color] dark:active:bg-[#242424] rounded-sm p-2
           bg-gray-200 dark:bg-[#313131] theme-system:!bg-inherit [&_.sun-icon]:hidden dark:[&_.moon-icon]:hidden dark:[&_.sun-icon]:inline
         }`}
@@ -59,16 +67,18 @@ export function ThemeSwitcher() {
           ev.preventDefault();
           setIsHoveringOverride(true);
 
-          let newPreference: string | null = currentTheme === "dark" ? "light" : "dark";
-          const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
+          let newPreference: string | null =
+            currentTheme === 'dark' ? 'light' : 'dark';
+          const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+            .matches
+            ? 'dark'
+            : 'light';
 
           if (preference !== null && systemTheme === currentTheme) {
             newPreference = null;
-            localStorage.removeItem("theme");
+            localStorage.removeItem('theme');
           } else {
-            localStorage.setItem("theme", newPreference);
+            localStorage.setItem('theme', newPreference);
           }
 
           setPreference(newPreference);

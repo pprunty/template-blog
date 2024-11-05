@@ -1,9 +1,9 @@
-import { ReactNode, Children } from "react";
+import { ReactNode, Children } from 'react';
 
 export function withHeadingId(children: ReactNode): ReactNode {
   return Children.map(children, (el) => {
     // Check if `el` is a string
-    if (typeof el === "string") {
+    if (typeof el === 'string') {
       const re = /\[#([^\]]+)\]\s*$/m;
       const match = el.match(re);
 
@@ -28,7 +28,6 @@ export function withHeadingId(children: ReactNode): ReactNode {
             >
               #
             </a>
-
             <a
               id={match[1]}
               className={`

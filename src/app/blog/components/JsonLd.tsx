@@ -27,7 +27,7 @@ interface JsonLdProps {
 
 // Define the component using React.FC with JsonLdProps
 const JsonLd: React.FC<JsonLdProps> = ({
-  type = "BlogPosting", // default value for type
+  type = 'BlogPosting', // default value for type
   url,
   title,
   description,
@@ -36,36 +36,36 @@ const JsonLd: React.FC<JsonLdProps> = ({
   dateModified,
   author = AUTHOR, // Use default author from config if not provided
   keywords,
-  articleBody
+  articleBody,
 }) => {
   const jsonLdData = {
-    "@context": "https://schema.org",
-    "@type": type,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": url
+    '@context': 'https://schema.org',
+    '@type': type,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
     },
-    "headline": title,
-    "description": description,
-    "image": image,
-    "author": {
-      "@type": "Person",
-      "name": author.name,
-      "url": author.url
+    headline: title,
+    description: description,
+    image: image,
+    author: {
+      '@type': 'Person',
+      name: author.name,
+      url: author.url,
     },
-    "publisher": {
-      "@type": "Organization",
-      "name": author.publisherName,
-      "logo": {
-        "@type": "ImageObject",
-        "url": author.publisherLogo
-      }
+    publisher: {
+      '@type': 'Organization',
+      name: author.publisherName,
+      logo: {
+        '@type': 'ImageObject',
+        url: author.publisherLogo,
+      },
     },
-    "datePublished": datePublished,
-    "dateModified": dateModified || datePublished, // Use modified date if available
-    "articleBody": articleBody,
-    "keywords": keywords,
-    "articleSection": DEFAULT_SECTION // Default section from config
+    datePublished: datePublished,
+    dateModified: dateModified || datePublished, // Use modified date if available
+    articleBody: articleBody,
+    keywords: keywords,
+    articleSection: DEFAULT_SECTION, // Default section from config
   };
 
   return (

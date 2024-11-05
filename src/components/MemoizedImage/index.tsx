@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import Image, { ImageProps } from "next/image";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Image, { ImageProps } from 'next/image';
 
 interface MemoizedImageProps extends Omit<ImageProps, 'onClick'> {
   focusable?: boolean;
@@ -10,11 +10,11 @@ interface MemoizedImageProps extends Omit<ImageProps, 'onClick'> {
 
 export const MemoizedImage = React.memo(function MemoizedImage({
   src,
-  alt = "Image",
+  alt = 'Image',
   width,
   height,
   priority,
-  loading = "lazy",
+  loading = 'lazy',
   focusable = true,
   fill,
   sizes,
@@ -93,7 +93,7 @@ export const MemoizedImage = React.memo(function MemoizedImage({
           width={width}
           height={height}
           className={`image-animate ${isImageLoaded ? 'animate-once' : ''} ${className}`}
-          data-animate={isImageLoaded ? "zoom-fade-small" : ""}
+          data-animate={isImageLoaded ? 'zoom-fade-small' : ''}
           priority={priority}
           loading={loading}
           fill={fill}

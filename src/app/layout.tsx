@@ -1,23 +1,21 @@
 import { Inter } from 'next/font/google';
-import "./globals.css";
+import './globals.css';
 import { AUTHOR, SITE_URL, DEFAULT_KEYWORDS } from '@/config';
-import { doge } from "./doge";
-import { themeEffect } from "@/components/ThemeSwitcher/theme-effect";
+import { doge } from './doge';
+import { themeEffect } from '@/components/ThemeSwitcher/theme-effect';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import type { Viewport } from 'next';
-import { Suspense } from "react";
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic'; // Import dynamic
-
-const Analytics = dynamic(() => import('./analytics'), { ssr: false });
+import ClientOnlyAnalytics from '@/components/ClientOnlyAnalytics';
 
 // Define viewport settings
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   userScalable: true,
-  themeColor: "transparent",
+  themeColor: 'transparent',
 };
 
 // Font settings
@@ -31,7 +29,10 @@ export const metadata: Metadata = {
   title: `${AUTHOR.name}'s blog`,
   description: `${AUTHOR.description}`, // Use AUTHOR's updated description from config
   keywords: DEFAULT_KEYWORDS,
-  manifest: process.env.NODE_ENV === 'production' ? '/manifest.prod.json' : '/manifest.json',
+  manifest:
+    process.env.NODE_ENV === 'production'
+      ? '/manifest.prod.json'
+      : '/manifest.json',
   openGraph: {
     title: `${AUTHOR.name}'s blog`,
     description: `${AUTHOR.description}`, // Use AUTHOR's updated description from config
@@ -57,31 +58,31 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: [
-      { url: '/icons/192x192.png', sizes: '192x192', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/icons/180x180.png', sizes: '180x180' },
-    ],
+    icon: [{ url: '/icons/192x192.png', sizes: '192x192', type: 'image/png' }],
+    apple: [{ url: '/icons/180x180.png', sizes: '180x180' }],
   },
   metadataBase: new URL(SITE_URL),
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": AUTHOR.name,
-    "jobTitle": "Software Engineer",
-    "description": `${AUTHOR.description}`,
-    "url": SITE_URL,
-    "sameAs": [
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: AUTHOR.name,
+    jobTitle: 'Software Engineer',
+    description: `${AUTHOR.description}`,
+    url: SITE_URL,
+    sameAs: [
       AUTHOR.twitterUrl,
       AUTHOR.stravaUrl,
       AUTHOR.githubUrl,
       AUTHOR.redditUrl,
-      AUTHOR.linkedinUrl
-    ]
+      AUTHOR.linkedinUrl,
+    ],
   };
 
   return (
@@ -107,13 +108,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`dark:text-gray-100 max-w-2xl m-auto`}>
         <main className="p-6 pt-3 md:pt-6 min-h-screen">
-        <Suspense fallback={null}>
-          <Header />
-          {children}
-          <Footer/>
-         </Suspense>
+          <Suspense fallback={null}>
+            <Header />
+            {children}
+            <Footer />
+          </Suspense>
         </main>
-       <Analytics />
+        <ClientOnlyAnalytics />
       </body>
     </html>
   );

@@ -24,13 +24,26 @@ export const getAllPosts = cache(async (): Promise<BlogPostType[]> => {
           type: metadata.type || 'article',
           keywords: metadata.keywords || [],
           readingTime: metadata.readingTime || 6,
+          draft: metadata.draft || false,
         } as BlogPostType;
       } catch (error) {
         console.error(`Error processing post ${slug}:`, error);
         return null;
       }
-    })
+    }),
   );
 
-  return posts.filter(Boolean) as BlogPostType[];
+  // Filter out posts marked as draft if the environment is production
+  const isProduction = process.env.NODE_ENV === 'production';
+  const filteredPosts = posts.filter(
+    (post) => post && (!isProduction || !post.draft),
+  ) as BlogPostType[];
+
+  // Sort the posts by date (latest first)
+  return filteredPosts.sort((a, b) => {
+    if (a.date && b.date) {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    }
+    return 0;
+  });
 });

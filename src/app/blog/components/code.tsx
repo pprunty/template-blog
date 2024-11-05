@@ -12,21 +12,19 @@ export function InlineCode({
   const isInlineCode = !className;
 
   if (isInlineCode) {
-    return (
-      <code className="font-mono bg-[#f0f0f0] text-sm">
-        {children}
-      </code>
-    );
+    return <code className="font-mono bg-[#f0f0f0] text-sm">{children}</code>;
   }
 
   // For code blocks, you might want to handle them differently
   return (
-    <pre className="
+    <pre
+      className="
                           text-sm
                           bg-gray-800 text-white
                           dark:bg-[#222] dark:text-gray-300
 
-                          overflow-scroll">
+                          overflow-scroll"
+    >
       <code className={className}>{children}</code>
     </pre>
   );

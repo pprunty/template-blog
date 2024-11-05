@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { AnchorHTMLAttributes, ReactNode } from "react";
+import Link from 'next/link';
+import { AnchorHTMLAttributes, ReactNode } from 'react';
 
 interface AProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
@@ -7,9 +7,9 @@ interface AProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   className?: string;
 }
 
-export function A({ children, className = "", href, ...props }: AProps) {
+export function A({ children, className = '', href, ...props }: AProps) {
   // If the href starts with "#", render an <a> tag (for internal anchor links)
-  if (href.startsWith("#")) {
+  if (href.startsWith('#')) {
     return (
       <a
         href={href}

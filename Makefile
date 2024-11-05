@@ -10,11 +10,11 @@ all: dev
 # Development server
 .PHONY: dev
 dev:
-	npm run dev
+	npm run dev --turbo
 
 # Build the project
 .PHONY: build
-build:
+build: lint
 	NODE_ENV=$(NODE_ENV) npm run build
 
 # Start the production server
@@ -25,7 +25,7 @@ start:
 # Lint the project
 .PHONY: lint
 lint:
-	npm run lint
+	npm run lint:fix
 
 # Clean the build artifacts and node_modules
 .PHONY: clean
