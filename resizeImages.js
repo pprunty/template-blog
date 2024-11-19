@@ -9,17 +9,13 @@ if (!inputDir) {
   process.exit(1); // Exit if no input directory is provided
 }
 
-// Set the output directory to be the same as the input directory
-const outputDir = inputDir;
+// Set the output directory to a subdirectory called 'output'
+const outputDir = path.join(inputDir, 'output');
 
 // Ensure the output directory exists
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
-
-// Define the desired dimensions for the resized images
-//const width = 650; // Set your desired width here
-//const height = 800; // Set your desired height here
 
 // Function to resize and convert images to WebP format
 async function processImage(imagePath) {
@@ -27,9 +23,6 @@ async function processImage(imagePath) {
 
   try {
     await sharp(imagePath)
-//      .resize(width, height, {
-//        fit: 'cover', // Adjust the resize strategy to fit your needs
-//      })
       .toFormat('webp')
       .toFile(path.join(outputDir, `${fileName}.webp`));
 
@@ -46,7 +39,7 @@ async function processAllImages() {
 
     // Include WebP files in the list of supported extensions
     const imageFiles = files.filter((file) =>
-      ['.jpg', '.jpeg', '.png', '.tiff', '.bmp', '.gif', '.webp'].includes(path.extname(file).toLowerCase())
+      ['.jpg', '.jpeg', '.png', '.tiff', '.bmp', '.HEIC', '.heic', '.gif', '.webp'].includes(path.extname(file).toLowerCase())
     );
 
     if (imageFiles.length === 0) {
