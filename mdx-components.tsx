@@ -18,6 +18,8 @@ import 'highlight.js/styles/atom-one-dark.css';
 import { InlineCode } from "@/app/blog/components/code";
 import { Admonition } from '@/app/blog/components/admonition';
 import { TableOfContents } from "@/app/blog/components/toc";
+import PhotoGrid from '@/components/PhotoGrid';
+import Strava from "@/app/blog/components/strava";
 
 // Import MemoizedImage from the new file
 import { MemoizedImage } from "@/components/MemoizedImage";
@@ -60,6 +62,8 @@ export function useMDXComponents(components?: { [component: string]: React.Compo
     Figure,
     Caption,
     YouTube,
+    PhotoGrid,
+    Strava,
     Ref,
     FootNotes,
     FootNote,

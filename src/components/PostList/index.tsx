@@ -34,11 +34,11 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                   </div>
                 )}
                 {post.image && (
-                  <div className="relative w-[113px] h-[113px] xs:w-[80px] xs:h-[80px] sm:w-[110px] sm:h-[110px] overflow-hidden mr-4 flex-shrink-0">
+                  <div className="relative w-[113px] h-[113px] xs:w-[80px] xs:h-[80px] sm:w-[125px] sm:h-[125px] overflow-hidden mr-4 flex-shrink-0">
                     <OptimizedImage
                       src={post.image}
                       alt={post.title || 'Blog post image'}
-                      sizes="(max-width: 640px) 80px, (min-width: 640px) 113px, (min-width: 768px) 110px"
+                      sizes="(max-width: 640px) 80px, (min-width: 640px) 113px, (min-width: 768px) 125px"
                       priority={index === 0} // Prioritize the first image
                       loading={index === 0 ? 'eager' : 'lazy'}
                     />

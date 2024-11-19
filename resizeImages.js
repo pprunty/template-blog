@@ -2,9 +2,15 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-// Define the source and output directories
-const inputDir = path.join(__dirname, 'public/images/essential-reading-list-adventure-philosophy-human-nature'); // Replace with your source images directory
-const outputDir = path.join(__dirname, 'public/photos'); // Replace with your output directory
+// Get the input directory from the command line arguments
+const inputDir = process.argv[2]; // Pass the input directory as the first argument
+if (!inputDir) {
+  console.error('Please provide an input directory as the first argument.');
+  process.exit(1); // Exit if no input directory is provided
+}
+
+// Set the output directory to be the same as the input directory
+const outputDir = inputDir;
 
 // Ensure the output directory exists
 if (!fs.existsSync(outputDir)) {
@@ -12,8 +18,8 @@ if (!fs.existsSync(outputDir)) {
 }
 
 // Define the desired dimensions for the resized images
-const width = 650; // Set your desired width here
-const height = 800; // Set your desired height here
+//const width = 650; // Set your desired width here
+//const height = 800; // Set your desired height here
 
 // Function to resize and convert images to WebP format
 async function processImage(imagePath) {

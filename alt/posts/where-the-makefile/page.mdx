@@ -1,0 +1,132 @@
+import { SITE_URL } from '@/config';
+
+export const metadata = {
+  title: "Where's the Makefile?",
+  description: "Exploring the lack of Makefiles used in industry and arguing why they should be standard for every software repository and project.",
+  image: "/images/where-the-makefile/makefile.webp",
+  date: "2024-11-07",
+  author: "Patrick Prunty",
+  authorUrl: "https://patrickprunty.vercel.app/about",
+  openGraph: {
+    title: "Where's the Makefile?",
+    description: "Exploring the lack of Makefiles used in industry and arguing why they should be standard for every software repository and project.",
+    url: "/blog/where-the-makefile",
+    images: [
+      {
+        url: `${SITE_URL}/images/where-the-makefile/makefile.webp`,
+        alt: "Where's the Makefile?",
+      },
+    ],
+    type: 'article',
+    tags: ["programming", "makefile", "GNU", "software developement", "technology", "industry standards"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Where's the Makefile?",
+    description: "Exploring the lack of Makefiles used in industry and arguing why they should be standard for every software repository and project.",
+    image: `${SITE_URL}/images/where-the-makefile/makefile.webp`,
+  },
+  keywords: ["programming", "makefile", "GNU", "software developement", "technology", "industry standards"],
+  slug: "where-the-makefile",
+  readingTime: 2,
+  draft: true
+};
+
+Wouldn't it be so easy?
+
+Imagine a world wherein everytime you are introduced to a new code base, the quickstart section of the
+documentation reads:
+
+```makefile
+To install, build and run the project, run:
+
+$ make run
+```
+
+And so, you open up the project, run the `make run` command and BOOM. The application starts running.
+
+That's the power the Makefile gives you and your team.
+
+# What is a Makefile? [#what-is-a-makefile]
+
+A Makefile is a file which sits at the root of your project.
+
+It should *always* be called 'Makefile', no file extension is required.
+
+The Makefile collects the commands you should use to run your project.
+
+It enables team members, new and old, to get a project up-and-running quickly, determine its state and get to work on
+developing within the project structure **without** having to know the nuances of how to actually install, build and run the
+application.
+
+Image you have a simple python project, you know that to run the project you need to run:
+
+```bash
+python main.py
+```
+
+To install the requirements for the project, you know you
+
+
+Putting it all together, you can check if the user has a venv created, create it.
+
+
+
+# What are Pre-Required Software?
+
+This question is often asked in regards to
+
+Oh, but what if you need to install required software before running the command, say, for example for a
+NextJS 15 project?
+
+The requirements for NextJS are:
+
+* `node`
+* `docker` (optional)
+
+So can simply do this in your Makefile:
+
+```bash
+
+NODE_INSTALL=
+DOCKER_INSTALL=
+
+# Development server
+.PHONY: run
+dev:
+	npm run dev --turbo
+
+# Build the project
+.PHONY: build
+build: lint
+	NODE_ENV=$(NODE_ENV) npm run build
+
+# Install dependencies
+.PHONY: install
+install:
+	npm install
+
+# Help
+.PHONY: help
+help:
+	@echo "Usage: make [target]"
+	@echo ""
+	@echo "Targets:"
+	@echo "  run        Start the development server"
+	@echo "  build      Build the project for production"
+	@echo "  install    Install dependencies"
+```
+
+# Makefile and Docker [#makefile-and-docker]
+
+
+# Makefiles are Monsters [#makefiles-are-monsters]
+
+If I haven't already convinced you, *Makefiles are monsters*.
+
+They should be industry standard and maintained by developers on every project.
+
+Not to mention,
+with the advance of LLM (Large Language Models), a Makefile provides a one-stop-shop for an artificially intelligent
+agent to discover, clone and run a project.
+

@@ -17,7 +17,6 @@ export default async function Layout({ children, params }: LayoutProps) {
   const { slug } = await params; // Await params before accessing slug
   const posts = await getAllPosts();
 
-  console.log('slug = ' + slug);
   // Use the first element of slug array, assuming it's the main slug
   const currentPost = posts.find((post) => post.slug === slug);
 

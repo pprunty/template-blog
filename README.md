@@ -14,7 +14,7 @@
 [![Lighthouse SEO Badge](./assets/lighthouse/lighthouse_seo.svg)](https://github.com/pprunty/blog.v2)
 
 [blog.v2](https://github.com/pprunty/blog.v2) is a high-performance, minimalistic and feature-rich blog template built
-with NextJS 14.
+with NextJS 15.
 
 For an immersive experience with the `blog.v2` template, we recommend exploring
 our [Guide to using the blog.v2 Template](https://blog-v2-template.vercel.app/blog/blog-v2-template-guide). This
@@ -44,7 +44,7 @@ For single-click deployment of this template with [Vercel](https://vercel.com), 
 
 ## Feature Overview (#feature-overview)
 
-- ⚡ Built with NextJS 14 for optimal performance
+- ⚡ Built with NextJS 15 for optimal performance
 - 🔷 TypeScript support for enhanced type safety and developer experience
 - 🌓 Dark mode/light mode switch with no flicker and automatic theme preference detection (based on user's OS settings)
 - 📱 PWA (Progressive Web App) enabled using next-pwa and automatic script for generating icons using sharp
