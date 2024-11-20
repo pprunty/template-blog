@@ -20,6 +20,8 @@ import { Admonition } from '@/app/blog/components/admonition';
 import { TableOfContents } from "@/app/blog/components/toc";
 import PhotoGrid from '@/components/PhotoGrid';
 import Strava from "@/app/blog/components/strava";
+import LinkButton from "@/components/LinkButton";
+import Carousel from "@/components/Carousel";
 
 // Import MemoizedImage from the new file
 import { MemoizedImage } from "@/components/MemoizedImage";
@@ -68,5 +70,7 @@ export function useMDXComponents(components?: { [component: string]: React.Compo
     FootNotes,
     FootNote,
     TableOfContents,
+    LinkButton,
+    Carousel,
   };
 }
