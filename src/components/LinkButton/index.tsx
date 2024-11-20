@@ -5,12 +5,14 @@ type ArrowButtonProps = {
   url: string;
   className?: string; // Optional className prop
   label?: string | null; // Optional label prop (can be null)
+  newTab?: boolean; // Optional newTab prop
 };
 
 const LinkButton: React.FC<ArrowButtonProps> = ({
   url,
   className = '',
   label = null,
+  newTab = false,
 }) => {
   return (
     <Link
@@ -18,14 +20,17 @@ const LinkButton: React.FC<ArrowButtonProps> = ({
       className={`
         inline-flex items-center justify-center text-current
         border-2 border-[#000] dark:border-white
-        transition-[border-radius, border-color] duration-[300ms] ease-out
-        rounded-[0rem] hover:rounded-[1.1rem]
+        transition-[border-radius, border-color, background-color, transform] duration-[300ms] ease-out
+        rounded-[0rem] hover:rounded-[1.1rem] active:rounded-[1.1rem] // Match hover and active corner radius
         py-3 px-4
-        bg-transparent
-        hover:border-[#555]
+        bg-transparent hover:bg-[#f0f0f0] dark:hover:bg-[#222] // Add hover background color
+        active:bg-[#e0e0e0] dark:active:bg-[#333] // Active background color with easing
+        hover:border-[#555] active:border-[#333] // Border color for hover and active
         whitespace-nowrap // Prevent wrapping of text
         ${className} // Merge external className with internal styles
       `}
+      target={newTab ? '_blank' : '_self'}
+      rel={newTab ? 'noopener noreferrer' : undefined}
     >
       <div className="flex items-center space-x-2">
         {label && (
