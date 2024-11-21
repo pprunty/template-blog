@@ -86,13 +86,8 @@
   /* Light mode */
   * {
     scrollbar-width: thin; /* Make scrollbar narrower */
-    scrollbar-color: #000 #F0F0F0; /* Thumb and track colors */
   }
 
-  /* Dark mode */
-  .dark * {
-    scrollbar-color: #ccc #1c1c1c; /* Thumb and track colors */
-  }
 
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
