@@ -38,8 +38,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV !== 'development',
   },
   experimental: {
-    turbo: true,
-    scrollRestoration: true,
+    turbo: true
   },
   headers() {
       return [
