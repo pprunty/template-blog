@@ -22,6 +22,7 @@ import PhotoGrid from '@/components/PhotoGrid';
 import Strava from "@/app/blog/components/strava";
 import LinkButton from "@/components/LinkButton";
 import Carousel from "@/components/Carousel";
+import PDF from "@/app/blog/components/pdf"; // Import PDFViewer component
 
 // Import MemoizedImage from the new file
 import { MemoizedImage } from "@/components/MemoizedImage";
@@ -72,5 +73,6 @@ export function useMDXComponents(components?: { [component: string]: React.Compo
     TableOfContents,
     LinkButton,
     Carousel,
+    PDF: PDF, // Associate the PDF component with the `pdf` tag
   };
 }
