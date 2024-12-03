@@ -69,7 +69,7 @@
     "@uiw/codemirror-theme-atomone": "^4.23.6",
     "@uiw/react-codemirror": "^4.23.6",
     "autoprefixer": "^10.4.20",
-    "boxen": "^4.2.0",
+    "boxen": "^8.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.0.2",
     "eslint-config-prettier": "^9.1.0",
