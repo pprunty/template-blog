@@ -1,6 +1,8 @@
 import { AUTHOR, SITE_URL, DEFAULT_KEYWORDS } from '@/config';
 import Image from "next/image";
 import PhotoGrid from '@/components/PhotoGrid';
+import { MemoizedImage } from "@/components/MemoizedImage";
+import Link from 'next/link';
 
 export const photographyImages = [
     "/photography/0a94d7f5-834a-4567-86db-93f1ce8dc3ca.webp",
@@ -88,9 +90,10 @@ Outside work, you'll find me training for triathlons, hiking, or spending time w
 # Achievements [#achievements]
 
 * Earned a First Class Honors MSc. in High-Performance Computing (HPC) from Trinity College Dublin in 2020. [Learn more about HPC here](blog/what-is-high-performance-computing).
-* Completed the 2023 Dublin Marathon—my first marathon—with a [time of 3:24:53](https://www.strava.com/activities/10125503113/best-efforts). In memory of a dear friend who passed away suddenly the previous year, I raised over €1,500 for the [Irish Heart Foundation](https://irishheart.ie/).
+* Completed the 2023 Dublin Marathon—my first marathon—with a [time of 3:24:53](https://www.strava.com/activities/10125503113/best-efforts). Raising over €1,500 for the [Irish Heart Foundation](https://irishheart.ie/), in memory of a dear friend who passed away suddenly the previous year.
 * Claimed second place in my debut triathlon at the 2024 RDJ Try-A-Triathlon, [finishing in 51:24](https://www.strava.com/activities/12229188198).
-* Developed [blog.v2](https://github.com/pprunty/blog.v2), a high-performance blog template built with [NextJS 15](https://nextjs.org/). This open-source project combines minimalist design with robust features. Read about my development journey in [New Blog. Who Dis?](/blog/new-blog-who-dis)
+* Developed [motormongo](https://github.com/pprunty/motormongo), a Python library and Object Document Mapper (ODM) for MongoDB built on-top of Motor's asynchronous library for asynchronous CRUD operations. The documentation site for this package is available [here](https://motormongo.readthedocs.io/en/latest/index.html).
+* Actively developing [Samwise](https://github.com/pprunty/samwise), a high-performance blog template built with [NextJS 15](https://nextjs.org/). This open-source project combines minimalist design with robust features. Read about its development journey in [New Blog. Who Dis?](/blog/new-blog-who-dis)
 
 # CV [#cv]
 
@@ -113,16 +116,38 @@ My CV is available [here](/downloads/pprunty_CV.pdf).
 
 [Jigsaw Presents](https://www.youtube.com/channel/UCx8iHEGQMyeInLgPQ81-EJA?sub_confirmation=1) is a YouTube Channel... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan semper risus, eget egestas sapien egestas vitae. Praesent a mollis elit, lobortis mollis orci. Suspendisse efficitur, nibh quis interdum mattis, purus mauris fringilla lacus, ut luctus nulla magna a est. Interdum et malesuada fames ac ante ipsum primis in faucibus.
 
-<LinkButton url="https://www.youtube.com/channel/UCx8iHEGQMyeInLgPQ81-EJA?sub_confirmation=1" label="VIEW PROJECT" newTab={true} />
+<Link
+href="https://www.youtube.com/channel/UCx8iHEGQMyeInLgPQ81-EJA?sub_confirmation=1"
+>
+<MemoizedImage
+src={"/images/projects/jigsaw-presents.webp"}
+alt={"Link to Jigsaw Presents YouTube Channel"}
+width={620}
+height={500}
+loading="lazy"
+focusable={false}
+priority={false}
+/>
+</Link>
 
-![Jigsaw Presents Logo](/images/projects/jigsaw-presents.webp)
+## Samwise [#samwise]
 
-## blog.v2 [#blog.v2]
-[blog.v2]() is an open sourced digital blogging template built with NextJS 15. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan semper risus, eget egestas sapien egestas vitae. Praesent a mollis elit, lobortis mollis orci. Suspendisse efficitur, nibh quis interdum mattis, purus mauris fringilla lacus, ut luctus nulla magna a est. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+[Samwise]() is an open sourced digital blogging template built with NextJS 15. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan semper risus, eget egestas sapien egestas vitae. Praesent a mollis elit, lobortis mollis orci. Suspendisse efficitur, nibh quis interdum mattis, purus mauris fringilla lacus, ut luctus nulla magna a est. Interdum et malesuada fames ac ante ipsum primis in faucibus.
 
-<LinkButton url="https://blog-v2-template.vercel.app/" label="VIEW PROJECT" newTab={true}/>
+<Link
+href="https://samwise-v2-template.vercel.app/"
+>
+<MemoizedImage
+src={"/images/projects/samwise-v2.webp"}
+alt={"samwise Logo"}
+width={620}
+height={500}
+loading="lazy"
+focusable={false}
+priority={false}
+/>
+</Link>
 
-![blog.v2 Logo](/images/projects/blog-v2.webp)
 
 # Photography [#photography]
 
