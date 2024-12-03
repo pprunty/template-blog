@@ -1,12 +1,18 @@
 // src/app/page.tsx
-import { BlogPostType } from '@/types/BlogPost';
-import BlogPostList from '@/components/BlogPostList';
-import { getAllPosts } from '@/utils/getAllPosts';
+import { BlogPostType } from '@/__samwise/types/BlogPost';
+import BlogPostList from '@/modules/blog/templates/BlogPostList';
+import { getAllPosts } from '@/__samwise/utils/getAllPosts';
+import PillarMenu from '@/modules/common/components/PillarMenu';
+import { ButtonsArrayType } from '@/__samwise/types/Buttons';
 
 export const revalidate = 60; // Revalidate the page every 60 seconds
 
 export default async function PostsPage() {
   const posts = await getAllPosts();
+  const buttons: ButtonsArrayType = [
+    { type: 'edit-blog' },
+    { type: 'create-post' },
+  ];
 
   const postsByYear = posts.reduce(
     (acc, post) => {
@@ -22,5 +28,10 @@ export default async function PostsPage() {
     {} as Record<string, BlogPostType[]>,
   );
 
-  return <BlogPostList postsByYear={postsByYear} />;
+  return (
+    <>
+      <BlogPostList postsByYear={postsByYear} />
+      <PillarMenu buttons={buttons} />
+    </>
+  );
 }

@@ -40,19 +40,6 @@ const nextConfig = {
   experimental: {
     turbo: true
   },
-  headers() {
-      return [
-        {
-          source: "/images/me.WEBP",
-          headers: [
-            {
-              key: "cache-control",
-              value: "public, max-age=31536000, immutable",
-            },
-          ],
-        },
-      ];
-    },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
 

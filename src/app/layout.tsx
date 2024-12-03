@@ -1,14 +1,17 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { AUTHOR, SITE_URL, DEFAULT_KEYWORDS } from '@/config';
+import { AUTHOR, SITE_URL, SOCIAL_URLS, DEFAULT_KEYWORDS } from '@/config';
 import { doge } from './doge';
-import { themeEffect } from '@/components/ThemeSwitcher/theme-effect';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { themeEffect } from '@/modules/common/templates/ThemeSwitcher/theme-effect';
+import Header from '@/modules/layout/templates/Header';
+import Footer from '@/modules/layout/templates/Footer';
 import type { Viewport } from 'next';
 import { Suspense } from 'react';
 import type { Metadata } from 'next';
-import ClientOnlyAnalytics from '@/components/ClientOnlyAnalytics';
+import ClientOnlyAnalytics from '@/modules/common/templates/ClientOnlyAnalytics';
+import ClientSideScrollRestorer from '@/modules/common/components/ClientSideScrollRestorer';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Define viewport settings
 export const viewport: Viewport = {
@@ -21,39 +24,44 @@ export const viewport: Viewport = {
 // Font settings
 const inter = Inter({
   subsets: ['latin'], // Only include necessary subsets
-  weight: ['400', '700'], // Specify required font weights
+  weight: ['400', '500', '600', '700'], // Specify required font weights
 });
 
 // Define metadata
 export const metadata: Metadata = {
-  title: `${AUTHOR.name}'s blog`,
+  title: `${AUTHOR.name}`,
   description: `${AUTHOR.description}`, // Use AUTHOR's updated description from config
-  keywords: DEFAULT_KEYWORDS,
+  keywords: [
+    ...DEFAULT_KEYWORDS, // Spread the existing keywords array
+    'samwise',
+    'Patrick Prunty',
+    'NextJS',
+  ],
   manifest:
     process.env.NODE_ENV === 'production'
       ? '/manifest.prod.json'
       : '/manifest.json',
   openGraph: {
-    title: `${AUTHOR.name}'s blog`,
+    title: `${AUTHOR.name}`,
     description: `${AUTHOR.description}`, // Use AUTHOR's updated description from config
     url: SITE_URL,
-    siteName: `${AUTHOR.name}'s blog`,
+    siteName: `${AUTHOR.name}`,
     images: [
       {
-        url: `${SITE_URL}/icon.png`,
-        alt: `${AUTHOR.name} out hiking`,
+        url: `${SITE_URL}/icon.webp`,
+        alt: `${AUTHOR.name} profile picture`,
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    site: `${AUTHOR.twitterHandle}`,
-    creator: `${AUTHOR.twitterHandle}`,
+    site: `${SOCIAL_URLS.twitter}`,
+    creator: `${SOCIAL_URLS.twitter}`,
     images: [
       {
-        url: `${SITE_URL}/icon.png`,
-        alt: `${AUTHOR.name} out hiking`,
+        url: `${SITE_URL}/icon.webp`,
+        alt: `${AUTHOR.name} profile picture`,
       },
     ],
   },
@@ -73,15 +81,16 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: AUTHOR.name,
-    jobTitle: 'Software Engineer',
+    jobTitle: `${AUTHOR.bio}`,
     description: `${AUTHOR.description}`,
     url: SITE_URL,
     sameAs: [
-      AUTHOR.twitterUrl,
-      AUTHOR.stravaUrl,
-      AUTHOR.githubUrl,
-      AUTHOR.redditUrl,
-      AUTHOR.linkedinUrl,
+      // todo: only use user provided input for socials here
+      SOCIAL_URLS.twitter,
+      SOCIAL_URLS.strava,
+      SOCIAL_URLS.github,
+      SOCIAL_URLS.reddit,
+      SOCIAL_URLS.linkedin,
     ],
   };
 
@@ -103,7 +112,7 @@ export default function RootLayout({
             __html: JSON.stringify(jsonLd),
           }}
         />
-        {/* ensure your logo/icon is named "icon.png" and in the public directory for favicon support */}
+        {/* ensure your logo/icon is named "icon.webp" and in the public directory for favicon support */}
         <link rel="icon" href="/icons/32x32.png" sizes="any" />
       </head>
       <body className={`dark:text-gray-100 max-w-2xl m-auto`}>
@@ -113,8 +122,23 @@ export default function RootLayout({
             {children}
             <Footer />
           </Suspense>
+          <Suspense>
+            <ClientSideScrollRestorer />
+          </Suspense>
         </main>
         <ClientOnlyAnalytics />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
       </body>
     </html>
   );

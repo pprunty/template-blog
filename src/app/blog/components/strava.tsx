@@ -23,9 +23,9 @@ const Strava: React.FC<StravaProps> = ({
   }, []);
 
   return (
-    <div className="flex justify-center my-6">
+    <div className="flex justify-center my-6 rounded-2xl">
       <div
-        className="strava-embed-placeholder rounded-2xl w-full max-w-2xl"
+        className="strava-embed-placeholder w-full max-w-md rounded-2xl overflow-hidden border border-gray-300 shadow-md"
         data-embed-type="activity"
         data-embed-id={activityId}
         data-style={styleType}

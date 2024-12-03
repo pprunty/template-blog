@@ -1,10 +1,10 @@
 // src/app/blog/[slug]/header.tsx
 
-import { getViewCount } from '@/utils/fetchViewCount';
+import { getViewCount } from '@/__samwise/utils/fetchViewCount';
 import { formatDistanceToNow } from 'date-fns';
-import Views from '@/components/Views';
-import { BlogPostType } from '@/types/BlogPost';
-import { H1 } from '@/app/blog/components/h1';
+import ViewCounter from '@/modules/blog/components/ViewCounter';
+import { BlogPostType } from '@/__samwise/types/BlogPost';
+import { H1 } from '@/app/blog/components//h1';
 
 interface HeaderProps {
   currentPost: BlogPostType | null;
@@ -29,7 +29,7 @@ export default async function Header({ currentPost }: HeaderProps) {
     <div suppressHydrationWarning={true}>
       {/* Header Section */}
       <H1>{currentPost.title}</H1>
-      <p className="font-mono flex text-xs text-gray-700 dark:text-gray-300">
+      <p className="font-mono flex text-xs text-gray-700 dark:text-[#999999]">
         <span className="flex-grow">
           <span className="hidden md:inline">
             <span>
@@ -52,7 +52,7 @@ export default async function Header({ currentPost }: HeaderProps) {
           </span>
         </span>
         <span className="pr-1.5" suppressHydrationWarning={true}>
-          <Views
+          <ViewCounter
             id={currentPost.slug}
             defaultValue={views}
             incrementOnMount={true}

@@ -1,4 +1,5 @@
-// Main file
+// mdx-components.js
+
 import { A as a } from "@/app/blog/components/a";
 import { P as p } from "@/app/blog/components/p";
 import { H1 as h1 } from "@/app/blog/components/h1";
@@ -18,61 +19,80 @@ import 'highlight.js/styles/atom-one-dark.css';
 import { InlineCode } from "@/app/blog/components/code";
 import { Admonition } from '@/app/blog/components/admonition';
 import { TableOfContents } from "@/app/blog/components/toc";
-import PhotoGrid from '@/components/PhotoGrid';
+import PhotoGrid from "@/modules/common/templates/PhotoGrid";
 import Strava from "@/app/blog/components/strava";
-import LinkButton from "@/components/LinkButton";
-import Carousel from "@/components/Carousel";
+import TikTok from "@/app/blog/components/tiktok";
+import LinkedIn from "@/app/blog/components/linkedin";
+import Twitter from "@/app/blog/components/twitter";
+import { Table, TableHeader, TableCell, TableRow } from '@/app/blog/components/table';
+import Image from "next/image";
+import { MemoizedImage } from "@/modules/common/components/MemoizedImage";
+import Grid from "@/modules/common/components/Grid";
+import Carousel from "@/modules/common/components/Carousel";
+import LinkButton from "@/modules/common/components/LinkButton";
 import PDF from "@/app/blog/components/pdf"; // Import PDFViewer component
+import StarRating from "@/app/blog/components/rating";
 
-// Import MemoizedImage from the new file
-import { MemoizedImage } from "@/components/MemoizedImage";
+// Collect all components into an object
+export const MDXComponents = {
+  a,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  ol,
+  ul,
+  li,
+  hr,
+  code: InlineCode,
+  blockquote,
+  Admonition,
+    img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    const { src, alt } = props;
+    if (!src) return null;
+    const width = 620;
+    const height = 500;
+    return (
+      <MemoizedImage
+        src={src}
+        alt={alt || "Image"}
+        width={width}
+        height={height}
+        loading="lazy"
+        priority={false}
+      />
+    );
+  },
+  Figure,
+  Caption,
+  YouTube,
+  PhotoGrid,
+  Strava,
+  TikTok,
+  LinkedIn,
+  Twitter,
+  Ref,
+  FootNotes,
+  FootNote,
+  TableOfContents,
+  table: Table,
+  th: TableHeader,
+  td: TableCell,
+  tr: TableRow,
+  Image,
+  Grid,
+  Carousel,
+  LinkButton,
+  MemoizedImage,
+  PDF,
+  StarRating
+};
 
-export function useMDXComponents(components?: { [component: string]: React.ComponentType }) {
+// Export useMDXComponents function
+export function useMDXComponents(components = {}) {
   return {
     ...components,
-    a,
-    h1,
-    h2,
-    h3,
-    h4,
-    p,
-    ol,
-    ul,
-    li,
-    hr,
-    code: InlineCode,
-    blockquote,
-    Admonition,
-    img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-      const { src, alt } = props;
-
-      if (!src) return null; // No image rendered
-
-      const width = 620;
-      const height = 500;
-
-      return (
-        <MemoizedImage
-          src={src}
-          alt={alt || "Image"}
-          width={width}
-          height={height}
-          loading="lazy"
-          priority={false}
-        />
-      );
-    },
-    Figure,
-    Caption,
-    YouTube,
-    PhotoGrid,
-    Strava,
-    Ref,
-    FootNotes,
-    FootNote,
-    TableOfContents,
-    LinkButton,
-    Carousel,
-    PDF: PDF, // Associate the PDF component with the `pdf` tag
+    ...MDXComponents,
   };
 }

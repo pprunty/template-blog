@@ -10,12 +10,26 @@ const config: Config = {
   darkMode: "class",
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./scripts/*.{js,ts,jsx,tsx,mdx}"
+    "./scripts/**/*.{js,ts,jsx,tsx,mdx}" // Fix wildcard pattern for scripts folder
   ],
-   theme: {
-      extend: {
-      }
+  theme: {
+    extend: {
+      keyframes: {
+        modalShow: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' }, // Cast opacity as a string
+          '100%': { opacity: '1', transform: 'scale(1)' },  // Cast opacity as a string
+        },
+        modalHide: {
+          '0%': { opacity: '1', transform: 'scale(1)' },    // Cast opacity as a string
+          '100%': { opacity: '0', transform: 'scale(0.95)' }, // Cast opacity as a string
+        },
+      },
+      animation: {
+        modalShow: 'modalShow 0.3s ease-out forwards',
+        modalHide: 'modalHide 0.3s ease-out forwards',
+      },
     },
+  },
   plugins: [
     plugin(function ({ addVariant }: { addVariant: (name: string, rule: string) => void }) {
       // Adding theme-system variant

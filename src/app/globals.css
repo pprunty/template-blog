@@ -18,7 +18,7 @@
     color-scheme: light;
 
     @apply bg-[#fcfcfc];
-    @apply text-[#111];
+    @apply text-[#000];
   }
 
   img {
@@ -60,13 +60,10 @@
   /* Customize scrollbar for WebKit browsers (Chrome, Safari) */
   /* Light mode scrollbar styles */
   ::-webkit-scrollbar {
-    width: 12px; /* Make scrollbar narrower */
-    height: 12px;
+    width: 6px; /* Make scrollbar narrower */
+    height: 6px;
   }
 
-  ::-webkit-scrollbar-track {
-    background: #F0F0F0; /* Light gray track */
-  }
 
   ::-webkit-scrollbar-thumb {
     background-color: #000; /* Black thumb */
@@ -88,6 +85,9 @@
     scrollbar-width: thin; /* Make scrollbar narrower */
   }
 
+  /* Dark mode */
+  .dark * {
+  }
 
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -100,8 +100,15 @@
   font-variation-settings: normal;
   -webkit-tap-highlight-color: transparent;
 
-  /* Apply global styles to pre and code tags */
+  pre {
+    margin: 1rem 0 !important;
+  }
 
+    blockquote, dl, dd, hr, pre {
+        margin: 1rem 0 !important;
+    }
+
+  /* Apply global styles to pre and code tags */
   pre code {
     font-family: monospace;
     font-size: 14px; /* Ensure code within pre has smaller font */
@@ -132,6 +139,23 @@
   .toc a:hover {
     color: #2b6cb0; /* Example hover color */
   }
+
+/* Hide scrollbars for iOS and all devices */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  overflow: hidden;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+/* Ensures horizontal overflow is hidden on iOS */
+.hide-scrollbar {
+  overflow-x: hidden !important;
+}
+
 }
 
 /* Initial state */

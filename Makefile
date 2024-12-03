@@ -1,4 +1,4 @@
-# Makefile for blog-v2
+# Makefile for samwise
 
 # Variables
 NODE_ENV=production
@@ -60,7 +60,7 @@ post:
 # Generate Lighthouse report
 .PHONY: lighthouse
 lighthouse:
-	$(eval URL ?= https://blog-v2-template.vercel.app/)
+	$(eval URL ?= https://samwise-v2.vercel.app/)
 	$(eval DEVICE ?= mobile)  # Default to mobile if not specified
 	lighthouse $(URL) --emulated-form-factor=$(DEVICE) --output=html --view --chrome-flags="--incognito" --output-path=./lighthouse_report_$(DEVICE).html
 

@@ -1,15 +1,21 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Caption } from './caption';
 import { FileText } from 'lucide-react';
 
 interface PDFViewerProps {
   file: string;
   caption?: string | null;
+  previewImage?: string; // Optional preview image
 }
 
-const PDF: React.FC<PDFViewerProps> = ({ file, caption = null }) => {
+const PDF: React.FC<PDFViewerProps> = ({
+  file,
+  caption = null,
+  previewImage,
+}) => {
   const [iframeSrc, setIframeSrc] = useState<string>('about:blank');
 
   useEffect(() => {
@@ -21,10 +27,10 @@ const PDF: React.FC<PDFViewerProps> = ({ file, caption = null }) => {
     <div>
       {/* Mobile View */}
       <div className="block md:hidden">
-        <a href={file} target="_blank" rel="noopener noreferrer">
-          <div className="w-full aspect-[4/5] bg-gray-100 dark:bg-[#0D0D0D] border dark:border-[#252525] flex flex-col items-center justify-center">
-            <FileText className="h-10 w-10 text-gray-600 dark:text-gray-300 mb-2" />
-            <span className="font-mono text-sm text-gray-600 dark:text-gray-300 text-center">
+        <Link href={file} target="_blank" rel="noopener noreferrer">
+          <div className="w-full aspect-[4/5] rounded-sm bg-gray-100 dark:bg-[#0D0D0D] border dark:border-[#252525] flex flex-col items-center justify-center">
+            <FileText className="h-10 w-10 text-gray-600 dark:text-[#999999] mb-2" />
+            <span className="font-mono text-sm text-gray-600 dark:text-[#999999] text-center">
               {caption && (
                 <>
                   <span className="mb-2">{caption}</span>
@@ -34,7 +40,7 @@ const PDF: React.FC<PDFViewerProps> = ({ file, caption = null }) => {
               (click to open)
             </span>
           </div>
-        </a>
+        </Link>
       </div>
 
       {/* Desktop View */}
@@ -46,6 +52,7 @@ const PDF: React.FC<PDFViewerProps> = ({ file, caption = null }) => {
             frameBorder="0"
             scrolling="auto"
             tabIndex={-1}
+            aria-hidden="true"
             loading="lazy"
           />
         </div>

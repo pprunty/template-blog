@@ -21,7 +21,7 @@ export function InlineCode({
       className="
                           text-sm
                           bg-gray-800 text-white
-                          dark:bg-[#222] dark:text-gray-300
+                          dark:bg-[#222] dark:text-[#999999]
 
                           overflow-scroll"
     >

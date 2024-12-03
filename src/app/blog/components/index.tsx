@@ -1,5 +1,3 @@
-// components/blog/index.ts
-
 export { A as a } from './a';
 export { P as p } from './p';
 export { H1 as h1 } from './h1';
@@ -10,14 +8,16 @@ export { OL as ol } from './ol';
 export { UL as ul } from './ul';
 export { LI as li } from './li';
 export { HR as hr } from './hr';
-export { Figure } from './figure';
-export { Caption } from './caption';
-export { YouTube } from './youtube';
+export { Figure } from './figure'; // Ensure `figure` has a default export
+export { Caption } from './caption'; // Ensure `caption` has a default export
+export { YouTube } from './youtube'; // Ensure `youtube` has a default export
 export { Ref, FootNotes, FootNote } from './footnotes';
 export { Blockquote as blockquote } from './blockquote';
-export { InlineCode as code } from './code';
+export { InlineCode } from './code'; // Ensure `code` has a default export
 export { Admonition } from './admonition';
-export { TableOfContents } from './toc';
-export { default as PhotoGrid } from '@/components/PhotoGrid';
-export { default as Strava } from './strava';
-export { MemoizedImage } from '@/components/MemoizedImage';
+export { Table, TableHeader, TableCell, TableRow } from './table';
+export { default as Strava } from './strava'; // Ensure `strava` has a default export
+export { default as TikTok } from './tiktok'; // Ensure `tiktok` has a default export
+export { default as LinkedIn } from './linkedin'; // Ensure `linkedin` has a default export
+export { default as Twitter } from './twitter'; // Ensure `twitter` has a default export
+export { default as PDF } from './pdf'; // Ensure `pdf` has a default export

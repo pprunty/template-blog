@@ -1,21 +1,16 @@
-import fs from 'fs';
-import path from 'path';
+// generate-slugs.js
+import { generateSlugsJson } from '../src/__samwise/utils/generateSlugs'; // Adjust the path as needed
 
-// Define the type for the 'postsDirectory'
-const postsDirectory: string = path.join(__dirname, '..', 'src', 'posts');
-
-// Read the directory and filter the results
-const slugs: string[] = fs
-  .readdirSync(postsDirectory)
-  .filter((name: string) => !name.startsWith('.')) // Filter out hidden files
-  .filter((name: string) =>
-    fs.statSync(path.join(postsDirectory, name)).isDirectory()
-  );
-
-// Define the output path for the JSON file
-const outputPath: string = path.join(__dirname, '..', 'src', 'posts', 'slugs.json');
-
-// Write the slugs to a JSON file
-fs.writeFileSync(outputPath, JSON.stringify(slugs, null, 2));
-
-console.log(`Slugs saved to ${outputPath}`);
+(async () => {
+  try {
+    await generateSlugsJson();
+    console.log('✅ slugs.json generated successfully!');
+  } catch (error) {
+    // Check if the error is an instance of Error
+    if (error instanceof Error) {
+      console.error('❌ Error generating slugs.json:', error.message);
+    } else {
+      console.error('❌ Unknown error generating slugs.json:', error);
+    }
+  }
+})();

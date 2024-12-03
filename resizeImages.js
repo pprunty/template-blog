@@ -17,12 +17,19 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
 
+// Define the desired dimensions for the resized images
+const width = 600; // Set your desired width here
+const height = 980; // Set your desired height here
+
 // Function to resize and convert images to WebP format
 async function processImage(imagePath) {
   const fileName = path.basename(imagePath, path.extname(imagePath)); // Get the file name without extension
 
   try {
     await sharp(imagePath)
+//      .resize(width, height, {
+//        fit: 'cover', // Adjust the resize strategy to fit your needs
+//      })
       .toFormat('webp')
       .toFile(path.join(outputDir, `${fileName}.webp`));
 
