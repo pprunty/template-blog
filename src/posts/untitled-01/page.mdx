@@ -1,45 +1,31 @@
 import { SITE_URL, AUTHOR } from '@/config';
 
 export const metadata = {
-  title: 'Untitled 01',
-  description: 'An experimental poem by Patrick Prunty.',
-  image: '/images/untitled-01/untitled-01.webp',
-  date: '2024-12-04',
-  author: 'Patrick Prunty',
-  authorUrl: 'https://patrickprunty.vercel.app/about',
+  title: "Untitled 01",
+  image: `/images/untitled-01/PJ_dinner.webp`,
+  description: "An experimental poem by Patrick Prunty.",
+  date: "2024-07-18",
   openGraph: {
-    title: 'Untitled 01',
-    description: 'An experimental poem by Patrick Prunty.',
-    url: '/blog/untitled-01',
+    title: "Untitled 01",
+    description: "An experimental poem by Patrick Prunty.",
+    type: "article",
+    url: "/blog/untitled-01",
     images: [
       {
-        url: 'http://localhost:3000/images/untitled-01/untitled-01.webp',
-        alt: 'Untitled 01'
-      }
+        url: `${SITE_URL}/images/untitled-01/PJ_dinner.webp`,
+        alt: "Artwork by Jak Ruiz for Untitled 01",
+      },
     ],
-    type: 'article',
-    tags: [
-      'poetry',
-      'experimental',
-      'creative writing',
-      'writing'
-    ]
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Untitled 01',
-    description: 'An experimental poem by Patrick Prunty.',
-    image: 'http://localhost:3000/images/untitled-01/untitled-01.webp'
+    card: "summary_large_image",
+    title: "Untitled 01",
+    description: "An experimental poem by Patrick Prunty.",
+    image: `${SITE_URL}/images/untitled-01/PJ_dinner.webp`,
   },
-  keywords: [
-    'poetry',
-    'experimental',
-    'creative writing',
-    'writing'
-  ],
-  slug: 'untitled-01',
-  readingTime: 1,
-  draft: false
+  keywords: ["poetry", "experimental", "creative writing", "writing"],
+  slug: "untitled-01",
+  readingTime: 2,
 };
 
 Deliciously delicate so delectable this.
