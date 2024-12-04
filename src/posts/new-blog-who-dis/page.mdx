@@ -1,50 +1,53 @@
-import { SITE_URL } from '@/config';
+import { SITE_URL, AUTHOR } from '@/config';
 
 export const metadata = {
-  title: "New Blog. Who Dis?",
-  description: "Discover the inspiration and development process behind blog.v2, the NextJS 15 blog template. The most high-performance, minimalist, yet feature-rich open-sourced digital blogging platform.",
-  image: "/images/new-blog-who-dis/vercel.webp",
-  date: "2024-10-18",
-  author: "Patrick Prunty",
-  authorUrl: "https://patrickprunty.vercel.app/about",
+  title: 'New Blog. Who Dis?',
+  description: 'Discover the inspiration and development process behind blog.v2, the NextJS 15 blog template. The most high-performance, minimalist, yet feature-rich open-sourced digital blogging platform.',
+  image: '/images/new-blog-who-dis/new-blog-who-dis.webp',
+  date: '2024-12-04',
+  author: 'Patrick Prunty',
+  authorUrl: 'https://patrickprunty.vercel.app/about',
   openGraph: {
-    title: "New Blog. Who Dis?",
-    description: "Discover the inspiration and development process behind blog.v2, the NextJS 15 blog template. The most high-performance, minimalist, yet feature-rich open-sourced digital blogging platform.",
-    url: "/blog/new-blog-who-dis",
+    title: 'New Blog. Who Dis?',
+    description: 'Discover the inspiration and development process behind blog.v2, the NextJS 15 blog template. The most high-performance, minimalist, yet feature-rich open-sourced digital blogging platform.',
+    url: '/blog/new-blog-who-dis',
     images: [
       {
-        url: `${SITE_URL}/images/new-blog-who-dis/vercel.webp`,
-        alt: "New Blog. Who Dis?",
-      },
+        url: 'http://localhost:3000/images/new-blog-who-dis/new-blog-who-dis.webp',
+        alt: 'New Blog. Who Dis?'
+      }
     ],
     type: 'article',
-    tags: ["blog.v2", "programming", "open source", "blogging", "technology", "nextjs", "react", "software developement"],
+    tags: [
+      'blog.v2',
+      'programming',
+      'open source',
+      'blogging',
+      'technology',
+      'nextjs',
+      'react',
+      'software developement'
+    ]
   },
   twitter: {
-    card: "summary_large_image",
-    title: "New Blog. Who Dis?",
-    description: "Discover the inspiration and development process behind blog.v2, the NextJS 15 blog template. The most high-performance, minimalist, yet feature-rich open-sourced digital blogging platform.",
-    image: `${SITE_URL}/images/new-blog-who-dis/vercel.webp`,
+    card: 'summary_large_image',
+    title: 'New Blog. Who Dis?',
+    description: 'Discover the inspiration and development process behind blog.v2, the NextJS 15 blog template. The most high-performance, minimalist, yet feature-rich open-sourced digital blogging platform.',
+    image: 'http://localhost:3000/images/new-blog-who-dis/new-blog-who-dis.webp'
   },
-  keywords: ["blog.v2", "programming", "open source", "blogging", "technology", "nextjs", "react", "software developement"],
-  slug: "new-blog-who-dis",
-  readingTime: 1
+  keywords: [
+    'blog.v2',
+    'programming',
+    'open source',
+    'blogging',
+    'technology',
+    'nextjs',
+    'react',
+    'software developement'
+  ],
+  slug: 'new-blog-who-dis',
+  readingTime: 1,
+  draft: false
 };
-
-![Vercel Logo](/images/new-blog-who-dis/vercel.webp)
-
-The best way to display a loading spinner from a user experience (UX) perspective is by not displaying it at all. This
-is the mantra I repeated to myself whilst I developed the new version of my blog, [blog.v2](), and abstracted it
-as a [NextJS 15]() template for [open source use]().
-
-# The old blog [#the-old-blog]
-
-# NextJS: The New Frontend Frontier [#nextjs]
-
-Why next.js, etc.
-
-# Why Performance Matters [#performance-matters]
-
-# Image Optimization [#image-optimization]
 
 .webp, next/image, animations, memoization, LCP

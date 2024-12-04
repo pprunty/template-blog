@@ -1,4 +1,4 @@
-import { SITE_URL } from '@/config';
+import { SITE_URL, AUTHOR } from '@/config';
 
 export const vietnamImages = [
     "/images/2024-in-review/vietnam4.webp",
@@ -10,34 +10,50 @@ export const vietnamImages = [
 ];
 
 export const metadata = {
-  title: "2024 in Review",
+  title: '2024 in Review',
   description: "A look back on a transformative year filled with achievements, insights, and pivotal trends across technology, outdoor pursuits, and entrepreneurial ventures—reflecting on lessons learned and charting the path forward for the year ahead.",
-  image: "/images/2024-in-review/ablade-glover.webp",
-  date: "2024-12-30",
-  author: "Patrick Prunty",
-  authorUrl: "https://patrickprunty.vercel.app/about",
+  image: '/images/2024-in-review/2024-in-review.webp',
+  date: '2024-12-04',
+  author: 'Patrick Prunty',
+  authorUrl: 'https://patrickprunty.vercel.app/about',
   openGraph: {
-    title: "2024 in Review",
-    description: "A look back on a transformative year filled with achievements, insights, and pivotal trends across technology, outdoor pursuits, and entrepreneurial ventures—reflecting on lessons learned and charting the path forward for the year ahead.",
-    url: "/blog/2024-in-review",
+    title: '2024 in Review',
+  description: "A look back on a transformative year filled with achievements, insights, and pivotal trends across technology, outdoor pursuits, and entrepreneurial ventures—reflecting on lessons learned and charting the path forward for the year ahead.",
+    url: '/blog/2024-in-review',
     images: [
       {
-        url: `${SITE_URL}/images/2024-in-review/ablade-glover.webp`,
-        alt: "2024 in Review",
-      },
+        url: 'http://localhost:3000/images/2024-in-review/2024-in-review.webp',
+        alt: '2024 in Review'
+      }
     ],
     type: 'article',
-    tags: ["yearly review", "artificial intelligence", "projects", "open source", "software", "programming", "technology"],
+    tags: [
+      'yearly review',
+      'artificial intelligence',
+      'projects',
+      'open source',
+      'software',
+      'programming',
+      'technology'
+    ]
   },
   twitter: {
-    card: "summary_large_image",
-    title: "2024 in Review",
-    description: "A look back on a transformative year filled with achievements, insights, and pivotal trends across technology, outdoor pursuits, and entrepreneurial ventures—reflecting on lessons learned and charting the path forward for the year ahead.",
-    image: `${SITE_URL}/images/2024-in-review/ablade-glover.webp`,
+    card: 'summary_large_image',
+    title: '2024 in Review',
+  description: "A look back on a transformative year filled with achievements, insights, and pivotal trends across technology, outdoor pursuits, and entrepreneurial ventures—reflecting on lessons learned and charting the path forward for the year ahead.",
+    image: 'http://localhost:3000/images/2024-in-review/2024-in-review.webp'
   },
-  keywords: ["yearly review", "artificial intelligence", "projects", "open source", "software", "programming", "technology"],
-  slug: "2024-in-review",
-  readingTime: 3,
+  keywords: [
+    'yearly review',
+    'artificial intelligence',
+    'projects',
+    'open source',
+    'software',
+    'programming',
+    'technology'
+  ],
+  slug: '2024-in-review',
+  readingTime: 1,
   draft: true
 };
 
