@@ -32,6 +32,7 @@ import Carousel from "@/modules/common/components/Carousel";
 import LinkButton from "@/modules/common/components/LinkButton";
 import PDF from "@/app/blog/components/pdf"; // Import PDFViewer component
 import StarRating from "@/app/blog/components/rating";
+import MP3 from "@/app/blog/components/mp3";
 
 // Collect all components into an object
 export const MDXComponents = {
@@ -86,7 +87,8 @@ export const MDXComponents = {
   LinkButton,
   MemoizedImage,
   PDF,
-  StarRating
+  StarRating,
+  MP3
 };
 
 // Export useMDXComponents function
