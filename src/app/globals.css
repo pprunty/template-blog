@@ -17,7 +17,7 @@
     -webkit-tap-highlight-color: transparent;
     color-scheme: light;
 
-    @apply bg-[#f0f0f0];
+    @apply bg-[#fcfcfc];
     @apply text-[#000];
   }
 
@@ -30,7 +30,7 @@
     color-scheme: dark;
     /* You can change theme dark color here to #131313 for example, remember to change it in theme-effect.ts too */
     @apply bg-[#000];
-    @apply text-[#f0f0f0];
+    @apply text-[#fcfcfc];
   }
 
   /* Prevent transition delays */

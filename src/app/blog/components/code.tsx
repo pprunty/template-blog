@@ -12,7 +12,7 @@ export function InlineCode({
   const isInlineCode = !className;
 
   if (isInlineCode) {
-    return <code className="font-mono bg-[#f0f0f0] text-sm">{children}</code>;
+    return <code className="font-mono bg-[#fcfcfc] text-sm">{children}</code>;
   }
 
   // For code blocks, you might want to handle them differently
