@@ -52,7 +52,11 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
 
   return (
     <TooltipWrapper message={ariaLabel} position="left">
-      <button onClick={onClick} className={`text-white`} aria-label={ariaLabel}>
+      <button
+        onClick={onClick}
+        className={`text-white p-2`}
+        aria-label={ariaLabel}
+      >
         <IconComponent size={16} className="text-current" />
       </button>
     </TooltipWrapper>

@@ -83,7 +83,7 @@ const Carousel: React.FC<CarouselProps> = ({
           {items.map((item, index) => (
             <div
               key={index}
-              className={`min-w-[80%] snap-center flex-shrink-0 p-4 rounded-lg ${itemClassName}`}
+              className={`min-w-[80%] snap-center flex-shrink-0  rounded-lg ${itemClassName}`}
             >
               {item}
             </div>

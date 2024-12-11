@@ -35,7 +35,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, index }) => (
             {post.keywords.slice(0, 4).map((tag, index) => (
               <span
                 key={index}
-                className="text-[11px] border font-mono border-gray-400 dark:border-[#999999] text-gray-700 dark:text-[#999999] px-1"
+                className="text-[11px] lowercase border font-mono border-gray-400 dark:border-[#999999] text-gray-700 dark:text-[#999999] px-1"
               >
                 {tag}
               </span>

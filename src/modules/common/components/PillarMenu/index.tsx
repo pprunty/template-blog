@@ -142,17 +142,17 @@ const PillarMenu: React.FC<PillarMenuProps> = ({
   }
 
   return (
-    <div className="fixed top-1/2 right-0 transform -translate-y-1/2 flex flex-col space-y-2 mr-4 z-50">
+    <div className="fixed top-1/2 right-0 transform -translate-y-1/2 flex flex-col mr-4 z-50">
       {/* Menu Container */}
       <div
-        className={`transition-all shadow-lg duration-300 ease-in-out px-3 py-4 flex flex-col items-center rounded-full bg-[#000] dark:border-[#252525] border`}
+        className={`transition-all shadow-lg duration-300 ease-in-out py-1 flex flex-col items-center rounded-full bg-[#000] dark:border-[#252525] border`}
         style={{
           height: 'auto',
           opacity: 1,
         }}
       >
         {/* Menu Items */}
-        <ul className="flex flex-col items-center space-y-4">
+        <ul className="flex flex-col items-center space-y-2">
           {buttons.map((button, index) => (
             <li key={index}>
               <FloatingButton

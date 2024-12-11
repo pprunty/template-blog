@@ -25,13 +25,15 @@ const Showcase: React.FC<ShowcaseProps> = ({ items }) => {
   }, []);
 
   if (isCarousel) {
-    return <Carousel items={items} itemClassName="bg-gray-100" />;
+    return (
+      <Carousel items={items} itemClassName="bg-gray-100 max-w-xs mx-auto" />
+    );
   }
 
   return (
     <Grid columns={1} gap="gap-4 py-4">
       {items.map((item, index) => (
-        <div key={index} className="p-4 bg-gray-100 rounded-lg">
+        <div key={index} className="rounded-lg">
           {item}
         </div>
       ))}
