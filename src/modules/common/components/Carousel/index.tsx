@@ -83,7 +83,7 @@ const Carousel: React.FC<CarouselProps> = ({
           {items.map((item, index) => (
             <div
               key={index}
-              className={`max-w-[80%] sm:max-w-full snap-center rounded-lg flex-shrink-0 ${itemClassName}`}
+              className={`max-w-[80%] sm:max-w-full snap-center rounded-lg flex-shrink-0`}
             >
               {item}
             </div>
