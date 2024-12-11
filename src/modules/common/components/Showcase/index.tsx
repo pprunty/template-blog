@@ -26,7 +26,7 @@ const Showcase: React.FC<ShowcaseProps> = ({ items }) => {
 
   if (isCarousel) {
     return (
-      <Carousel items={items} itemClassName="bg-gray-100 max-w-xs mx-auto" />
+      <Carousel items={items} />
     );
   }
 
