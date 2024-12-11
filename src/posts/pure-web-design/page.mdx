@@ -1,0 +1,227 @@
+import { SITE_URL, AUTHOR } from '@/config';
+
+export const metadata = {
+  title: 'Pure Web Design [tmplate.xyz]',
+  description: 'Exploring a web design approach using Next.js by abstracting layout, container, and widget layers while centralizing route configurations for streamlined application management.',
+  image: '/images/pure-web-design/pure-web-design.webp',
+  date: '2024-12-10',
+  author: 'Patrick Prunty',
+  authorUrl: 'https://patrickprunty.vercel.app/about',
+  openGraph: {
+    title: 'Pure Web Design [tmplate.xyz]',
+    description: 'Exploring a web design approach using Next.js by abstracting layout, container, and widget layers while centralizing route configurations for streamlined application management.',
+    url: '/blog/pure-web-design',
+    images: [
+      {
+        url: `${SITE_URL}/images/pure-web-design/pure-web-design.webp`,
+        alt: 'Pure Web Design [tmplate.xyz]'
+      }
+    ],
+    type: 'article',
+    tags: [
+      'UI/UX',
+      'Web Development',
+      'tmplate.xyz',
+      'Web Design',
+      'Next.js',
+      'Abstraction',
+      'software development',
+      'programming'
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pure Web Design [tmplate.xyz]',
+    description: 'Exploring a web design approach using Next.js by abstracting layout, container, and widget layers while centralizing route configurations for streamlined application management.',
+    image: `${SITE_URL}/images/pure-web-design/pure-web-design.webp`
+  },
+  keywords: [
+    'UI/UX',
+    'Web Development',
+    'tmplate.xyz',
+    'Web Design',
+    'Next.js',
+    'Abstraction',
+  'software development',
+  'programming'
+  ],
+  slug: 'pure-web-design',
+  readingTime: 4,
+  draft: true
+};
+
+
+There are three different layers to a web application:
+
+1. Layout
+2. Container
+3. Widget
+
+```text
++-----------------------------------------------------+
+| *Layout Layer*                                      |
+| <--- e.g Footer, Header, Navigation                 |
+|                                                     |
+|   +---------------------------------------------+   |
+|   | *Container Layer*                           |   |
+|   | <--- e.g Grid, Stacked, TikTok snap-scroll  |   |
+|   |                                             |   |
+|   |   +---------------------------------+       |   |
+|   |   | *Widget Layer*                  |       |   |
+|   |   | <--- e.g Buttons, Cards, Media  |       |   |
+|   |   +---------------------------------+       |   |
+|   |                                             |   |
+|   |   +---------------------------------+       |   |
+|   |   | *Modals*                        |       |   |
+|   |   | <--- Triggered via widget       |       |   |
+|   |   +---------------------------------+       |   |
+|   +---------------------------------------------+   |
+|                                                     |
++-----------------------------------------------------+
+```
+<Caption>The Abstract Layers of Web Design: Layout, Containers and Widgets</Caption>
+
+
+# Configuration [#app-configuration]
+
+```json
+{
+  "production_url": "https://template-v3.vercel.app",
+  "layout": {
+    "mobile": "header_and_footer",
+    "desktop": "bottom_bar"
+  },
+  "routing": {
+    "primary": {
+
+    },
+    "secondary": {
+
+    },
+    "admin": {
+
+    },
+  },
+  "analytics": {
+    "ga_measurement_id": "",
+    "vercel_analytics": true,
+  },
+  "seo": {
+     "title": "the last man standing",
+      "publisher": {
+        "name": "Patrick Prunty",
+        "logo": "/icon.webp"
+      },
+      "bio": "high-performance, customisable nextjs blog template",
+      "description": "blog.v2: a high-performance, seo-optimised, and self-serviced nextjs 15 blog template. providing fast loading, image optimisation, dark/light themes, real-time markdown editing, and seamless vercel deployment—perfect for bloggers seeking a sleek, customisable, and professional platform."
+    },
+    "keywords": [
+      "blog.v2",
+      "nextjs",
+      "digital blog",
+      "open source",
+      "web development",
+      "ui/ux",
+      "high-performance",
+      "patrick prunty",
+      "minimalistic"
+    ],
+    "social_urls": {
+      "twitter": "",
+      "strava": "https://www.strava.com/athletes/72636452",
+      "github": "https://github.com/pprunty/blog.v2",
+      "linkedin": "https://www.linkedin.com/in/patrickprunty/",
+      "reddit": "",
+      "tiktok": "",
+      "instagram": "https://www.instagram.com/pprunty97/",
+      "youtube": "",
+      "email": "patrickprunty.business@gmail.com"
+    }
+  },
+  "blog": {
+    "is_blog_user_configured": true
+  }
+}
+```
+
+
+# Layout Layer [#layout-layer]
+
+The layout layer controls the user experience from a navigation point of view. The layout layer typically displays a
+header and footer, allowing users to navigate between pages in your web application. This should be as seamless as possible
+and responsive for different screen sizes.
+
+As a user you want:
+
+1. **Speed**: The user does not expect to see a delay when navigating between webpages. The best way to show a loading spinner
+is by not showing one at all.
+2. **Feedback**: The user should, after selecting an item in the navigation to receive feedback via animation,
+active color, or heading that they are on the page they selected.
+3. **Consistent Styling**: The user does not wish to see webpages that are totally different with respect to styling after
+navigation.
+
+
+From my experience, the most popular layouts are:
+
+**Desktop layouts**:
+
+- SidebarMenu (does not include footer)
+- HeaderAndFooter (includes footer)
+- NarrowHeaderAndFooter (includes footer)
+- SinglePageApplication
+
+**Mobile Layouts**:
+
+- BottomBar (optionally includes footer)
+- StickyHeader (includes footer)
+- HamburgerMenu (includes footer)
+- HeaderAndFooter (includes footer, obviously)
+
+## How I Solved the Navigation Problem
+
+In Next.js, the `layout.tsx` file defines the layout for all pages that inherit that layout.
+
+Suppose your webpage has four main pages: Home, Search, Profile and Settings. Wouldn't it be great to be able to determine
+which layout best suits your needs?
+
+By creating an
+abstract layout, you can create something which will do the following:
+
+```typescript
+<Layout type={"HeaderAndFooter"} mobile={"BottomBar"}>
+    {children}
+</Layout>
+```
+
+
+It is important you track for the user, where in the application they are. This is done in different ways, depending on the 
+type of layout.
+
+# The Container Layer [#the-container-layer]
+
+There are a few different types of containers:
+
+- Stacked
+- Snap Scroll View (like TikTok)
+- Grid Layout (for images, cards, etc.)
+- Controlled Grid Layout (customizable/resizeable grid)
+
+# Modals [#modals]
+
+Only use an entirely new webpage, if the content you plan to display on that webpage will not 
+fit within a Modal/pop-up. Even if you consider the content to be too much, think of ways of how 
+you can reduce the content such that it will fit in a Modal. If it still will not fit, only then 
+use a new webpage and route.
+
+# The Widget Layer [#the-widget-layer]
+
+## Widget Catalogue [#widget-catalogue]
+
+*** 
+
+If you made it this far, the great news for you is that I have made the initial 
+version of this template open source on GitHub for your personal use. It is free to
+use under MIT License and better than most of the drool Next.js paid templates you see
+advertised on [r/sideproject]() and Twitter.
+
+
