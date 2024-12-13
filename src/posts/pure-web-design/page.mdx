@@ -51,11 +51,9 @@ export const metadata = {
 };
 
 
-There are three different layers to a web application:
-
-1. Layout
-2. Container
-3. Widget
+This method breaks down application architecture into three distinct layers: **Layout**, **Container**, and **Widget**.
+By abstracting these layers and centralizing configuration, developers can create polymorphic web interfaces suitable
+for any SaaS product.
 
 ```text
 +-----------------------------------------------------+
@@ -84,84 +82,16 @@ There are three different layers to a web application:
 
 # Configuration [#app-configuration]
 
-```json
-{
-  "production_url": "https://template-v3.vercel.app",
-  "layout": {
-    "mobile": "header_and_footer",
-    "desktop": "bottom_bar"
-  },
-  "routing": {
-    "primary": {
-
-    },
-    "secondary": {
-
-    },
-    "admin": {
-
-    },
-  },
-  "analytics": {
-    "ga_measurement_id": "",
-    "vercel_analytics": true,
-  },
-  "seo": {
-     "title": "the last man standing",
-      "publisher": {
-        "name": "Patrick Prunty",
-        "logo": "/icon.webp"
-      },
-      "bio": "high-performance, customisable nextjs blog template",
-      "description": "blog.v2: a high-performance, seo-optimised, and self-serviced nextjs 15 blog template. providing fast loading, image optimisation, dark/light themes, real-time markdown editing, and seamless vercel deployment—perfect for bloggers seeking a sleek, customisable, and professional platform."
-    },
-    "keywords": [
-      "blog.v2",
-      "nextjs",
-      "digital blog",
-      "open source",
-      "web development",
-      "ui/ux",
-      "high-performance",
-      "patrick prunty",
-      "minimalistic"
-    ],
-    "social_urls": {
-      "twitter": "",
-      "strava": "https://www.strava.com/athletes/72636452",
-      "github": "https://github.com/pprunty/blog.v2",
-      "linkedin": "https://www.linkedin.com/in/patrickprunty/",
-      "reddit": "",
-      "tiktok": "",
-      "instagram": "https://www.instagram.com/pprunty97/",
-      "youtube": "",
-      "email": "patrickprunty.business@gmail.com"
-    }
-  },
-  "blog": {
-    "is_blog_user_configured": true
-  }
-}
-```
-
 
 # Layout Layer [#layout-layer]
 
-The layout layer controls the user experience from a navigation point of view. The layout layer typically displays a
-header and footer, allowing users to navigate between pages in your web application. This should be as seamless as possible
-and responsive for different screen sizes.
+The Layout Layer defines the website's structural skeleton and serves as the primary **navigation** control mechanism. It guides user movement through the application by:
 
-As a user you want:
+- Establishing primary navigation paths (menus, links, headers)
+- Providing clear user orientation signals (active colors, animations)
+- Adapting navigation across different device types
 
-1. **Speed**: The user does not expect to see a delay when navigating between webpages. The best way to show a loading spinner
-is by not showing one at all.
-2. **Feedback**: The user should, after selecting an item in the navigation to receive feedback via animation,
-active color, or heading that they are on the page they selected.
-3. **Consistent Styling**: The user does not wish to see webpages that are totally different with respect to styling after
-navigation.
-
-
-From my experience, the most popular layouts are:
+Effective layout navigation ensures speed, provides clear feedback, and maintains consistent styling across the user's journey through the application.
 
 **Desktop layouts**:
 
@@ -193,18 +123,21 @@ abstract layout, you can create something which will do the following:
 </Layout>
 ```
 
-
 It is important you track for the user, where in the application they are. This is done in different ways, depending on the 
 type of layout.
 
 # The Container Layer [#the-container-layer]
 
-There are a few different types of containers:
+This layer determines how the content is arranged and displayed on the page. It focuses on organizing content into
+grids, lists, carousels, or views like snap-scroll to shape the user experience and guide interactions.
 
-- Stacked
-- Snap Scroll View (like TikTok)
-- Grid Layout (for images, cards, etc.)
-- Controlled Grid Layout (customizable/resizeable grid)
+The most common organizations are:
+
+- Grid layouts
+- Vertically stacked content (flexbox)
+- Snap-scroll view (like TikTok)
+- Masonry layout for images (like Pinterest)
+- Controlled Grid Layout (using library like `react-grid-layout`)
 
 # Modals [#modals]
 
@@ -214,6 +147,15 @@ you can reduce the content such that it will fit in a Modal. If it still will no
 use a new webpage and route.
 
 # The Widget Layer [#the-widget-layer]
+
+This layer deals with the individual components that users interact with. These are the building blocks of the interface,
+including functional elements like buttons and cards, or media like photos and videos.
+
+A widget can be a single component such as a button, or made up of multiple components, in which case it is referred
+to as a **template** (if it's a reusable structure) or a **composite component** (if it combines multiple elements and
+interactions).
+
+
 
 ## Widget Catalogue [#widget-catalogue]
 
