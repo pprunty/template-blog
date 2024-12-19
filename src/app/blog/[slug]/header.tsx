@@ -13,7 +13,7 @@ interface HeaderProps {
 export default async function Header({ currentPost }: HeaderProps) {
   if (currentPost == null) return <></>;
 
-//   const views = await getViewCount(currentPost.slug);
+  //   const views = await getViewCount(currentPost.slug);
 
   let postDate: Date | null = null;
   let timeAgo: string = '';

@@ -25,9 +25,7 @@ const Showcase: React.FC<ShowcaseProps> = ({ items }) => {
   }, []);
 
   if (isCarousel) {
-    return (
-      <Carousel items={items} />
-    );
+    return <Carousel items={items} />;
   }
 
   return (

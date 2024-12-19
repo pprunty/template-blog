@@ -23,7 +23,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       rel="noopener noreferrer"
     >
       {/* Image Section */}
-      <div className="w-full sm:w-1/2 flex-shrink-0 h-52 sm:h-full p-0 border-b sm:border-b-0 sm:border-r dark:border-[#252525] border-gray-200 shadow-sm sm:shadow-none">
+      <div className="w-full sm:w-1/2 flex-shrink-0 h-52 sm:h-34 p-0 border-b sm:border-b-0 sm:border-r dark:border-[#252525] border-gray-200 shadow-sm sm:shadow-none">
         <Image
           src={imagePath}
           alt={title}
